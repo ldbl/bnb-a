@@ -2,6 +2,7 @@
 """
 Email Reporter Module
 Generates and sends daily BNB analysis reports via email
+Refactored with dependency injection and centralized logging
 """
 
 import smtplib
@@ -10,39 +11,119 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 import os
-from typing import Dict, Optional
+from typing import Dict, Optional, Any, Protocol
+from abc import ABC, abstractmethod
 
-from main import BNBAdvancedAnalyzer
+from logger import get_logger
+
+
+class AnalyzerProtocol(Protocol):
+    """Protocol for analyzer dependency - defines required interface"""
+    
+    def analyze_market(self) -> Dict[str, Any]:
+        """Analyze current market conditions"""
+        ...
+    
+    def check_critical_alerts(self) -> Dict[str, Any]:
+        """Check for critical alerts across all modules"""
+        ...
+    
+    def get_market_data(self) -> Dict[str, Any]:
+        """Get current market data"""
+        ...
+
+
+class MLPredictorProtocol(Protocol):
+    """Protocol for ML predictor dependency"""
+    
+    def analyze_long_term_trends(self) -> Dict[str, Any]:
+        """Analyze long-term market trends"""
+        ...
+
+
+class ReversalDetectorProtocol(Protocol):
+    """Protocol for trend reversal detector dependency"""
+    
+    def check_critical_reversal_alerts(self) -> Dict[str, Any]:
+        """Check for critical trend reversal alerts"""
+        ...
 
 
 class EmailReporter:
-    """Handles daily email report generation and sending"""
+    """Handles daily email report generation and sending with dependency injection"""
     
-    def __init__(self):
-        # Email configuration from environment variables
-        self.smtp_server = os.getenv('SMTP_SERVER', 'smtp.gmail.com')
-        self.smtp_port = int(os.getenv('SMTP_PORT', '587'))
+    def __init__(self, analyzer: Optional[AnalyzerProtocol] = None, 
+                 smtp_server: str = None, smtp_port: int = None):
+        """
+        Initialize EmailReporter with dependency injection
+        
+        Args:
+            analyzer: Analyzer instance (injected dependency)
+            smtp_server: SMTP server (defaults to Gmail)
+            smtp_port: SMTP port (defaults to 587)
+        """
+        self.logger = get_logger(__name__)
+        
+        # Dependency injection - analyzer can be provided or will be lazy-loaded
+        self._analyzer = analyzer
+        self._ml_predictor = None
+        self._reversal_detector = None
+        
+        # Email configuration from environment variables or parameters
+        self.smtp_server = smtp_server or os.getenv('SMTP_SERVER', 'smtp.gmail.com')
+        self.smtp_port = smtp_port or int(os.getenv('SMTP_PORT', '587'))
         self.sender_email = os.getenv('SENDER_EMAIL')
         self.sender_password = os.getenv('SENDER_PASSWORD')
         self.recipient_email = os.getenv('RECIPIENT_EMAIL')
         
         # Validate required environment variables
         if not all([self.sender_email, self.sender_password, self.recipient_email]):
-            raise ValueError("Missing required email configuration. Set SENDER_EMAIL, SENDER_PASSWORD, RECIPIENT_EMAIL")
+            error_msg = "Missing required email configuration. Set SENDER_EMAIL, SENDER_PASSWORD, RECIPIENT_EMAIL"
+            self.logger.error(error_msg)
+            raise ValueError(error_msg)
+        
+        self.logger.info(f"EmailReporter initialized for {self.recipient_email}")
+    
+    @property
+    def analyzer(self) -> AnalyzerProtocol:
+        """Lazy-load analyzer if not injected"""
+        if self._analyzer is None:
+            self.logger.info("Lazy-loading BNBAdvancedAnalyzer...")
+            # Import here to avoid circular dependency
+            from main import BNBAdvancedAnalyzer
+            self._analyzer = BNBAdvancedAnalyzer()
+        return self._analyzer
+    
+    @property 
+    def ml_predictor(self) -> Optional[MLPredictorProtocol]:
+        """Get ML predictor from analyzer"""
+        if self._ml_predictor is None and hasattr(self.analyzer, 'ml_predictor'):
+            self._ml_predictor = self.analyzer.ml_predictor
+        return self._ml_predictor
+    
+    @property
+    def reversal_detector(self) -> Optional[ReversalDetectorProtocol]:
+        """Get reversal detector from analyzer"""
+        if self._reversal_detector is None and hasattr(self.analyzer, 'reversal_detector'):
+            self._reversal_detector = self.analyzer.reversal_detector
+        return self._reversal_detector
     
     def generate_daily_report(self) -> str:
         """Generate comprehensive daily analysis report"""
         
+        self.logger.info("Generating daily BNB analysis report...")
+        
         try:
-            # Initialize analyzer
-            analyzer = BNBAdvancedAnalyzer()
-            
             # Get current analysis
-            analysis = analyzer.analyze_market()
-            alerts = analyzer.check_critical_alerts()
+            analysis = self.analyzer.analyze_market()
+            alerts = self.analyzer.check_critical_alerts()
             
             if "error" in analysis:
-                return f"❌ Error generating analysis: {analysis['error']}"
+                error_msg = f"Error in market analysis: {analysis['error']}"
+                self.logger.error(error_msg)
+                return f"❌ {error_msg}"
+            
+            self.logger.debug("Market analysis completed successfully")
             
             # Build email report
             report_parts = []
@@ -61,8 +142,10 @@ Current Price: ${current_price:.2f}
             # Critical Alerts Summary
             if alerts.get("show_any", False):
                 report_parts.append(self.format_alerts_summary(alerts))
+                self.logger.info(f"Report includes {len(alerts)} critical alerts")
             else:
                 report_parts.append("📊 No critical alerts today - market in normal conditions\n")
+                self.logger.debug("No critical alerts detected")
             
             # Strategic Analysis Summary
             signals = analysis.get('signals', {})
@@ -70,19 +153,23 @@ Current Price: ${current_price:.2f}
             
             # ML Strategic Outlook
             try:
-                ml_analysis = analyzer.ml_predictor.analyze_long_term_trends()
-                if "error" not in ml_analysis:
-                    report_parts.append(self.format_ml_outlook(ml_analysis))
-            except:
-                pass
+                if self.ml_predictor:
+                    ml_analysis = self.ml_predictor.analyze_long_term_trends()
+                    if "error" not in ml_analysis:
+                        report_parts.append(self.format_ml_outlook(ml_analysis))
+                        self.logger.debug("ML analysis included in report")
+            except Exception as e:
+                self.logger.warning(f"Failed to include ML analysis: {e}")
             
             # Trend Reversal Check
             try:
-                reversal_check = analyzer.reversal_detector.check_critical_reversal_alerts()
-                if reversal_check.get("show_alert", False):
-                    report_parts.append(self.format_reversal_alert(reversal_check))
-            except:
-                pass
+                if self.reversal_detector:
+                    reversal_check = self.reversal_detector.check_critical_reversal_alerts()
+                    if reversal_check.get("show_alert", False):
+                        report_parts.append(self.format_reversal_alert(reversal_check))
+                        self.logger.info("Trend reversal alert included in report")
+            except Exception as e:
+                self.logger.warning(f"Failed to include reversal analysis: {e}")
             
             # Footer
             report_parts.append(f"""
@@ -92,10 +179,14 @@ Current Price: ${current_price:.2f}
 ⚠️  This is for informational purposes only, not financial advice
 """)
             
-            return "\n".join(report_parts)
+            full_report = "\n".join(report_parts)
+            self.logger.info(f"Daily report generated successfully ({len(full_report)} characters)")
+            return full_report
             
         except Exception as e:
-            return f"❌ Error generating daily report: {e}"
+            error_msg = f"Error generating daily report: {e}"
+            self.logger.error(error_msg)
+            return f"❌ {error_msg}"
     
     def format_alerts_summary(self, alerts: Dict) -> str:
         """Format critical alerts for email"""
@@ -209,6 +300,8 @@ Current Price: ${current_price:.2f}
     def send_email(self, subject: str, body: str) -> bool:
         """Send email with the daily report"""
         
+        self.logger.info(f"Attempting to send email to {self.recipient_email}")
+        
         try:
             # Create message
             message = MIMEMultipart()
@@ -229,17 +322,20 @@ Current Price: ${current_price:.2f}
                 text = message.as_string()
                 server.sendmail(self.sender_email, self.recipient_email, text)
             
-            print(f"✅ Email sent successfully to {self.recipient_email}")
+            self.logger.info(f"✅ Email sent successfully to {self.recipient_email}")
             return True
             
+        except smtplib.SMTPException as e:
+            self.logger.error(f"SMTP error while sending email: {e}")
+            return False
         except Exception as e:
-            print(f"❌ Failed to send email: {e}")
+            self.logger.error(f"Unexpected error while sending email: {e}")
             return False
     
     def send_daily_report(self) -> bool:
         """Generate and send the daily BNB analysis report"""
         
-        print("📧 Generating daily BNB analysis report...")
+        self.logger.info("Starting daily report generation and sending process")
         
         # Generate report content
         report_content = self.generate_daily_report()
@@ -248,60 +344,99 @@ Current Price: ${current_price:.2f}
         current_date = datetime.now().strftime('%Y-%m-%d')
         
         try:
-            analyzer = BNBAdvancedAnalyzer()
-            market_data = analyzer.get_market_data()
+            market_data = self.analyzer.get_market_data()
             current_price = market_data.get('current_price', 0)
             subject = f"🚀 BNB Daily Report - {current_date} | ${current_price:.2f}"
-        except:
+            self.logger.debug(f"Email subject: {subject}")
+        except Exception as e:
             subject = f"🚀 BNB Daily Report - {current_date}"
+            self.logger.warning(f"Could not get current price for subject: {e}")
         
         # Send email
         success = self.send_email(subject, report_content)
         
         if success:
-            print("📧 Daily report sent successfully!")
+            self.logger.info("📧 Daily report sent successfully!")
         else:
-            print("❌ Failed to send daily report")
+            self.logger.error("❌ Failed to send daily report")
         
         return success
 
 
+class MockAnalyzer:
+    """Mock analyzer for testing purposes"""
+    
+    def __init__(self, mock_data: Dict = None):
+        self.mock_data = mock_data or {}
+        self.ml_predictor = None
+        self.reversal_detector = None
+    
+    def analyze_market(self) -> Dict[str, Any]:
+        return self.mock_data.get('market_analysis', {
+            'market_data': {'current_price': 850.0},
+            'signals': {
+                'action': 'BUY',
+                'confidence': 75,
+                'bull_score': 6,
+                'bear_score': 2,
+                'reasoning': ['RSI oversold', 'Support level bounce']
+            }
+        })
+    
+    def check_critical_alerts(self) -> Dict[str, Any]:
+        return self.mock_data.get('alerts', {
+            'show_any': True,
+            'whale_alerts': ['Large whale transaction detected'],
+            'fibonacci_alerts': ['Price near Golden Pocket']
+        })
+    
+    def get_market_data(self) -> Dict[str, Any]:
+        return self.mock_data.get('market_data', {'current_price': 850.0})
+
+
 def main():
     """Main function for running daily email report"""
+    
+    logger = get_logger(__name__)
     
     try:
         # Check if running in test mode
         test_mode = os.getenv('TEST_MODE', 'false').lower() == 'true'
         
         if test_mode:
-            print("🧪 Running in TEST MODE - checking email configuration...")
+            logger.info("🧪 Running in TEST MODE - checking email configuration...")
             
             # Check environment variables
             required_vars = ['SENDER_EMAIL', 'SENDER_PASSWORD', 'RECIPIENT_EMAIL']
             missing_vars = [var for var in required_vars if not os.getenv(var)]
             
             if missing_vars:
-                print(f"❌ Missing environment variables: {missing_vars}")
+                logger.error(f"❌ Missing environment variables: {missing_vars}")
                 return False
             
-            print("✅ Email configuration looks good!")
+            logger.info("✅ Email configuration looks good!")
             
-            # Generate and print report (don't send)
-            reporter = EmailReporter()
+            # Generate and print report (don't send) with mock data
+            mock_analyzer = MockAnalyzer()
+            reporter = EmailReporter(analyzer=mock_analyzer)
             report = reporter.generate_daily_report()
+            
             print("\n📧 GENERATED REPORT:")
             print("-" * 50)
             print(report)
             print("-" * 50)
+            
+            logger.info("Test mode completed successfully")
             return True
         
         else:
             # Normal mode - send actual email
-            reporter = EmailReporter()
+            logger.info("Running in PRODUCTION MODE - sending actual email")
+            reporter = EmailReporter()  # Will lazy-load real analyzer
             return reporter.send_daily_report()
             
     except Exception as e:
-        print(f"❌ Error in email reporter: {e}")
+        logger.error(f"❌ Error in email reporter: {e}")
         return False
 
 

@@ -8,6 +8,7 @@ import requests
 from datetime import datetime, timedelta
 from typing import Dict, List
 import time
+from market_config import BNBMarketConfig
 
 
 def get_current_price():
@@ -67,13 +68,9 @@ class ElliottWaveAnalyzer:
         }
         
         # Known Elliott Wave structure based on visual analysis (1.5-year cycle)
-        self.visual_structure = {
-            "wave_1": {"start": 191, "end": 731, "period": "Feb-Jul 2024", "gain": 282.7},
-            "wave_2": {"start": 731, "end": 380, "period": "Jul-Aug 2024", "decline": -48.0},
-            "wave_3": {"start": 380, "end": 731, "period": "Aug-Nov 2024", "gain": 92.4},
-            "wave_4": {"start": 731, "end": 600, "period": "Nov-Dec 2024", "decline": -17.9},
-            "wave_5": {"start": 600, "end": self.current_price, "period": "Dec 2024-Now", "gain": ((self.current_price - 600) / 600) * 100}
-        }
+        # Use centralized market configuration for Elliott Wave structure
+        self.market_config = BNBMarketConfig()
+        self.visual_structure = self.market_config.get_wave_structure_for_price(self.current_price)
     
     def find_pivot_points(self, prices: List[float], lookback: int = 2) -> List[Dict]:
         """Find local highs and lows (pivot points)"""

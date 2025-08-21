@@ -1,0 +1,82 @@
+2025-08-21 22:32:35,728 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:35,728 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:35,729 - email_reporter - ERROR - __init__:82 - Missing required email configuration. Set SENDER_EMAIL, SENDER_PASSWORD, RECIPIENT_EMAIL
+2025-08-21 22:32:35,730 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:35,731 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:35,731 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:35,731 - email_reporter - INFO - generate_daily_report:114 - Generating daily BNB analysis report...
+2025-08-21 22:32:35,732 - email_reporter - INFO - generate_daily_report:145 - Report includes 3 critical alerts
+2025-08-21 22:32:35,732 - email_reporter - INFO - generate_daily_report:183 - Daily report generated successfully (687 characters)
+2025-08-21 22:32:35,734 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:35,734 - email_reporter - INFO - generate_daily_report:114 - Generating daily BNB analysis report...
+2025-08-21 22:32:35,735 - email_reporter - ERROR - generate_daily_report:123 - Error in market analysis: API failure
+2025-08-21 22:32:35,748 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:35,748 - email_reporter - INFO - send_daily_report:338 - Starting daily report generation and sending process
+2025-08-21 22:32:35,748 - email_reporter - INFO - generate_daily_report:114 - Generating daily BNB analysis report...
+2025-08-21 22:32:35,748 - email_reporter - INFO - generate_daily_report:145 - Report includes 3 critical alerts
+2025-08-21 22:32:35,749 - email_reporter - INFO - generate_daily_report:183 - Daily report generated successfully (687 characters)
+2025-08-21 22:32:35,749 - email_reporter - INFO - send_daily_report:359 - 📧 Daily report sent successfully!
+2025-08-21 22:32:35,750 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:35,750 - email_reporter - INFO - send_email:303 - Attempting to send email to recipient@example.com
+2025-08-21 22:32:35,756 - email_reporter - ERROR - send_email:332 - Unexpected error while sending email: SMTP connection failed
+2025-08-21 22:32:35,758 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:35,758 - email_reporter - INFO - send_email:303 - Attempting to send email to recipient@example.com
+2025-08-21 22:32:35,763 - email_reporter - INFO - send_email:325 - ✅ Email sent successfully to recipient@example.com
+2025-08-21 22:32:35,768 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:35,768 - email_reporter - INFO - generate_daily_report:114 - Generating daily BNB analysis report...
+2025-08-21 22:32:35,769 - email_reporter - INFO - generate_daily_report:170 - Trend reversal alert included in report
+2025-08-21 22:32:35,769 - email_reporter - INFO - generate_daily_report:183 - Daily report generated successfully (939 characters)
+2025-08-21 22:32:35,769 - email_reporter - INFO - send_daily_report:338 - Starting daily report generation and sending process
+2025-08-21 22:32:35,769 - email_reporter - INFO - generate_daily_report:114 - Generating daily BNB analysis report...
+2025-08-21 22:32:35,769 - email_reporter - INFO - generate_daily_report:170 - Trend reversal alert included in report
+2025-08-21 22:32:35,770 - email_reporter - INFO - generate_daily_report:183 - Daily report generated successfully (939 characters)
+2025-08-21 22:32:35,770 - email_reporter - INFO - send_email:303 - Attempting to send email to recipient@example.com
+2025-08-21 22:32:35,773 - email_reporter - INFO - send_email:325 - ✅ Email sent successfully to recipient@example.com
+2025-08-21 22:32:35,773 - email_reporter - INFO - send_daily_report:359 - 📧 Daily report sent successfully!
+2025-08-21 22:32:50,683 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:50,684 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:50,685 - email_reporter - ERROR - __init__:82 - Missing required email configuration. Set SENDER_EMAIL, SENDER_PASSWORD, RECIPIENT_EMAIL
+2025-08-21 22:32:50,685 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:50,686 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:50,687 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:50,687 - email_reporter - INFO - generate_daily_report:114 - Generating daily BNB analysis report...
+2025-08-21 22:32:50,687 - email_reporter - INFO - generate_daily_report:145 - Report includes 3 critical alerts
+2025-08-21 22:32:50,687 - email_reporter - INFO - generate_daily_report:183 - Daily report generated successfully (687 characters)
+2025-08-21 22:32:50,688 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:32:50,688 - email_reporter - INFO - generate_daily_report:114 - Generating daily BNB analysis report...
+2025-08-21 22:32:50,688 - email_reporter - ERROR - generate_daily_report:123 - Error in market analysis: API failure
+2025-08-21 22:33:04,827 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:33:04,828 - email_reporter - INFO - analyzer:91 - Lazy-loading BNBAdvancedAnalyzer...
+2025-08-21 22:33:04,830 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:33:04,831 - email_reporter - INFO - send_daily_report:338 - Starting daily report generation and sending process
+2025-08-21 22:33:04,831 - email_reporter - INFO - generate_daily_report:114 - Generating daily BNB analysis report...
+2025-08-21 22:33:04,831 - email_reporter - INFO - generate_daily_report:145 - Report includes 3 critical alerts
+2025-08-21 22:33:04,831 - email_reporter - INFO - generate_daily_report:183 - Daily report generated successfully (687 characters)
+2025-08-21 22:33:04,831 - email_reporter - INFO - send_daily_report:359 - 📧 Daily report sent successfully!
+2025-08-21 22:33:04,834 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:33:04,834 - email_reporter - INFO - send_email:303 - Attempting to send email to recipient@example.com
+2025-08-21 22:33:04,849 - email_reporter - ERROR - send_email:332 - Unexpected error while sending email: SMTP connection failed
+2025-08-21 22:33:04,854 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:33:04,855 - email_reporter - INFO - send_email:303 - Attempting to send email to recipient@example.com
+2025-08-21 22:33:04,858 - email_reporter - INFO - send_email:325 - ✅ Email sent successfully to recipient@example.com
+2025-08-21 22:33:04,868 - email_reporter - INFO - __init__:85 - EmailReporter initialized for recipient@example.com
+2025-08-21 22:33:04,869 - email_reporter - INFO - generate_daily_report:114 - Generating daily BNB analysis report...
+2025-08-21 22:33:04,869 - email_reporter - INFO - generate_daily_report:170 - Trend reversal alert included in report
+2025-08-21 22:33:04,869 - email_reporter - INFO - generate_daily_report:183 - Daily report generated successfully (939 characters)
+2025-08-21 22:33:04,870 - email_reporter - INFO - send_daily_report:338 - Starting daily report generation and sending process
+2025-08-21 22:33:04,870 - email_reporter - INFO - generate_daily_report:114 - Generating daily BNB analysis report...
+2025-08-21 22:33:04,870 - email_reporter - INFO - generate_daily_report:170 - Trend reversal alert included in report
+2025-08-21 22:33:04,870 - email_reporter - INFO - generate_daily_report:183 - Daily report generated successfully (939 characters)
+2025-08-21 22:33:04,870 - email_reporter - INFO - send_email:303 - Attempting to send email to recipient@example.com
+2025-08-21 22:33:04,878 - email_reporter - INFO - send_email:325 - ✅ Email sent successfully to recipient@example.com
+2025-08-21 22:33:04,878 - email_reporter - INFO - send_daily_report:359 - 📧 Daily report sent successfully!
+2025-08-21 22:35:23,937 - data_fetcher - ERROR - fetch_klines:45 - API Error: 400 - {"code":-1120,"msg":"Invalid interval."}
+2025-08-21 22:35:24,262 - data_fetcher - ERROR - fetch_klines:45 - API Error: 400 - {"code":-1120,"msg":"Invalid interval."}
+2025-08-21 22:35:24,575 - data_fetcher - ERROR - fetch_klines:45 - API Error: 400 - {"code":-1120,"msg":"Invalid interval."}
+2025-08-21 22:36:12,704 - __main__ - INFO - main:407 - 🧪 Running in TEST MODE - checking email configuration...
+2025-08-21 22:36:12,705 - __main__ - INFO - main:417 - ✅ Email configuration looks good!
+2025-08-21 22:36:12,705 - __main__ - INFO - __init__:85 - EmailReporter initialized for test@example.com
+2025-08-21 22:36:12,705 - __main__ - INFO - generate_daily_report:114 - Generating daily BNB analysis report...
+2025-08-21 22:36:12,705 - __main__ - INFO - generate_daily_report:145 - Report includes 3 critical alerts
+2025-08-21 22:36:12,705 - __main__ - INFO - generate_daily_report:183 - Daily report generated successfully (687 characters)
+2025-08-21 22:36:12,705 - __main__ - INFO - main:429 - Test mode completed successfully

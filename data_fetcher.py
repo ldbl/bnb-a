@@ -8,6 +8,8 @@ import requests
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Tuple
 import time
+from logger import get_logger
+from indicators import TechnicalIndicators
 
 
 class BinanceDataFetcher:
@@ -18,6 +20,7 @@ class BinanceDataFetcher:
         self.symbol = symbol
         self.request_timeout = 10
         self.retry_attempts = 3
+        self.logger = get_logger(__name__)
     
     def fetch_klines(self, interval: str, limit: int = 100) -> List:
         """Fetch historical candlestick data from Binance"""
@@ -36,14 +39,17 @@ class BinanceDataFetcher:
                 )
                 
                 if response.status_code == 200:
+                    self.logger.debug(f"Successfully fetched klines for {self.symbol} {interval}")
                     return response.json()
                 else:
-                    print(f"API Error: {response.status_code} - {response.text}")
+                    self.logger.error(f"API Error: {response.status_code} - {response.text}")
                     
             except requests.exceptions.RequestException as e:
-                print(f"Request failed (attempt {attempt + 1}): {e}")
+                self.logger.warning(f"Request failed (attempt {attempt + 1}/{self.retry_attempts}): {e}")
                 if attempt < self.retry_attempts - 1:
                     time.sleep(1)  # Wait before retry
+                else:
+                    self.logger.error(f"All {self.retry_attempts} attempts failed for klines request")
         
         return []
     
@@ -57,10 +63,14 @@ class BinanceDataFetcher:
             )
             
             if response.status_code == 200:
-                return float(response.json()['price'])
+                price = float(response.json()['price'])
+                self.logger.debug(f"Current price for {self.symbol}: ${price}")
+                return price
+            else:
+                self.logger.error(f"Price API Error: {response.status_code} - {response.text}")
             
         except Exception as e:
-            print(f"Error fetching current price: {e}")
+            self.logger.error(f"Error fetching current price: {e}")
         
         return None
     
@@ -75,6 +85,7 @@ class BinanceDataFetcher:
             
             if response.status_code == 200:
                 data = response.json()
+                self.logger.debug(f"24h ticker data fetched for {self.symbol}")
                 return {
                     "price_change": float(data['priceChange']),
                     "price_change_percent": float(data['priceChangePercent']),
@@ -83,9 +94,11 @@ class BinanceDataFetcher:
                     "volume": float(data['volume']),
                     "quote_volume": float(data['quoteVolume'])
                 }
+            else:
+                self.logger.error(f"24h ticker API Error: {response.status_code} - {response.text}")
                 
         except Exception as e:
-            print(f"Error fetching 24h ticker: {e}")
+            self.logger.error(f"Error fetching 24h ticker: {e}")
         
         return None
     
@@ -116,7 +129,7 @@ class BinanceDataFetcher:
             "1d": {"interval": "1d", "limit": 30, "period": "1 Month"},
             "1w": {"interval": "1w", "limit": 12, "period": "3 Months"},
             "1M": {"interval": "1M", "limit": 6, "period": "6 Months"},
-            "3M": {"interval": "3M", "limit": 4, "period": "1 Year"}
+            "1M_year": {"interval": "1M", "limit": 12, "period": "1 Year"}  # Fixed: use 1M with 12 months
         }
         
         analysis = {}
@@ -141,7 +154,6 @@ class BinanceDataFetcher:
             strength = abs((current_price - price_20_ago) / price_20_ago * 100)
             
             # Calculate RSI for this timeframe
-            from indicators import TechnicalIndicators
             rsi = TechnicalIndicators.calculate_rsi(closes)
             
             # Calculate volatility
