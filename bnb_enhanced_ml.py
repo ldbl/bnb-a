@@ -60,7 +60,7 @@ class BNBEnhancedML:
         
         self.logger.info(f"BNBEnhancedML initialized - will learn from {len(self.learning_cryptos)} cryptos")
     
-    def fetch_learning_data(self, interval: str = "1h", limit: int = 1000) -> Dict[str, pd.DataFrame]:
+    def fetch_learning_data(self, interval: str = "1d", limit: int = 1000) -> Dict[str, pd.DataFrame]:
         """Fetch data from all top 10 cryptos for pattern learning"""
         
         self.logger.info(f"Fetching learning data from {len(self.learning_cryptos)} cryptocurrencies...")
@@ -534,7 +534,7 @@ class BNBEnhancedML:
         try:
             params = {
                 "symbol": "BTCUSDT",
-                "interval": "1h",
+                "interval": "1d",
                 "limit": 500
             }
             
@@ -640,7 +640,7 @@ class BNBEnhancedML:
                 self.logger.error(f"Failed to train {model_name}: {e}")
                 results[model_name] = {"error": str(e)}
         
-        # Store model
+        # Store model in memory
         model_key = f"bnb_enhanced_{periods_ahead}"
         self.models[model_key] = {
             "models": models,
@@ -650,6 +650,38 @@ class BNBEnhancedML:
             "pattern_library": self.pattern_library,
             "universal_insights": universal_insights
         }
+        
+        # Save models to disk for persistence
+        try:
+            import pickle
+            import json
+            from datetime import datetime
+            
+            model_path = self.model_dir / f"bnb_enhanced_{periods_ahead}.pkl"
+            metadata_path = self.model_dir / f"bnb_enhanced_{periods_ahead}_metadata.json"
+            
+            # Save complete model data
+            with open(model_path, 'wb') as f:
+                pickle.dump(self.models[model_key], f)
+            
+            # Save metadata
+            metadata = {
+                "created_at": datetime.now().isoformat(),
+                "periods_ahead": periods_ahead,
+                "models_trained": len(models),
+                "training_samples": len(X_train),
+                "learning_cryptos": len(crypto_data),
+                "enhanced_features": len(numeric_features),
+                "results": results
+            }
+            
+            with open(metadata_path, 'w') as f:
+                json.dump(metadata, f, indent=2)
+            
+            self.logger.info(f"✅ Models saved to disk: {model_path}")
+            
+        except Exception as e:
+            self.logger.error(f"❌ Failed to save models to disk: {e}")
         
         return {
             "success": True,
@@ -689,12 +721,27 @@ class BNBEnhancedML:
         """Make enhanced BNB prediction using multi-crypto intelligence"""
         
         model_key = f"bnb_enhanced_{periods_ahead}"
+        
+        # Try to load from memory first, then from disk
         if model_key not in self.models:
-            return {"error": f"No trained model for {periods_ahead} periods ahead"}
+            # Try to load from disk
+            try:
+                import pickle
+                model_path = self.model_dir / f"bnb_enhanced_{periods_ahead}.pkl"
+                
+                if model_path.exists():
+                    self.logger.info(f"Loading trained model from disk: {model_path}")
+                    with open(model_path, 'rb') as f:
+                        self.models[model_key] = pickle.load(f)
+                else:
+                    return {"error": f"No trained model for {periods_ahead} periods ahead"}
+            except Exception as e:
+                self.logger.error(f"Failed to load model from disk: {e}")
+                return {"error": f"No trained model for {periods_ahead} periods ahead"}
         
         try:
-            # Get fresh BNB data
-            bnb_params = {"symbol": "BNBUSDT", "interval": "1h", "limit": 200}
+            # Get fresh BNB data  
+            bnb_params = {"symbol": "BNBUSDT", "interval": "1d", "limit": 200}
             response = requests.get(f"{self.base_url}/klines", params=bnb_params, timeout=10)
             
             if response.status_code != 200:

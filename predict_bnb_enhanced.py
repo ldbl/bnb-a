@@ -11,8 +11,8 @@ from bnb_enhanced_ml import BNBEnhancedML
 
 def main():
     parser = argparse.ArgumentParser(description="BNB Enhanced ML Predictions")
-    parser.add_argument("--periods", type=int, default=10,
-                       help="Prediction horizon in hours (default: 10)")
+    parser.add_argument("--periods", type=int, default=7,
+                       help="Prediction horizon in DAYS (default: 7)")
     parser.add_argument("--detailed", action="store_true",
                        help="Show detailed analysis including discovered patterns")
     parser.add_argument("--insights", action="store_true",
@@ -26,7 +26,7 @@ def main():
     print("=" * 60)
     print("🧠 Enhanced with Top 10 Cryptocurrency Intelligence")
     print("🎯 Target: BNB (Binance Coin)")
-    print(f"⏰ Prediction Horizon: {periods} hours")
+    print(f"⏰ Prediction Horizon: {periods} DAYS")
     print(f"🕐 Analysis Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
     
@@ -54,7 +54,7 @@ def main():
     print(f"\n🎯 ENHANCED BNB PREDICTION RESULTS")
     print("=" * 50)
     print(f"💰 Current BNB Price: ${current_price:.2f}")
-    print(f"⏰ Prediction Horizon: {periods} hours ahead")
+    print(f"⏰ Prediction Horizon: {periods} days ahead")
     print(f"🧠 Enhanced Analysis: Multi-Crypto Intelligence")
     
     # Color-coded prediction display
@@ -202,7 +202,7 @@ def main():
     print("Always implement proper risk management and position sizing.")
     print("Multi-crypto patterns improve accuracy but don't guarantee results.")
     
-    print(f"\n🕐 Enhanced prediction valid until: {periods} hours from analysis time")
+    print(f"\n🕐 Enhanced prediction valid until: {periods} days from analysis time")
     print("🔄 For updated enhanced predictions, run this script again.")
     print("🧠 Your BNB analysis is powered by crypto market intelligence!")
     

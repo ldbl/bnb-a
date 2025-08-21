@@ -306,29 +306,29 @@ class BNBAdvancedAnalyzer:
         
         try:
             print("📅 SELECT PREDICTION HORIZON:")
-            print("1. 5 hours ahead")
-            print("2. 10 hours ahead") 
-            print("3. 20 hours ahead")
+            print("1. 7 days ahead (1 week)")
+            print("2. 30 days ahead (1 month)") 
+            print("3. 90 days ahead (3 months)")
             print("4. Train enhanced models first")
             print("5. Show discovered patterns")
             
             choice = input(f"\n{self.display.colorize('Select option (1-5): ', 'cyan')}").strip()
             
             if choice == "1":
-                periods = 5
+                periods = 7
             elif choice == "2":
-                periods = 10
+                periods = 30
             elif choice == "3":
-                periods = 20
+                periods = 90
             elif choice == "4":
                 print("🧠 Training BNB enhanced models with multi-crypto intelligence...")
-                result = self.ml_system.train_bnb_enhanced_model(10)
+                result = self.ml_system.train_bnb_enhanced_model(30)
                 if "success" in result:
                     print(f"✅ Training completed: {result['models_trained']} enhanced models")
                     print(f"📊 Learning from: {result['learning_cryptos']} cryptocurrencies")
                     print(f"🧠 Universal insights: {result['universal_insights']}")
                     print(f"🔧 Enhanced features: {result['enhanced_features']}")
-                    periods = 10
+                    periods = 30
                 else:
                     print(f"❌ Training failed: {result.get('error', 'Unknown error')}")
                     return
@@ -342,11 +342,11 @@ class BNBAdvancedAnalyzer:
                 print("💡 Train models first to see discovered patterns!")
                 return
             else:
-                periods = 10
-                print("Invalid choice, using 10 hours")
+                periods = 30
+                print("Invalid choice, using 30 days (1 month)")
             
             # Make enhanced prediction
-            print(f"\n🔮 Making BNB enhanced prediction ({periods}h ahead)...")
+            print(f"\n🔮 Making BNB enhanced prediction ({periods} days ahead)...")
             print("🧠 Using patterns learned from top 10 cryptocurrencies...")
             
             prediction = self.ml_system.predict_bnb_enhanced(periods)

@@ -11,8 +11,8 @@ from bnb_enhanced_ml import BNBEnhancedML
 
 def main():
     parser = argparse.ArgumentParser(description="Train BNB Enhanced ML with Multi-Crypto Intelligence")
-    parser.add_argument("--periods", type=int, nargs="+", default=[5, 10, 20],
-                       help="Prediction periods in hours (default: 5 10 20)")
+    parser.add_argument("--periods", type=int, nargs="+", default=[7, 30, 90],
+                       help="Prediction periods in DAYS (default: 7 30 90 days)")
     parser.add_argument("--data-limit", type=int, default=1500,
                        help="Data points to fetch per cryptocurrency (default: 1500)")
     parser.add_argument("--verbose", action="store_true",
@@ -34,7 +34,7 @@ def main():
     print("   • Chainlink (LINK) - Oracles")
     print("   • Polygon (MATIC) - Scaling")
     print()
-    print(f"⏰ Prediction Periods: {args.periods} hours")
+    print(f"⏰ Prediction Periods: {args.periods} DAYS")
     print(f"📊 Data Limit: {args.data_limit} candles per crypto")
     print(f"🕐 Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
@@ -49,7 +49,7 @@ def main():
     
     # Train models for each prediction period
     for periods in args.periods:
-        print(f"🎯 TRAINING BNB ENHANCED MODEL FOR {periods}H PREDICTION")
+        print(f"🎯 TRAINING BNB ENHANCED MODEL FOR {periods} DAYS PREDICTION")
         print("-" * 60)
         
         result = bnb_ml.train_bnb_enhanced_model(periods)
@@ -87,7 +87,7 @@ def main():
                     if len(insights) > 5:
                         print(f"   ... and {len(insights) - 5} more insights")
             
-            training_results[f"{periods}h"] = {
+            training_results[f"{periods}d"] = {
                 "success": True,
                 "models": models_trained,
                 "learning_cryptos": learning_cryptos,
@@ -104,7 +104,7 @@ def main():
             error_msg = result.get("error", "Unknown error")
             print(f"❌ TRAINING FAILED: {error_msg}")
             
-            training_results[f"{periods}h"] = {
+            training_results[f"{periods}d"] = {
                 "success": False,
                 "error": error_msg
             }
