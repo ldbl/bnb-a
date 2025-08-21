@@ -16,6 +16,7 @@ from whale_tracker import WhaleTracker
 from sentiment_module import SentimentAnalyzer
 from correlation_module import CorrelationAnalyzer
 from ml_predictor import MLPredictor
+from ml_enhanced import TrendReversalML
 from trend_reversal import TrendReversalDetector
 
 
@@ -34,6 +35,7 @@ class BNBAdvancedAnalyzer:
         self.sentiment_analyzer = SentimentAnalyzer()
         self.correlation_analyzer = CorrelationAnalyzer()
         self.ml_predictor = MLPredictor()
+        self.ml_reversal = TrendReversalML()
         self.reversal_detector = TrendReversalDetector()
         
         print(f"🚀 BNB Advanced Analyzer initialized for {symbol}")
@@ -350,6 +352,111 @@ class BNBAdvancedAnalyzer:
         except Exception as e:
             print(f"❌ Error in ML analysis: {e}")
     
+    def show_ml_reversal_analysis(self):
+        """Show ML-based trend reversal analysis"""
+        print("\n" + "="*60)
+        print("🤖 ML TREND REVERSAL DETECTION")
+        print("="*60)
+        
+        try:
+            print("📅 SELECT PREDICTION HORIZON:")
+            print("1. 5 hours ahead")
+            print("2. 10 hours ahead") 
+            print("3. 20 hours ahead")
+            print("4. Train new models")
+            
+            choice = input(f"\n{self.display.colorize('Select option (1-4): ', 'cyan')}").strip()
+            
+            if choice == "1":
+                periods = 5
+            elif choice == "2":
+                periods = 10
+            elif choice == "3":
+                periods = 20
+            elif choice == "4":
+                print("🎓 Training new models...")
+                # Get fresh data for training
+                training_data = self.ml_predictor.fetch_training_data("1h", 2000)
+                if training_data is not None:
+                    result = self.ml_reversal.train_reversal_models(training_data, 10)
+                    if "success" in result:
+                        print(f"✅ Training completed: {result['models_trained']} models")
+                        periods = 10
+                    else:
+                        print(f"❌ Training failed: {result.get('error', 'Unknown error')}")
+                        return
+                else:
+                    print("❌ Could not fetch training data")
+                    return
+            else:
+                print("Invalid choice, using default (10 hours)")
+                periods = 10
+            
+            # Get recent data for prediction
+            recent_data = self.ml_predictor.fetch_training_data("1h", 200)
+            if recent_data is None:
+                print("❌ Could not fetch recent market data")
+                return
+            
+            # Make prediction
+            print(f"\n🔮 Making ML trend reversal prediction for {periods} hours ahead...")
+            prediction = self.ml_reversal.predict_reversal(recent_data, periods)
+            
+            if "error" in prediction:
+                print(f"❌ Prediction error: {prediction['error']}")
+                print("💡 Try training models first (option 4)")
+                return
+            
+            # Display results
+            current_price = recent_data['close'].iloc[-1]
+            pred_label = prediction['prediction_label']
+            confidence = prediction['confidence']
+            ensemble_pred = prediction['ensemble_prediction']
+            
+            print(f"\n🎯 ML REVERSAL PREDICTION RESULTS")
+            print("=" * 40)
+            print(f"💰 Current Price: ${current_price:.2f}")
+            print(f"⏰ Time Horizon: {periods} hours ahead")
+            
+            # Color coding based on prediction
+            if ensemble_pred == 1:  # Bullish reversal
+                icon = "🟢📈"
+                advice = "BULLISH REVERSAL - Consider LONG position"
+                color = "green"
+            elif ensemble_pred == 2:  # Bearish reversal
+                icon = "🔴📉"
+                advice = "BEARISH REVERSAL - Consider SHORT position"
+                color = "red"
+            else:  # No reversal
+                icon = "🟡➡️"
+                advice = "NO REVERSAL - Current trend continues"
+                color = "yellow"
+            
+            print(f"{icon} Prediction: {self.display.colorize(pred_label, color)}")
+            print(f"🎲 Confidence: {confidence:.1%}")
+            print(f"💡 Advice: {advice}")
+            
+            # Show individual model predictions if confidence is decent
+            if confidence > 0:
+                print(f"\n📊 INDIVIDUAL MODEL PREDICTIONS:")
+                print("-" * 30)
+                
+                for model_name, model_pred in prediction['individual_predictions'].items():
+                    pred_num = model_pred['prediction']
+                    pred_text = ["No Reversal", "Bullish Reversal", "Bearish Reversal"][pred_num]
+                    proba = model_pred.get('probability', [])
+                    
+                    if proba:
+                        max_proba = max(proba)
+                        print(f"🤖 {model_name}: {pred_text} ({max_proba:.1%})")
+                    else:
+                        print(f"🤖 {model_name}: {pred_text}")
+            
+            print(f"\n⚠️ This is ML prediction, not financial advice!")
+            
+        except Exception as e:
+            print(f"❌ Error in ML reversal analysis: {e}")
+    
     def show_reversal_analysis(self):
         """Show comprehensive trend reversal analysis"""
         print("\n" + "="*60)
@@ -478,23 +585,27 @@ class BNBAdvancedAnalyzer:
                     input(f"\n{self.display.colorize('Press Enter to continue...', 'cyan')}")
                     
                 elif choice == "9":
-                    self.show_reversal_analysis()
+                    self.show_ml_reversal_analysis()
                     input(f"\n{self.display.colorize('Press Enter to continue...', 'cyan')}")
                     
                 elif choice == "10":
-                    self.show_market_summary()
+                    self.show_reversal_analysis()
                     input(f"\n{self.display.colorize('Press Enter to continue...', 'cyan')}")
                     
                 elif choice == "11":
+                    self.show_market_summary()
+                    input(f"\n{self.display.colorize('Press Enter to continue...', 'cyan')}")
+                    
+                elif choice == "12":
                     self.display.toggle_colors()
                     time.sleep(1)
                     
-                elif choice == "12":
+                elif choice == "13":
                     print(f"\n{self.display.colorize('👋 Thank you for using BNB Advanced Analyzer!', 'green')}")
                     break
                     
                 else:
-                    print(f"\n{self.display.colorize('❌ Invalid choice. Please select 1-12.', 'red')}")
+                    print(f"\n{self.display.colorize('❌ Invalid choice. Please select 1-13.', 'red')}")
                     time.sleep(1)
                     
             except KeyboardInterrupt:
@@ -517,12 +628,13 @@ class BNBAdvancedAnalyzer:
         print("6. Show Sentiment Analysis")
         print("7. Show Correlation Analysis (BTC/ETH)")
         print("8. Show ML Predictions (AI Price Forecasts)")
-        print("9. Show Trend Reversal Analysis")
-        print("10. Show market summary")
-        print("11. Toggle colors")
-        print("12. Exit")
+        print("9. Show ML Trend Reversal Detection")
+        print("10. Show Trend Reversal Analysis")
+        print("11. Show market summary")
+        print("12. Toggle colors")
+        print("13. Exit")
         
-        return input(f"\n{self.display.colorize('Choice (1-12): ', 'cyan')}")
+        return input(f"\n{self.display.colorize('Choice (1-13): ', 'cyan')}")
 
 
 def main():

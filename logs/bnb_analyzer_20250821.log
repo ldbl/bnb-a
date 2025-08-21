@@ -119,3 +119,4 @@
 2025-08-21 23:06:25,809 - ml_enhanced - INFO - load_model:113 - Model gradient_boost_reversal_10d loaded successfully
 2025-08-21 23:06:25,810 - ml_enhanced - INFO - load_model:113 - Model logistic_reversal_10d loaded successfully
 2025-08-21 23:06:25,814 - ml_enhanced - INFO - load_model:113 - Model random_forest_reversal_10d loaded successfully
+2025-08-21 23:13:01,208 - ml_enhanced - INFO - __init__:61 - TrendReversalML initialized with model directory: ml_models
