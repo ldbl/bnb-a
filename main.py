@@ -17,6 +17,7 @@ from sentiment_module import SentimentAnalyzer
 from correlation_module import CorrelationAnalyzer
 from ml_predictor import MLPredictor
 from ml_enhanced import TrendReversalML
+from multi_crypto_ml import MultiCryptoML
 from trend_reversal import TrendReversalDetector
 
 
@@ -36,6 +37,7 @@ class BNBAdvancedAnalyzer:
         self.correlation_analyzer = CorrelationAnalyzer()
         self.ml_predictor = MLPredictor()
         self.ml_reversal = TrendReversalML()
+        self.multi_crypto_ml = MultiCryptoML()
         self.reversal_detector = TrendReversalDetector()
         
         print(f"🚀 BNB Advanced Analyzer initialized for {symbol}")
@@ -261,7 +263,7 @@ class BNBAdvancedAnalyzer:
                 results = self.whale_tracker.display_whale_analysis(days_back=7)
             elif choice == "4":
                 results = self.whale_tracker.multi_period_whale_analysis()
-            else:
+        else:
                 print("Invalid choice, using default (24 hours)")
                 results = self.whale_tracker.display_whale_analysis(days_back=1)
                 
@@ -457,6 +459,161 @@ class BNBAdvancedAnalyzer:
         except Exception as e:
             print(f"❌ Error in ML reversal analysis: {e}")
     
+    def show_multi_crypto_analysis(self):
+        """Show multi-cryptocurrency ML analysis"""
+        print("\n" + "="*60)
+        print("🌐 MULTI-CRYPTOCURRENCY ML ANALYSIS")
+        print("="*60)
+        
+        try:
+            print("🎯 SELECT TARGET ASSET:")
+            print("1. BNB (Binance Coin)")
+            print("2. ETH (Ethereum)")
+            print("3. SOL (Solana)")
+            print("4. ADA (Cardano)")
+            print("5. Custom asset")
+            
+            choice = input(f"\n{self.display.colorize('Select asset (1-5): ', 'cyan')}").strip()
+            
+            asset_map = {
+                "1": "BNB",
+                "2": "ETH", 
+                "3": "SOL",
+                "4": "ADA"
+            }
+            
+            if choice in asset_map:
+                target_asset = asset_map[choice]
+            elif choice == "5":
+                target_asset = input("Enter asset symbol (e.g., AVAX): ").strip().upper()
+            else:
+                target_asset = "BNB"
+                print("Invalid choice, using BNB")
+            
+            print(f"\n📅 SELECT PREDICTION HORIZON:")
+            print("1. 5 hours ahead")
+            print("2. 10 hours ahead")
+            print("3. 20 hours ahead")
+            print("4. Train models first")
+            
+            horizon_choice = input(f"\n{self.display.colorize('Select horizon (1-4): ', 'cyan')}").strip()
+            
+            if horizon_choice == "1":
+                periods = 5
+            elif horizon_choice == "2":
+                periods = 10
+            elif horizon_choice == "3":
+                periods = 20
+            elif horizon_choice == "4":
+                print("🎓 Training multi-crypto models...")
+                result = self.multi_crypto_ml.train_multi_crypto_models(target_asset, 10)
+                if "success" in result:
+                    print(f"✅ Training completed: {result['models_trained']} models")
+                    print(f"📊 Cross-asset features: {result['feature_count']}")
+                    periods = 10
+                else:
+                    print(f"❌ Training failed: {result.get('error', 'Unknown error')}")
+                    return
+            else:
+                periods = 10
+                print("Invalid choice, using 10 hours")
+            
+            # Make multi-crypto prediction
+            print(f"\n🔮 Making multi-crypto prediction for {target_asset} ({periods}h ahead)...")
+            prediction = self.multi_crypto_ml.predict_multi_crypto_reversal(target_asset, periods)
+            
+            if "error" in prediction:
+                print(f"❌ Prediction error: {prediction['error']}")
+                print("💡 Try training models first (option 4)")
+                return
+            
+            # Display results
+            current_price = prediction["current_price"]
+            pred_label = prediction["prediction_label"]
+            confidence = prediction["confidence"]
+            ensemble_pred = prediction["ensemble_prediction"]
+            
+            print(f"\n🎯 MULTI-CRYPTO PREDICTION RESULTS")
+            print("=" * 45)
+            print(f"💰 Current {target_asset} Price: ${current_price:.2f}")
+            print(f"⏰ Prediction Horizon: {periods} hours ahead")
+            
+            # Color coding based on prediction
+            if ensemble_pred == 1:  # Bullish reversal
+                icon = "🟢📈"
+                advice = "BULLISH REVERSAL - Consider LONG position"
+                color = "green"
+            elif ensemble_pred == 2:  # Bearish reversal
+                icon = "🔴📉"
+                advice = "BEARISH REVERSAL - Consider SHORT position"
+                color = "red"
+            else:  # No reversal
+                icon = "🟡➡️"
+                advice = "NO REVERSAL - Current trend continues"
+                color = "yellow"
+            
+            print(f"{icon} Prediction: {self.display.colorize(pred_label, color)}")
+            print(f"🎲 Confidence: {confidence:.1%}")
+            print(f"💡 Advice: {advice}")
+            
+            # Market context
+            if "market_context" in prediction:
+                context = prediction["market_context"]
+                print(f"\n🌐 MARKET CONTEXT:")
+                print("-" * 20)
+                
+                if "btc_price" in context:
+                    btc_price = context["btc_price"]
+                    print(f"₿ Bitcoin: ${btc_price:.2f}")
+                
+                if "btc_correlation" in context:
+                    btc_corr = context["btc_correlation"]
+                    corr_strength = "Strong" if abs(btc_corr) > 0.7 else "Moderate" if abs(btc_corr) > 0.4 else "Weak"
+                    print(f"🔗 BTC Correlation: {btc_corr:.3f} ({corr_strength})")
+                
+                if "btc_dominance" in context:
+                    dominance = context["btc_dominance"]
+                    print(f"👑 BTC Dominance: {dominance:.1%}")
+            
+            # Show model agreement if confidence is decent
+            if confidence > 0:
+                print(f"\n📊 MODEL BREAKDOWN:")
+                print("-" * 20)
+                
+                for model_name, model_pred in prediction["individual_predictions"].items():
+                    pred_num = model_pred["prediction"]
+                    pred_text = ["No Reversal", "Bullish", "Bearish"][pred_num]
+                    proba = model_pred.get("probability", [])
+                    
+                    if proba:
+                        max_proba = max(proba)
+                        icon = "🎯" if max_proba > 0.8 else "🎲"
+                        print(f"{icon} {model_name}: {pred_text} ({max_proba:.1%})")
+                    else:
+                        print(f"🤖 {model_name}: {pred_text}")
+            
+            # Market overview
+            print(f"\n📊 TOP CRYPTO SNAPSHOT:")
+            print("-" * 25)
+            
+            overview = self.multi_crypto_ml.get_market_overview()
+            if "error" not in overview:
+                count = 0
+                for symbol, data in overview["market_summary"].items():
+                    if count >= 5:  # Show top 5
+                        break
+                    change = data["daily_change_pct"]
+                    crypto_name = data["crypto_name"]
+                    price = data["price"]
+                    emoji = "🟢" if change > 0 else "🔴" if change < 0 else "🟡"
+                    print(f"{emoji} {crypto_name}: ${price:.2f} ({change:+.1f}%)")
+                    count += 1
+            
+            print(f"\n⚠️ Multi-crypto ML analysis - Enhanced with cross-asset intelligence!")
+            
+        except Exception as e:
+            print(f"❌ Error in multi-crypto analysis: {e}")
+    
     def show_reversal_analysis(self):
         """Show comprehensive trend reversal analysis"""
         print("\n" + "="*60)
@@ -538,8 +695,8 @@ class BNBAdvancedAnalyzer:
         """Main application loop"""
         print(f"\n🎯 Starting BNB Advanced Trading Analyzer")
         print(f"💡 Analyzing {self.symbol} with advanced technical indicators\n")
-        
-        while True:
+    
+    while True:
             try:
                 # Display main analysis
                 success = self.display_analysis()
@@ -589,23 +746,27 @@ class BNBAdvancedAnalyzer:
                     input(f"\n{self.display.colorize('Press Enter to continue...', 'cyan')}")
                     
                 elif choice == "10":
-                    self.show_reversal_analysis()
+                    self.show_multi_crypto_analysis()
                     input(f"\n{self.display.colorize('Press Enter to continue...', 'cyan')}")
                     
                 elif choice == "11":
-                    self.show_market_summary()
+                    self.show_reversal_analysis()
                     input(f"\n{self.display.colorize('Press Enter to continue...', 'cyan')}")
                     
                 elif choice == "12":
+                    self.show_market_summary()
+                    input(f"\n{self.display.colorize('Press Enter to continue...', 'cyan')}")
+                    
+                elif choice == "13":
                     self.display.toggle_colors()
                     time.sleep(1)
                     
-                elif choice == "13":
+                elif choice == "14":
                     print(f"\n{self.display.colorize('👋 Thank you for using BNB Advanced Analyzer!', 'green')}")
                     break
                     
                 else:
-                    print(f"\n{self.display.colorize('❌ Invalid choice. Please select 1-13.', 'red')}")
+                    print(f"\n{self.display.colorize('❌ Invalid choice. Please select 1-14.', 'red')}")
                     time.sleep(1)
                     
             except KeyboardInterrupt:
@@ -629,12 +790,13 @@ class BNBAdvancedAnalyzer:
         print("7. Show Correlation Analysis (BTC/ETH)")
         print("8. Show ML Predictions (AI Price Forecasts)")
         print("9. Show ML Trend Reversal Detection")
-        print("10. Show Trend Reversal Analysis")
-        print("11. Show market summary")
-        print("12. Toggle colors")
-        print("13. Exit")
+        print("10. Show Multi-Crypto ML Analysis")
+        print("11. Show Trend Reversal Analysis")
+        print("12. Show market summary")
+        print("13. Toggle colors")
+        print("14. Exit")
         
-        return input(f"\n{self.display.colorize('Choice (1-13): ', 'cyan')}")
+        return input(f"\n{self.display.colorize('Choice (1-14): ', 'cyan')}")
 
 
 def main():

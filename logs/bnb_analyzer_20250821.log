@@ -120,3 +120,6 @@
 2025-08-21 23:06:25,810 - ml_enhanced - INFO - load_model:113 - Model logistic_reversal_10d loaded successfully
 2025-08-21 23:06:25,814 - ml_enhanced - INFO - load_model:113 - Model random_forest_reversal_10d loaded successfully
 2025-08-21 23:13:01,208 - ml_enhanced - INFO - __init__:61 - TrendReversalML initialized with model directory: ml_models
+2025-08-21 23:22:04,804 - multi_crypto_ml - INFO - __init__:62 - MultiCryptoML initialized for 10 cryptocurrencies
+2025-08-21 23:22:04,805 - multi_crypto_ml - INFO - fetch_multi_crypto_data:67 - Fetching data for 10 cryptocurrencies...
+2025-08-21 23:22:08,385 - multi_crypto_ml - INFO - fetch_multi_crypto_data:114 - ✅ Fetched data for 10 cryptocurrencies
