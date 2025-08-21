@@ -80,3 +80,42 @@
 2025-08-21 22:36:12,705 - __main__ - INFO - generate_daily_report:145 - Report includes 3 critical alerts
 2025-08-21 22:36:12,705 - __main__ - INFO - generate_daily_report:183 - Daily report generated successfully (687 characters)
 2025-08-21 22:36:12,705 - __main__ - INFO - main:429 - Test mode completed successfully
+2025-08-21 23:04:08,040 - __main__ - INFO - __init__:61 - TrendReversalML initialized with model directory: ml_models
+2025-08-21 23:04:08,534 - __main__ - INFO - train_reversal_models:252 - Training reversal models for 5 periods ahead
+2025-08-21 23:04:09,186 - __main__ - INFO - prepare_training_data:241 - Training data prepared: 981 samples, 12 features
+2025-08-21 23:04:09,186 - __main__ - INFO - prepare_training_data:242 - Label distribution: [981]
+2025-08-21 23:04:09,187 - __main__ - INFO - train_reversal_models:283 - Training random_forest model...
+2025-08-21 23:04:09,904 - __main__ - INFO - save_model:86 - Model random_forest_reversal_5d saved successfully
+2025-08-21 23:04:09,906 - __main__ - INFO - train_reversal_models:333 - random_forest: Train=1.000, Test=1.000
+2025-08-21 23:04:09,906 - __main__ - INFO - train_reversal_models:283 - Training gradient_boost model...
+2025-08-21 23:04:09,933 - __main__ - ERROR - train_reversal_models:336 - Failed to train gradient_boost: y contains 1 class after sample_weight trimmed classes with zero weights, while a minimum of 2 classes are required.
+2025-08-21 23:04:09,934 - __main__ - INFO - train_reversal_models:283 - Training logistic model...
+2025-08-21 23:04:09,946 - __main__ - ERROR - train_reversal_models:336 - Failed to train logistic: This solver needs samples of at least 2 classes in the data, but the data contains only one class: np.int64(0)
+2025-08-21 23:04:09,947 - __main__ - INFO - train_reversal_models:252 - Training reversal models for 10 periods ahead
+2025-08-21 23:04:10,717 - __main__ - INFO - prepare_training_data:241 - Training data prepared: 981 samples, 12 features
+2025-08-21 23:04:10,718 - __main__ - INFO - prepare_training_data:242 - Label distribution: [975   6]
+2025-08-21 23:04:10,718 - __main__ - INFO - train_reversal_models:283 - Training random_forest model...
+2025-08-21 23:04:10,923 - __main__ - INFO - save_model:86 - Model random_forest_reversal_10d saved successfully
+2025-08-21 23:04:10,923 - __main__ - INFO - train_reversal_models:333 - random_forest: Train=1.000, Test=0.995
+2025-08-21 23:04:10,923 - __main__ - INFO - train_reversal_models:283 - Training gradient_boost model...
+2025-08-21 23:04:11,254 - __main__ - INFO - save_model:86 - Model gradient_boost_reversal_10d saved successfully
+2025-08-21 23:04:11,255 - __main__ - INFO - train_reversal_models:333 - gradient_boost: Train=1.000, Test=0.995
+2025-08-21 23:04:11,255 - __main__ - INFO - train_reversal_models:283 - Training logistic model...
+2025-08-21 23:04:11,312 - __main__ - INFO - save_model:86 - Model logistic_reversal_10d saved successfully
+2025-08-21 23:04:11,312 - __main__ - INFO - train_reversal_models:333 - logistic: Train=0.994, Test=0.995
+2025-08-21 23:04:11,313 - __main__ - INFO - train_reversal_models:252 - Training reversal models for 20 periods ahead
+2025-08-21 23:04:12,343 - __main__ - INFO - prepare_training_data:241 - Training data prepared: 981 samples, 12 features
+2025-08-21 23:04:12,345 - __main__ - INFO - prepare_training_data:242 - Label distribution: [960  19   2]
+2025-08-21 23:04:12,347 - __main__ - INFO - train_reversal_models:283 - Training random_forest model...
+2025-08-21 23:04:12,776 - __main__ - INFO - save_model:86 - Model random_forest_reversal_20d saved successfully
+2025-08-21 23:04:12,776 - __main__ - INFO - train_reversal_models:333 - random_forest: Train=1.000, Test=0.980
+2025-08-21 23:04:12,776 - __main__ - INFO - train_reversal_models:283 - Training gradient_boost model...
+2025-08-21 23:04:16,050 - __main__ - INFO - save_model:86 - Model gradient_boost_reversal_20d saved successfully
+2025-08-21 23:04:16,050 - __main__ - INFO - train_reversal_models:333 - gradient_boost: Train=1.000, Test=0.964
+2025-08-21 23:04:16,051 - __main__ - INFO - train_reversal_models:283 - Training logistic model...
+2025-08-21 23:04:16,078 - __main__ - INFO - save_model:86 - Model logistic_reversal_20d saved successfully
+2025-08-21 23:04:16,078 - __main__ - INFO - train_reversal_models:333 - logistic: Train=0.978, Test=0.980
+2025-08-21 23:06:25,357 - ml_enhanced - INFO - __init__:61 - TrendReversalML initialized with model directory: ml_models
+2025-08-21 23:06:25,809 - ml_enhanced - INFO - load_model:113 - Model gradient_boost_reversal_10d loaded successfully
+2025-08-21 23:06:25,810 - ml_enhanced - INFO - load_model:113 - Model logistic_reversal_10d loaded successfully
+2025-08-21 23:06:25,814 - ml_enhanced - INFO - load_model:113 - Model random_forest_reversal_10d loaded successfully
