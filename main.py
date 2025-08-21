@@ -18,6 +18,7 @@ from correlation_module import CorrelationAnalyzer
 from ml_predictor import MLPredictor
 from ml_enhanced import TrendReversalML
 from multi_crypto_ml import MultiCryptoML
+from bnb_enhanced_ml import BNBEnhancedML
 from trend_reversal import TrendReversalDetector
 
 
@@ -38,6 +39,7 @@ class BNBAdvancedAnalyzer:
         self.ml_predictor = MLPredictor()
         self.ml_reversal = TrendReversalML()
         self.multi_crypto_ml = MultiCryptoML()
+        self.bnb_enhanced_ml = BNBEnhancedML()
         self.reversal_detector = TrendReversalDetector()
         
         print(f"🚀 BNB Advanced Analyzer initialized for {symbol}")
@@ -614,6 +616,190 @@ class BNBAdvancedAnalyzer:
         except Exception as e:
             print(f"❌ Error in multi-crypto analysis: {e}")
     
+    def show_bnb_enhanced_analysis(self):
+        """Show BNB analysis enhanced with multi-crypto intelligence"""
+        print("\n" + "="*60)
+        print("🎯 BNB ENHANCED ML ANALYSIS")
+        print("🧠 Enhanced with Top 10 Cryptocurrency Intelligence")
+        print("="*60)
+        
+        try:
+            print("📅 SELECT PREDICTION HORIZON:")
+            print("1. 5 hours ahead")
+            print("2. 10 hours ahead") 
+            print("3. 20 hours ahead")
+            print("4. Train enhanced models first")
+            print("5. Show discovered patterns")
+            
+            choice = input(f"\n{self.display.colorize('Select option (1-5): ', 'cyan')}").strip()
+            
+            if choice == "1":
+                periods = 5
+            elif choice == "2":
+                periods = 10
+            elif choice == "3":
+                periods = 20
+            elif choice == "4":
+                print("🧠 Training BNB enhanced models with multi-crypto intelligence...")
+                result = self.bnb_enhanced_ml.train_bnb_enhanced_model(10)
+                if "success" in result:
+                    print(f"✅ Training completed: {result['models_trained']} enhanced models")
+                    print(f"📊 Learning from: {result['learning_cryptos']} cryptocurrencies")
+                    print(f"🧠 Universal insights: {result['universal_insights']}")
+                    print(f"🔧 Enhanced features: {result['enhanced_features']}")
+                    periods = 10
+                else:
+                    print(f"❌ Training failed: {result.get('error', 'Unknown error')}")
+                    return
+            elif choice == "5":
+                # Show pattern analysis
+                print("🧠 PATTERN DISCOVERY ANALYSIS:")
+                print("=" * 40)
+                print("This feature analyzes what patterns the ML discovered")
+                print("from the top 10 cryptocurrencies and applies to BNB.")
+                print()
+                print("💡 Train models first to see discovered patterns!")
+                return
+            else:
+                periods = 10
+                print("Invalid choice, using 10 hours")
+            
+            # Make enhanced prediction
+            print(f"\n🔮 Making BNB enhanced prediction ({periods}h ahead)...")
+            print("🧠 Using patterns learned from top 10 cryptocurrencies...")
+            
+            prediction = self.bnb_enhanced_ml.predict_bnb_enhanced(periods)
+            
+            if "error" in prediction:
+                print(f"❌ Enhanced prediction error: {prediction['error']}")
+                print("💡 Try training enhanced models first (option 4)")
+                return
+            
+            # Display enhanced results
+            current_price = prediction["current_bnb_price"]
+            pred_label = prediction["prediction_label"]
+            confidence = prediction["confidence"]
+            ensemble_pred = prediction["ensemble_prediction"]
+            
+            print(f"\n🎯 BNB ENHANCED PREDICTION RESULTS")
+            print("=" * 50)
+            print(f"💰 Current BNB Price: ${current_price:.2f}")
+            print(f"⏰ Prediction Horizon: {periods} hours ahead")
+            print(f"🧠 Enhanced Analysis: Multi-Crypto Intelligence")
+            
+            # Color coding based on prediction
+            if ensemble_pred == 1:  # Bullish reversal
+                icon = "🟢📈"
+                advice = "BULLISH REVERSAL - Consider LONG position"
+                color = "green"
+                signal = "BUY SIGNAL 🚀"
+            elif ensemble_pred == 2:  # Bearish reversal
+                icon = "🔴📉"
+                advice = "BEARISH REVERSAL - Consider SHORT position"
+                color = "red"
+                signal = "SELL SIGNAL 💥"
+            else:  # No reversal
+                icon = "🟡➡️"
+                advice = "NO REVERSAL - Current trend continues"
+                color = "yellow"
+                signal = "HOLD ⏸️"
+            
+            print(f"{icon} Prediction: {self.display.colorize(pred_label, color)}")
+            print(f"🎲 Confidence: {confidence:.1%}")
+            print(f"📊 Signal: {signal}")
+            print(f"💡 Advice: {advice}")
+            
+            # Enhanced risk assessment
+            print(f"\n⚠️ ENHANCED RISK ASSESSMENT:")
+            print("-" * 30)
+            
+            if confidence >= 0.8:
+                risk_level = "🟢 LOW RISK"
+                position_size = "Standard position (3-5%)"
+                recommendation = "High confidence with multi-crypto validation"
+            elif confidence >= 0.6:
+                risk_level = "🟡 MEDIUM RISK"
+                position_size = "Reduced position (1-3%)"
+                recommendation = "Moderate confidence from enhanced analysis"
+            else:
+                risk_level = "🔴 HIGH RISK"
+                position_size = "Minimal position (<1%)"
+                recommendation = "Low confidence - wait for better signal"
+            
+            print(f"Risk Level: {risk_level}")
+            print(f"Position Sizing: {position_size}")
+            print(f"Recommendation: {recommendation}")
+            
+            # Show universal insights if available
+            if "universal_insights" in prediction:
+                insights = prediction["universal_insights"]
+                if insights and len(insights) > 0:
+                    print(f"\n🧠 UNIVERSAL PATTERNS APPLIED:")
+                    print("-" * 30)
+                    for i, insight in enumerate(insights[:3], 1):  # Show top 3
+                        print(f"{i}. {insight}")
+                    if len(insights) > 3:
+                        print(f"   ... and {len(insights) - 3} more patterns")
+                    print("💡 These patterns were learned from all cryptocurrencies!")
+            
+            # Enhancement details
+            print(f"\n🌐 ENHANCEMENT DETAILS:")
+            print("-" * 25)
+            print("✅ Fibonacci Levels: Enhanced with cross-crypto effectiveness")
+            print("✅ Volume Spikes: Validated across multiple assets")
+            print("✅ Candlestick Patterns: Cross-validated effectiveness weights")
+            print("✅ Market Correlation: BTC leadership intelligence")
+            print("✅ Pattern Library: Universal crypto market patterns")
+            
+            # Model breakdown
+            if confidence > 0:
+                print(f"\n📊 ENHANCED MODEL BREAKDOWN:")
+                print("-" * 30)
+                
+                for model_name, model_pred in prediction["individual_predictions"].items():
+                    pred_num = model_pred["prediction"]
+                    pred_text = ["No Reversal", "Bullish", "Bearish"][pred_num]
+                    proba = model_pred.get("probability", [])
+                    
+                    if proba:
+                        max_proba = max(proba)
+                        icon = "🎯" if max_proba > 0.8 else "🎲" if max_proba > 0.6 else "❓"
+                        print(f"{icon} {model_name}: {pred_text} ({max_proba:.1%})")
+                    else:
+                        print(f"🤖 {model_name}: {pred_text}")
+            
+            # Trading suggestions
+            print(f"\n💼 ENHANCED TRADING SUGGESTIONS:")
+            print("-" * 35)
+            
+            if ensemble_pred == 1 and confidence > 0.7:  # Strong bullish
+                print("🟢 ENHANCED BULLISH SETUP:")
+                print(f"   📈 Entry: ${current_price:.2f}")
+                print(f"   ⏰ Timeframe: {periods}h enhanced prediction")
+                print(f"   🛡️ Stop Loss: Enhanced risk management (3-5% below)")
+                print(f"   🎯 Target: Multi-crypto validated levels")
+                print(f"   🧠 Intelligence: Cross-crypto pattern confirmation")
+                
+            elif ensemble_pred == 2 and confidence > 0.7:  # Strong bearish
+                print("🔴 ENHANCED BEARISH SETUP:")
+                print(f"   📉 Entry: ${current_price:.2f}")
+                print(f"   ⏰ Timeframe: {periods}h enhanced prediction")
+                print(f"   🛡️ Stop Loss: Enhanced risk management (3-5% above)")
+                print(f"   🎯 Target: Multi-crypto validated levels")
+                print(f"   🧠 Intelligence: Cross-crypto pattern confirmation")
+                
+        else:
+                print("🟡 ENHANCED ANALYSIS SUGGESTS:")
+                print(f"   📊 Current Signal: {signal}")
+                print(f"   💡 Recommendation: Wait for higher confidence")
+                print(f"   🧠 Enhanced Intelligence: Suggests patience")
+                print(f"   🌐 Monitor: Cross-crypto market movements")
+            
+            print(f"\n🎯 BNB Enhanced Analysis - Powered by Multi-Crypto Intelligence!")
+            
+        except Exception as e:
+            print(f"❌ Error in BNB enhanced analysis: {e}")
+    
     def show_reversal_analysis(self):
         """Show comprehensive trend reversal analysis"""
         print("\n" + "="*60)
@@ -750,23 +936,27 @@ class BNBAdvancedAnalyzer:
                     input(f"\n{self.display.colorize('Press Enter to continue...', 'cyan')}")
                     
                 elif choice == "11":
-                    self.show_reversal_analysis()
+                    self.show_bnb_enhanced_analysis()
                     input(f"\n{self.display.colorize('Press Enter to continue...', 'cyan')}")
                     
                 elif choice == "12":
-                    self.show_market_summary()
+                    self.show_reversal_analysis()
                     input(f"\n{self.display.colorize('Press Enter to continue...', 'cyan')}")
                     
                 elif choice == "13":
+                    self.show_market_summary()
+                    input(f"\n{self.display.colorize('Press Enter to continue...', 'cyan')}")
+                    
+                elif choice == "14":
                     self.display.toggle_colors()
                     time.sleep(1)
                     
-                elif choice == "14":
+                elif choice == "15":
                     print(f"\n{self.display.colorize('👋 Thank you for using BNB Advanced Analyzer!', 'green')}")
                     break
                     
                 else:
-                    print(f"\n{self.display.colorize('❌ Invalid choice. Please select 1-14.', 'red')}")
+                    print(f"\n{self.display.colorize('❌ Invalid choice. Please select 1-15.', 'red')}")
                     time.sleep(1)
                     
             except KeyboardInterrupt:
@@ -791,12 +981,13 @@ class BNBAdvancedAnalyzer:
         print("8. Show ML Predictions (AI Price Forecasts)")
         print("9. Show ML Trend Reversal Detection")
         print("10. Show Multi-Crypto ML Analysis")
-        print("11. Show Trend Reversal Analysis")
-        print("12. Show market summary")
-        print("13. Toggle colors")
-        print("14. Exit")
+        print("11. Show BNB Enhanced ML (Multi-Crypto Intelligence)")
+        print("12. Show Trend Reversal Analysis")
+        print("13. Show market summary")
+        print("14. Toggle colors")
+        print("15. Exit")
         
-        return input(f"\n{self.display.colorize('Choice (1-14): ', 'cyan')}")
+        return input(f"\n{self.display.colorize('Choice (1-15): ', 'cyan')}")
 
 
 def main():
