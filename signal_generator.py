@@ -10,6 +10,7 @@ from indicators import TechnicalIndicators
 from elliott_wave import ElliottWaveAnalyzer
 from fib import FibonacciAnalyzer
 from correlation_module import CorrelationAnalyzer
+from market_config import BNBMarketConfig
 
 
 class TradingSignalGenerator:
@@ -21,16 +22,11 @@ class TradingSignalGenerator:
         self.fibonacci = FibonacciAnalyzer()
         self.correlation = CorrelationAnalyzer()
         
-        # Predefined support and resistance levels
-        self.support_levels = [732, 680, 644, 600, 550, 519]
-        self.resistance_levels = [869, 850, 820, 800, 780]
-        
-        # Historical cycle data
-        self.cycles = [
-            {"bottom": 363, "top": 641, "next_bottom": 408, "date": "2024-03"},
-            {"bottom": 408, "top": 793, "next_bottom": 519, "date": "2024-08"},
-            {"bottom": 519, "top": 869, "next_bottom": None, "date": "2025-02"}
-        ]
+        # Use centralized market configuration
+        self.market_config = BNBMarketConfig()
+        self.support_levels = self.market_config.SUPPORT_LEVELS
+        self.resistance_levels = self.market_config.RESISTANCE_LEVELS
+        self.cycles = self.market_config.MARKET_CYCLES
     
     def calculate_bull_bear_score(self, current_price: float, prices: List[float], 
                                   volumes: List[float]) -> Dict:

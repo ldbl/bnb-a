@@ -4,8 +4,7 @@ ASCII Charts Module
 Simple ASCII chart generation for price visualization
 """
 
-from typing import List, Dict
-import math
+from typing import List
 
 
 class ASCIIChart:
@@ -187,18 +186,11 @@ def create_support_resistance_visual(current_price: float, support: List[float],
     return "\n".join(chart_lines)
 
 
-# Example usage
-if __name__ == "__main__":
-    # Test price chart
-    test_prices = [840, 845, 842, 850, 848, 855, 851, 860, 857, 863]
-    chart = ASCIIChart(width=30, height=8)
-    
-    print(chart.create_price_chart(test_prices, "BNB/USDT"))
-    print("\n")
-    
-    # Test RSI chart
-    print(chart.create_rsi_chart([65.5]))
-    print("\n")
-    
-    # Test support/resistance
-    print(create_support_resistance_visual(850, [840, 830, 820], [860, 870, 880]))
+# Example usage for testing
+# Uncomment and run: python3 charts.py
+# if __name__ == "__main__":
+#     test_prices = [840, 845, 842, 850, 848, 855, 851, 860, 857, 863]
+#     chart = ASCIIChart(width=30, height=8)
+#     print(chart.create_price_chart(test_prices, "BNB/USDT"))
+#     print(chart.create_rsi_chart([65.5]))
+#     print(create_support_resistance_visual(850, [840, 830, 820], [860, 870, 880]))

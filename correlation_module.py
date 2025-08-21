@@ -9,12 +9,15 @@ import numpy as np
 from datetime import datetime, timedelta
 from typing import Dict, List, Tuple
 import time
+from logger import get_logger
 
 class CorrelationAnalyzer:
     """Analyzes correlation between BNB and major cryptocurrencies"""
     
     def __init__(self):
         self.base_url = "https://api.binance.com/api/v3"
+        self.logger = get_logger(__name__)
+        self.request_timeout = 10
         self.symbols = {
             "BNB": "BNBUSDT",
             "BTC": "BTCUSDT", 
@@ -39,20 +42,38 @@ class CorrelationAnalyzer:
         }
     
     def fetch_price_data(self, symbol: str, interval: str = "1h", limit: int = 100) -> List[float]:
-        """Fetch price data for correlation analysis"""
+        """Fetch price data for correlation analysis with timeout and logging"""
         try:
             params = {
                 "symbol": symbol,
                 "interval": interval,
                 "limit": limit
             }
-            response = requests.get(f"{self.base_url}/klines", params=params)
-            klines = response.json()
             
-            # Return closing prices
-            return [float(k[4]) for k in klines]
+            self.logger.debug(f"Fetching price data for {symbol} ({interval}, {limit} periods)")
+            response = requests.get(
+                f"{self.base_url}/klines", 
+                params=params, 
+                timeout=self.request_timeout
+            )
+            
+            if response.status_code == 200:
+                klines = response.json()
+                prices = [float(k[4]) for k in klines]
+                self.logger.debug(f"Successfully fetched {len(prices)} price points for {symbol}")
+                return prices
+            else:
+                self.logger.error(f"API Error for {symbol}: {response.status_code} - {response.text}")
+                return []
+                
+        except requests.exceptions.Timeout:
+            self.logger.error(f"Timeout while fetching {symbol} data")
+            return []
+        except requests.exceptions.RequestException as e:
+            self.logger.error(f"Network error fetching {symbol} data: {e}")
+            return []
         except Exception as e:
-            print(f"Error fetching {symbol} data: {e}")
+            self.logger.error(f"Unexpected error fetching {symbol} data: {e}")
             return []
     
     def calculate_correlation(self, prices1: List[float], prices2: List[float]) -> float:

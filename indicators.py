@@ -50,14 +50,20 @@ class TechnicalIndicators:
     
     @staticmethod
     def calculate_macd(prices: List[float], fast: int = 12, slow: int = 26, signal: int = 9) -> Dict:
-        """Calculate MACD (Moving Average Convergence Divergence)"""
-        if len(prices) < slow:
+        """Calculate MACD (Moving Average Convergence Divergence) with correct signal line"""
+        if len(prices) < slow + signal:
             return {"macd": 0, "signal": 0, "histogram": 0, "trend": "NEUTRAL"}
         
-        ema_fast = TechnicalIndicators.calculate_ema(prices, fast)
-        ema_slow = TechnicalIndicators.calculate_ema(prices, slow)
-        macd = ema_fast - ema_slow
-        macd_signal = TechnicalIndicators.calculate_ema([macd], signal)
+        # Calculate MACD line for all data points
+        macd_values = []
+        for i in range(slow, len(prices) + 1):
+            ema_fast = TechnicalIndicators.calculate_ema(prices[:i], fast)
+            ema_slow = TechnicalIndicators.calculate_ema(prices[:i], slow)
+            macd_values.append(ema_fast - ema_slow)
+        
+        # Calculate signal line as EMA of MACD values
+        macd_signal = TechnicalIndicators.calculate_ema(macd_values, signal)
+        macd = macd_values[-1] if macd_values else 0
         histogram = macd - macd_signal
         
         trend = "BULLISH" if macd > macd_signal else "BEARISH" if macd < macd_signal else "NEUTRAL"

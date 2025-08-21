@@ -142,6 +142,26 @@ def log_performance(func):
     return wrapper
 
 
+def get_logger(name: str = None) -> logging.Logger:
+    """
+    Get a logger instance for the specified module
+    
+    Args:
+        name: Module name (usually __name__)
+    
+    Returns:
+        Configured logger instance
+    """
+    if name:
+        # Create a specialized logger for the module
+        logger_instance = TradingLogger(name.split('.')[-1])
+        return logger_instance.logger
+    else:
+        # Return default logger
+        default_logger = TradingLogger()
+        return default_logger.logger
+
+
 # Example usage
 if __name__ == "__main__":
     # Test logging

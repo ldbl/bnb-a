@@ -11,7 +11,10 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Tuple, Optional
 import json
 import warnings
-warnings.filterwarnings('ignore')
+# Suppress only specific ML-related warnings to keep important diagnostics visible
+warnings.filterwarnings('ignore', category=UserWarning, module='sklearn')
+warnings.filterwarnings('ignore', category=FutureWarning, module='sklearn') 
+warnings.filterwarnings('ignore', category=DeprecationWarning, module='tensorflow')
 
 # ML imports with fallbacks
 try:
