@@ -105,6 +105,134 @@ class TechnicalIndicators:
             "macd": TechnicalIndicators.calculate_macd(prices),
             "bollinger": TechnicalIndicators.calculate_bollinger(prices)
         }
+    
+    @staticmethod
+    def check_critical_indicator_alerts(prices: List[float], volumes: List[float] = None) -> Dict:
+        """Check for critical technical indicator situations that warrant immediate attention"""
+        
+        try:
+            if len(prices) < 20:
+                return {"show_alert": False, "reason": "Insufficient price data for indicators"}
+            
+            # Calculate all indicators
+            rsi = TechnicalIndicators.calculate_rsi(prices)
+            macd = TechnicalIndicators.calculate_macd(prices)
+            bollinger = TechnicalIndicators.calculate_bollinger(prices)
+            
+            critical_signals = []
+            alert_score = 0
+            current_price = prices[-1]
+            
+            # RSI extreme conditions
+            if rsi <= 25:
+                critical_signals.append(f"📉 RSI EXTREME OVERSOLD ({rsi:.1f}) - Potential reversal")
+                alert_score += 8
+            elif rsi <= 30:
+                critical_signals.append(f"📉 RSI oversold ({rsi:.1f}) - Watch for bounce")
+                alert_score += 5
+            elif rsi >= 75:
+                critical_signals.append(f"📈 RSI EXTREME OVERBOUGHT ({rsi:.1f}) - Potential correction")
+                alert_score += 8
+            elif rsi >= 70:
+                critical_signals.append(f"📈 RSI overbought ({rsi:.1f}) - Caution advised")
+                alert_score += 5
+            
+            # MACD critical conditions
+            if macd["trend"] == "BULLISH" and macd["histogram"] > 5:
+                critical_signals.append(f"🚀 Strong MACD bullish momentum (H:{macd['histogram']:.1f})")
+                alert_score += 6
+            elif macd["trend"] == "BEARISH" and macd["histogram"] < -5:
+                critical_signals.append(f"💥 Strong MACD bearish momentum (H:{macd['histogram']:.1f})")
+                alert_score += 6
+            
+            # MACD crossover detection (recent trend change)
+            if len(prices) >= 2:
+                prev_macd = TechnicalIndicators.calculate_macd(prices[:-1])
+                if (prev_macd["trend"] != macd["trend"] and 
+                    macd["trend"] in ["BULLISH", "BEARISH"]):
+                    direction = "🟢 BULLISH" if macd["trend"] == "BULLISH" else "🔴 BEARISH"
+                    critical_signals.append(f"⚡ Fresh MACD {direction} crossover")
+                    alert_score += 7
+            
+            # Bollinger Bands squeeze/expansion
+            bb_width = bollinger["upper"] - bollinger["lower"]
+            bb_width_pct = (bb_width / bollinger["middle"]) * 100
+            
+            if bb_width_pct < 3:  # Very tight bands
+                critical_signals.append(f"🎯 Bollinger Bands SQUEEZE ({bb_width_pct:.1f}%) - Breakout imminent")
+                alert_score += 6
+            elif bollinger["position"] == "OVERBOUGHT" and current_price > bollinger["upper"]:
+                critical_signals.append(f"⚡ Price ABOVE Bollinger Upper Band - Extreme condition")
+                alert_score += 5
+            elif bollinger["position"] == "OVERSOLD" and current_price < bollinger["lower"]:
+                critical_signals.append(f"⚡ Price BELOW Bollinger Lower Band - Extreme condition")
+                alert_score += 5
+            
+            # Multi-indicator confluence
+            if rsi <= 30 and bollinger["position"] == "OVERSOLD" and macd["trend"] == "BULLISH":
+                critical_signals.append("💎 TRIPLE BULLISH CONFLUENCE - RSI+Bollinger+MACD")
+                alert_score += 9
+            elif rsi >= 70 and bollinger["position"] == "OVERBOUGHT" and macd["trend"] == "BEARISH":
+                critical_signals.append("⚠️ TRIPLE BEARISH CONFLUENCE - RSI+Bollinger+MACD")
+                alert_score += 9
+            
+            # Volume confirmation (if available)
+            if volumes and len(volumes) >= 2:
+                recent_volume = sum(volumes[-3:]) / 3  # 3-period average
+                prev_volume = sum(volumes[-6:-3]) / 3   # Previous 3-period average
+                volume_increase = (recent_volume / prev_volume - 1) * 100
+                
+                if volume_increase > 50 and macd["trend"] == "BULLISH":
+                    critical_signals.append(f"🔥 Volume surge (+{volume_increase:.0f}%) + Bullish MACD")
+                    alert_score += 4
+                elif volume_increase > 50 and macd["trend"] == "BEARISH":
+                    critical_signals.append(f"💥 Volume surge (+{volume_increase:.0f}%) + Bearish MACD")
+                    alert_score += 4
+            
+            # Determine if alert should be shown
+            show_alert = alert_score >= 7  # Threshold for indicator alerts
+            
+            return {
+                "show_alert": show_alert,
+                "alert_score": alert_score,
+                "critical_signals": critical_signals,
+                "indicator_data": {
+                    "rsi": rsi,
+                    "macd": macd,
+                    "bollinger": bollinger,
+                    "bb_width_pct": bb_width_pct,
+                    "current_price": current_price
+                }
+            }
+            
+        except Exception as e:
+            return {"show_alert": False, "reason": f"Error checking indicator alerts: {e}"}
+    
+    @staticmethod
+    def get_critical_indicator_alert_text(alert_data: Dict) -> str:
+        """Generate formatted alert text for critical technical indicator activity"""
+        
+        if not alert_data.get("show_alert"):
+            return ""
+        
+        signals = alert_data.get("critical_signals", [])
+        indicator_data = alert_data.get("indicator_data", {})
+        
+        alert_text = f"\n📊 CRITICAL TECHNICAL INDICATOR ALERT\n"
+        alert_text += "=" * 50 + "\n"
+        
+        for signal in signals:
+            alert_text += f"{signal}\n"
+        
+        alert_text += f"\nRSI: {indicator_data.get('rsi', 0):.1f}"
+        alert_text += f"\nMACD: {indicator_data.get('macd', {}).get('trend', 'Unknown')}"
+        alert_text += f"\nBollinger: {indicator_data.get('bollinger', {}).get('position', 'Unknown')}"
+        
+        alert_text += f"\n\nAlert Score: {alert_data.get('alert_score', 0)}/20"
+        alert_text += "\n💡 Consider: Check technical analysis for confirmation"
+        alert_text += "\n" + "=" * 50
+        
+        return alert_text
 
 
 # Example usage

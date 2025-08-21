@@ -195,6 +195,111 @@ class FibonacciAnalyzer:
         
         return signals
     
+    def check_critical_fibonacci_alerts(self, current_price: float) -> Dict:
+        """Check for critical Fibonacci situations that warrant immediate attention"""
+        
+        try:
+            signals = self.get_fibonacci_signals(current_price)
+            
+            if signals.get("signal") == "NO_DATA":
+                return {"show_alert": False, "reason": "No Fibonacci data available"}
+            
+            critical_signals = []
+            alert_score = 0
+            
+            closest = signals.get("closest_level", {})
+            fib_levels = signals.get("fibonacci_levels", {})
+            trend = signals.get("trend", "")
+            
+            # Golden Pocket detection (61.8% zone)
+            if signals.get("golden_pocket"):
+                critical_signals.append("⭐ GOLDEN POCKET - High probability bounce zone!")
+                alert_score += 8
+            
+            # Major Fibonacci level proximity
+            major_levels = ["38.2%", "50%", "61.8%", "78.6%"]
+            if closest.get("name") in major_levels and closest.get("distance", 100) < 8:
+                level_name = closest["name"]
+                distance = closest["distance"]
+                critical_signals.append(f"📐 At major Fib level {level_name} (${distance:.1f} away)")
+                alert_score += 6
+            
+            # Strong support/resistance at Fib levels
+            if signals.get("is_at_support"):
+                critical_signals.append(f"🛡️ Strong Fibonacci support at {closest.get('name', 'N/A')}")
+                alert_score += 5
+            elif signals.get("is_at_resistance"):
+                critical_signals.append(f"⚡ Strong Fibonacci resistance at {closest.get('name', 'N/A')}")
+                alert_score += 5
+            
+            # Extension levels (breakout scenarios)
+            extension_levels = ["161.8%", "261.8%"]
+            if closest.get("name") in extension_levels and closest.get("distance", 100) < 15:
+                critical_signals.append(f"🚀 Near Fibonacci extension {closest['name']} - Breakout zone")
+                alert_score += 4
+            
+            # Extreme Fibonacci zones (near 0% or 100%)
+            extreme_levels = ["0%", "100%"]
+            if closest.get("name") in extreme_levels and closest.get("distance", 100) < 10:
+                zone_type = "swing high" if closest["name"] == "0%" else "swing low"
+                critical_signals.append(f"🎯 Approaching {zone_type} ({closest['name']}) - Critical zone")
+                alert_score += 7
+            
+            # Action-based alerts
+            action = signals.get("action", "WAIT")
+            if action in ["STRONG_BUY", "STRONG_SELL"]:
+                action_emoji = "🟢" if "BUY" in action else "🔴"
+                critical_signals.append(f"{action_emoji} Strong Fibonacci {action} signal")
+                alert_score += 3
+            
+            # Determine if alert should be shown
+            show_alert = alert_score >= 6  # Threshold for Fibonacci alerts
+            
+            return {
+                "show_alert": show_alert,
+                "alert_score": alert_score,
+                "critical_signals": critical_signals,
+                "fibonacci_data": {
+                    "action": action,
+                    "trend": trend,
+                    "closest_level": closest,
+                    "golden_pocket": signals.get("golden_pocket", False),
+                    "swing_high": signals.get("swing_high", 0),
+                    "swing_low": signals.get("swing_low", 0)
+                }
+            }
+            
+        except Exception as e:
+            return {"show_alert": False, "reason": f"Error checking Fibonacci alerts: {e}"}
+    
+    def get_critical_fibonacci_alert_text(self, alert_data: Dict) -> str:
+        """Generate formatted alert text for critical Fibonacci activity"""
+        
+        if not alert_data.get("show_alert"):
+            return ""
+        
+        signals = alert_data.get("critical_signals", [])
+        fib_data = alert_data.get("fibonacci_data", {})
+        
+        alert_text = f"\n📐 CRITICAL FIBONACCI ALERT\n"
+        alert_text += "=" * 45 + "\n"
+        
+        for signal in signals:
+            alert_text += f"{signal}\n"
+        
+        alert_text += f"\nAction: {fib_data.get('action', 'WAIT')}"
+        alert_text += f"\nTrend: {fib_data.get('trend', 'Unknown')}"
+        
+        closest = fib_data.get("closest_level", {})
+        if closest:
+            alert_text += f"\nClosest Level: {closest.get('name', 'N/A')} at ${closest.get('level', 0)}"
+        
+        alert_text += f"\n\nAlert Score: {alert_data.get('alert_score', 0)}/20"
+        alert_text += "\n💡 Consider: Check Fibonacci analysis for entry/exit levels"
+        alert_text += "\n" + "=" * 45
+        
+        return alert_text
+    
     def display_analysis(self):
         """Display formatted Fibonacci analysis"""
         # Get current price

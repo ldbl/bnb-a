@@ -111,12 +111,12 @@ class BinanceDataFetcher:
         }
     
     def analyze_timeframes(self) -> Dict:
-        """Analyze multiple timeframes for trend detection"""
+        """Analyze multiple timeframes for trend detection (Daily+ focus)"""
         timeframes_config = {
-            "1h": {"interval": "1h", "limit": 168, "period": "Week"},
-            "4h": {"interval": "4h", "limit": 180, "period": "Month"},
-            "1d": {"interval": "1d", "limit": 90, "period": "3 Months"},
-            "1w": {"interval": "1w", "limit": 52, "period": "Year"}
+            "1d": {"interval": "1d", "limit": 30, "period": "1 Month"},
+            "1w": {"interval": "1w", "limit": 12, "period": "3 Months"},
+            "1M": {"interval": "1M", "limit": 6, "period": "6 Months"},
+            "3M": {"interval": "3M", "limit": 4, "period": "1 Year"}
         }
         
         analysis = {}
