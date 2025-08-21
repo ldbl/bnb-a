@@ -70,3 +70,13 @@
 2025-08-21 22:33:04,870 - email_reporter - INFO - send_email:303 - Attempting to send email to recipient@example.com
 2025-08-21 22:33:04,878 - email_reporter - INFO - send_email:325 - ✅ Email sent successfully to recipient@example.com
 2025-08-21 22:33:04,878 - email_reporter - INFO - send_daily_report:359 - 📧 Daily report sent successfully!
+2025-08-21 22:35:23,937 - data_fetcher - ERROR - fetch_klines:45 - API Error: 400 - {"code":-1120,"msg":"Invalid interval."}
+2025-08-21 22:35:24,262 - data_fetcher - ERROR - fetch_klines:45 - API Error: 400 - {"code":-1120,"msg":"Invalid interval."}
+2025-08-21 22:35:24,575 - data_fetcher - ERROR - fetch_klines:45 - API Error: 400 - {"code":-1120,"msg":"Invalid interval."}
+2025-08-21 22:36:12,704 - __main__ - INFO - main:407 - 🧪 Running in TEST MODE - checking email configuration...
+2025-08-21 22:36:12,705 - __main__ - INFO - main:417 - ✅ Email configuration looks good!
+2025-08-21 22:36:12,705 - __main__ - INFO - __init__:85 - EmailReporter initialized for test@example.com
+2025-08-21 22:36:12,705 - __main__ - INFO - generate_daily_report:114 - Generating daily BNB analysis report...
+2025-08-21 22:36:12,705 - __main__ - INFO - generate_daily_report:145 - Report includes 3 critical alerts
+2025-08-21 22:36:12,705 - __main__ - INFO - generate_daily_report:183 - Daily report generated successfully (687 characters)
+2025-08-21 22:36:12,705 - __main__ - INFO - main:429 - Test mode completed successfully

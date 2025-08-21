@@ -272,7 +272,7 @@ class CorrelationAnalyzer:
             "1d": {"interval": "1d", "periods": 30, "name": "1 Month"},
             "1w": {"interval": "1w", "periods": 12, "name": "3 Months"}, 
             "1M": {"interval": "1M", "periods": 6, "name": "6 Months"},
-            "3M": {"interval": "3M", "periods": 4, "name": "1 Year"}
+            "1M_year": {"interval": "1M", "periods": 12, "name": "1 Year"}  # Fixed: use 1M with 12 periods
         }
         
         results = {}

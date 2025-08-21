@@ -129,7 +129,7 @@ class BinanceDataFetcher:
             "1d": {"interval": "1d", "limit": 30, "period": "1 Month"},
             "1w": {"interval": "1w", "limit": 12, "period": "3 Months"},
             "1M": {"interval": "1M", "limit": 6, "period": "6 Months"},
-            "3M": {"interval": "3M", "limit": 4, "period": "1 Year"}
+            "1M_year": {"interval": "1M", "limit": 12, "period": "1 Year"}  # Fixed: use 1M with 12 months
         }
         
         analysis = {}
