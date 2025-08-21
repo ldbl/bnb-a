@@ -125,3 +125,4 @@
 2025-08-21 23:22:08,385 - multi_crypto_ml - INFO - fetch_multi_crypto_data:114 - ✅ Fetched data for 10 cryptocurrencies
 2025-08-21 23:26:13,900 - deep_learning_ml - INFO - __init__:66 - DeepLearningML initialized for automatic pattern discovery
 2025-08-21 23:32:05,331 - bnb_enhanced_ml - INFO - __init__:61 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-21 23:41:04,258 - bnb_enhanced_ml - INFO - __init__:61 - BNBEnhancedML initialized - will learn from 10 cryptos
