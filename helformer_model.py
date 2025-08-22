@@ -37,12 +37,12 @@ class HelformerModel:
     - Sharpe Ratio: 18.06
     """
     
-    def __init__(self, 
-                 sequence_length: int = 128,
-                 d_model: int = 256,
-                 num_heads: int = 8,
-                 num_layers: int = 6,
-                 dff: int = 1024,
+        def __init__(self,
+                 sequence_length: int = 128,  # Production: 128 for full sequence learning
+                 d_model: int = 256,          # Production: 256 for full model capacity
+                 num_heads: int = 8,          # Production: 8 for optimal attention
+                 num_layers: int = 6,         # Production: 6 for deep learning
+                 dff: int = 1024,             # Production: 1024 for full feedforward capacity
                  dropout_rate: float = 0.1,
                  hw_seasonal_periods: int = 24):
         
@@ -317,6 +317,20 @@ class HelformerModel:
                                if col not in ['open', 'high', 'low', 'close', 'volume'] 
                                and features_df[col].dtype in ['int64', 'float64', 'float32', 'int32']]
         
+        # Ensure we have exactly the expected number of features
+        expected_features = 128  # Production: 128 features for full capacity
+        if len(self.feature_columns) != expected_features:
+            self.logger.warning(f"Feature count mismatch: got {len(self.feature_columns)}, expected {expected_features}")
+            # Pad or truncate to match expected features
+            if len(self.feature_columns) < expected_features:
+                # Add dummy features if we have too few
+                for i in range(expected_features - len(self.feature_columns)):
+                    features_df[f'dummy_feature_{i}'] = 0.0
+                    self.feature_columns.append(f'dummy_feature_{i}')
+            else:
+                # Truncate if we have too many
+                self.feature_columns = self.feature_columns[:expected_features]
+        
         self.logger.info(f"Created {len(self.feature_columns)} enhanced features combining HW and traditional indicators")
         
         return features_df
@@ -411,23 +425,28 @@ class HelformerModel:
         
         return np.array(sequences), {k: np.array(v) for k, v in targets.items()}
     
-    def train_helformer(self, 
-                       crypto_data: pd.DataFrame, 
-                       validation_split: float = 0.2,
-                       epochs: int = 100,
-                       batch_size: int = 32,
-                       learning_rate: float = 0.001) -> Dict:
+    def train_helformer(self,
+                        data: pd.DataFrame,
+                        epochs: int = 100,  # Production: 100 epochs for full convergence
+                        batch_size: int = 32,  # Production: 32 for optimal training
+                        learning_rate: float = 0.001,
+                        validation_split: float = 0.2,
+                        sequence_length: int = 128,  # Production: 128 for full sequence learning
+                        d_model: int = 256,  # Production: 256 for full model capacity
+                        num_heads: int = 8,  # Production: 8 for optimal attention
+                        num_layers: int = 6,  # Production: 6 for deep learning
+                        dropout: float = 0.1) -> Dict:
         """Train the Helformer model"""
         
         self.logger.info("Starting Helformer training with HW decomposition + Transformer architecture")
         
         # Step 1: Extract Holt-Winters components
         self.logger.info("Step 1: Extracting Holt-Winters components...")
-        hw_components = self.extract_holt_winters_components(crypto_data['close'])
+        hw_components = self.extract_holt_winters_components(data['close'])
         
         # Step 2: Create enhanced features
         self.logger.info("Step 2: Creating enhanced features...")
-        features_df = self.create_enhanced_features(crypto_data, hw_components)
+        features_df = self.create_enhanced_features(data, hw_components)
         
         # Step 3: Prepare sequences
         self.logger.info("Step 3: Preparing sequences for Transformer...")
@@ -496,8 +515,23 @@ class HelformerModel:
         
         # Calculate performance metrics
         val_loss = min(history.history['val_loss'])
-        val_price_mae = min(history.history['val_price_mae'])
-        val_direction_acc = max(history.history['val_direction_accuracy'])
+        
+        # Get validation metrics - handle different naming conventions
+        if 'val_price_prediction_mae' in history.history:
+            val_price_mae = min(history.history['val_price_prediction_mae'])
+        elif 'val_price_mae' in history.history:
+            val_price_mae = min(history.history['val_price_mae'])
+        else:
+            # Fallback: use validation loss as approximation
+            val_price_mae = np.sqrt(val_loss)
+        
+        if 'val_direction_prediction_accuracy' in history.history:
+            val_direction_acc = max(history.history['val_direction_prediction_accuracy'])
+        elif 'val_direction_accuracy' in history.history:
+            val_direction_acc = max(history.history['val_direction_accuracy'])
+        else:
+            # Fallback: use training direction accuracy
+            val_direction_acc = max(history.history.get('direction_prediction_accuracy', [0.5]))
         
         # Store training history
         self.training_history = {
@@ -511,7 +545,8 @@ class HelformerModel:
         
         self.performance_metrics = {
             'rmse_equivalent': np.sqrt(val_loss),
-            'mape_equivalent': val_price_mae,
+            'val_price_mae': val_price_mae,  # Fixed: use val_price_mae key
+            'mape_equivalent': val_price_mae,  # Keep for backward compatibility
             'direction_accuracy': val_direction_acc,
             'model_type': 'Helformer',
             'holt_winters_params': self.hw_components

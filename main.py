@@ -359,7 +359,7 @@ class BNBAdvancedAnalyzer:
             
             # Helformer
             try:
-                helformer_result = self.ml_system.predict_helformer(10)
+                helformer_result = self.ml_system.predict_helformer(1)  # Use 1 period as trained
                 if 'error' not in helformer_result:
                     pred = helformer_result.get('prediction_label', 'Unknown')
                     conf = helformer_result.get('confidence', 0)
@@ -582,7 +582,7 @@ class BNBAdvancedAnalyzer:
                 # Helformer prediction
                 print("🔥 HELFORMER PREDICTION (925% Excess Return Potential)")
                 print("=" * 60)
-                helformer_result = self.ml_system.predict_helformer(10, 24)
+                helformer_result = self.ml_system.predict_helformer(1, 24)  # Use 1 period as trained
                 if "error" not in helformer_result:
                     self._display_revolutionary_prediction(helformer_result, "Helformer")
                 else:
@@ -814,7 +814,7 @@ class BNBAdvancedAnalyzer:
         
         # Try Revolutionary models (will show errors if not trained)
         revolutionary_models = [
-            ("Helformer", lambda: self.ml_system.predict_helformer(10, 24)),
+                            ("Helformer", lambda: self.ml_system.predict_helformer(1, 24)),  # Use 1 period as trained
             ("TFT", lambda: self.ml_system.predict_tft(24, [1, 6, 12, 24])),
             ("Performer", lambda: self.ml_system.predict_performer(168, True))
         ]

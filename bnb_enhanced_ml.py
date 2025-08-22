@@ -770,26 +770,26 @@ class BNBEnhancedML:
         
         self.logger.info("🚀 Training revolutionary Helformer model for breakthrough performance...")
         
-        # Step 1: Get high-quality data for Helformer
+        # Step 1: Get high-quality data for Helformer (production training)
         self.logger.info("Step 1: Fetching high-resolution data for Helformer...")
-        crypto_data = self.fetch_learning_data("1h", 2000)  # More data for Helformer
+        crypto_data = self.fetch_learning_data("1h", 2500)  # Production: 2500 periods for full training
         
         if len(crypto_data) < 5:
             return {"error": "Insufficient learning data for Helformer"}
         
         # Get BNB data
         bnb_data = crypto_data.get("BNBUSDT")
-        if bnb_data is None or len(bnb_data) < 200:
+        if bnb_data is None or len(bnb_data) < 500:  # Production: 500+ periods for robust training
             return {"error": "Insufficient BNB data for Helformer training"}
         
         try:
-            # Step 2: Initialize Helformer with optimized parameters
+            # Step 2: Initialize Helformer with production parameters (full power)
             helformer = HelformerModel(
-                sequence_length=128,  # Longer sequences for better pattern recognition
-                d_model=256,          # Rich representation
-                num_heads=8,          # Multi-head attention
-                num_layers=6,         # Deep architecture
-                dff=1024,            # Feed-forward dimension
+                sequence_length=128,  # Production: 128 for full sequence learning
+                d_model=256,          # Production: 256 for full model capacity
+                num_heads=8,          # Production: 8 for optimal attention
+                num_layers=6,         # Production: 6 for deep learning
+                dff=1024,             # Production: 1024 for full feedforward capacity
                 dropout_rate=0.1,     # Regularization
                 hw_seasonal_periods=24  # Cryptocurrency seasonality
             )
@@ -800,8 +800,8 @@ class BNBEnhancedML:
             training_result = helformer.train_helformer(
                 bnb_data,
                 validation_split=0.2,
-                epochs=100,
-                batch_size=32,
+                epochs=100,     # Production: 100 epochs for full convergence
+                batch_size=32,  # Production: 32 for optimal training
                 learning_rate=0.001
             )
             

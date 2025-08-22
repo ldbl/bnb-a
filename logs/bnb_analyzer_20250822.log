@@ -808,3 +808,145 @@ Call arguments received by layer 'favor_plus_attention_1' (type FAVORPlusAttenti
 2025-08-22 17:44:16,422 - helformer_model - ERROR - load_model:673 - Failed to load Helformer model: No file or directory found at ml_models_bnb_enhanced/helformer_10_transformer.h5
 2025-08-22 17:44:16,422 - temporal_fusion_transformer - INFO - __init__:262 - ADE-TFT initialized: hidden_size=128, horizons=24
 2025-08-22 17:44:16,423 - temporal_fusion_transformer - ERROR - load_model:879 - Failed to load TFT model: No file or directory found at ml_models_bnb_enhanced/tft_24_tft.h5
+2025-08-22 17:48:30,275 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:48:47,781 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 128, d_model: 256
+2025-08-22 17:48:47,784 - helformer_model - ERROR - load_model:673 - Failed to load Helformer model: No file or directory found at ml_models_bnb_enhanced/helformer_10_transformer.h5
+2025-08-22 17:51:06,524 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:51:06,524 - bnb_enhanced_ml - INFO - train_helformer_model:771 - 🚀 Training revolutionary Helformer model for breakthrough performance...
+2025-08-22 17:51:06,524 - bnb_enhanced_ml - INFO - train_helformer_model:774 - Step 1: Fetching high-resolution data for Helformer...
+2025-08-22 17:51:06,524 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 17:51:09,958 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 17:51:09,960 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:51:09,960 - bnb_enhanced_ml - INFO - train_helformer_model:798 - Step 2: Training Helformer with Holt-Winters + Transformer architecture...
+2025-08-22 17:51:09,960 - helformer_model - INFO - train_helformer:427 - Starting Helformer training with HW decomposition + Transformer architecture
+2025-08-22 17:51:09,960 - helformer_model - INFO - train_helformer:430 - Step 1: Extracting Holt-Winters components...
+2025-08-22 17:51:10,237 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.897, β=0.008
+2025-08-22 17:51:10,237 - helformer_model - INFO - train_helformer:434 - Step 2: Creating enhanced features...
+2025-08-22 17:51:10,261 - helformer_model - INFO - create_enhanced_features:320 - Created 64 enhanced features combining HW and traditional indicators
+2025-08-22 17:51:10,261 - helformer_model - INFO - train_helformer:438 - Step 3: Preparing sequences for Transformer...
+2025-08-22 17:51:10,272 - helformer_model - INFO - train_helformer:444 - Prepared 436 sequences with 64 timesteps and 64 features
+2025-08-22 17:51:10,272 - helformer_model - INFO - train_helformer:447 - Step 4: Building Transformer architecture...
+2025-08-22 17:51:10,687 - helformer_model - INFO - train_helformer:487 - Step 5: Training Transformer...
+2025-08-22 17:51:29,861 - bnb_enhanced_ml - ERROR - train_helformer_model:848 - Helformer training exception: 'val_price_mae'
+2025-08-22 17:52:32,214 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:52:32,215 - bnb_enhanced_ml - INFO - train_helformer_model:771 - 🚀 Training revolutionary Helformer model for breakthrough performance...
+2025-08-22 17:52:32,215 - bnb_enhanced_ml - INFO - train_helformer_model:774 - Step 1: Fetching high-resolution data for Helformer...
+2025-08-22 17:52:32,215 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 17:52:35,505 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 17:52:35,507 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:52:35,507 - bnb_enhanced_ml - INFO - train_helformer_model:798 - Step 2: Training Helformer with Holt-Winters + Transformer architecture...
+2025-08-22 17:52:35,507 - helformer_model - INFO - train_helformer:427 - Starting Helformer training with HW decomposition + Transformer architecture
+2025-08-22 17:52:35,507 - helformer_model - INFO - train_helformer:430 - Step 1: Extracting Holt-Winters components...
+2025-08-22 17:52:35,758 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.898, β=0.008
+2025-08-22 17:52:35,758 - helformer_model - INFO - train_helformer:434 - Step 2: Creating enhanced features...
+2025-08-22 17:52:35,782 - helformer_model - INFO - create_enhanced_features:320 - Created 64 enhanced features combining HW and traditional indicators
+2025-08-22 17:52:35,782 - helformer_model - INFO - train_helformer:438 - Step 3: Preparing sequences for Transformer...
+2025-08-22 17:52:35,793 - helformer_model - INFO - train_helformer:444 - Prepared 436 sequences with 64 timesteps and 64 features
+2025-08-22 17:52:35,793 - helformer_model - INFO - train_helformer:447 - Step 4: Building Transformer architecture...
+2025-08-22 17:52:36,100 - helformer_model - INFO - train_helformer:487 - Step 5: Training Transformer...
+2025-08-22 17:52:53,884 - bnb_enhanced_ml - ERROR - train_helformer_model:848 - Helformer training exception: 'val_price_mae'
+2025-08-22 17:53:30,113 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:53:30,113 - bnb_enhanced_ml - INFO - train_helformer_model:771 - 🚀 Training revolutionary Helformer model for breakthrough performance...
+2025-08-22 17:53:30,113 - bnb_enhanced_ml - INFO - train_helformer_model:774 - Step 1: Fetching high-resolution data for Helformer...
+2025-08-22 17:53:30,113 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 17:53:33,162 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 17:53:33,164 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:53:33,164 - bnb_enhanced_ml - INFO - train_helformer_model:798 - Step 2: Training Helformer with Holt-Winters + Transformer architecture...
+2025-08-22 17:53:33,164 - helformer_model - INFO - train_helformer:427 - Starting Helformer training with HW decomposition + Transformer architecture
+2025-08-22 17:53:33,164 - helformer_model - INFO - train_helformer:430 - Step 1: Extracting Holt-Winters components...
+2025-08-22 17:53:33,338 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.898, β=0.008
+2025-08-22 17:53:33,338 - helformer_model - INFO - train_helformer:434 - Step 2: Creating enhanced features...
+2025-08-22 17:53:33,354 - helformer_model - INFO - create_enhanced_features:320 - Created 64 enhanced features combining HW and traditional indicators
+2025-08-22 17:53:33,355 - helformer_model - INFO - train_helformer:438 - Step 3: Preparing sequences for Transformer...
+2025-08-22 17:53:33,364 - helformer_model - INFO - train_helformer:444 - Prepared 436 sequences with 64 timesteps and 64 features
+2025-08-22 17:53:33,365 - helformer_model - INFO - train_helformer:447 - Step 4: Building Transformer architecture...
+2025-08-22 17:53:33,634 - helformer_model - INFO - train_helformer:487 - Step 5: Training Transformer...
+2025-08-22 17:53:58,061 - helformer_model - INFO - train_helformer:541 - ✅ Helformer training completed!
+2025-08-22 17:53:58,062 - helformer_model - INFO - train_helformer:542 - 📊 Performance: RMSE≈25.604, Direction Acc: 0.932
+2025-08-22 17:53:58,225 - helformer_model - INFO - save_model:660 - Helformer model saved to ml_models_bnb_enhanced/helformer_1
+2025-08-22 17:53:58,225 - bnb_enhanced_ml - INFO - train_helformer_model:817 - ✅ Helformer model saved: ml_models_bnb_enhanced/helformer_1
+2025-08-22 17:53:58,225 - bnb_enhanced_ml - INFO - train_helformer_model:826 - 🎯 Helformer Performance:
+2025-08-22 17:53:58,225 - bnb_enhanced_ml - INFO - train_helformer_model:827 -    📊 RMSE: 25.604
+2025-08-22 17:53:58,225 - bnb_enhanced_ml - INFO - train_helformer_model:828 -    🎯 Direction Accuracy: 0.932
+2025-08-22 17:53:58,226 - bnb_enhanced_ml - INFO - train_helformer_model:829 -    🤖 Total Parameters: 603,525
+2025-08-22 17:54:16,392 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:54:23,627 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:54:23,631 - helformer_model - ERROR - load_model:694 - Failed to load Helformer model: No file or directory found at ml_models_bnb_enhanced/helformer_10_transformer.h5
+2025-08-22 17:55:37,533 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:56:14,051 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:56:14,052 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:56:14,875 - helformer_model - INFO - load_model:690 - Helformer model loaded from ml_models_bnb_enhanced/helformer_1
+2025-08-22 17:56:14,876 - bnb_enhanced_ml - INFO - predict_helformer:864 - ✅ Loaded Helformer model from disk
+2025-08-22 17:56:15,514 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.897, β=0.007
+2025-08-22 17:56:15,546 - helformer_model - INFO - create_enhanced_features:320 - Created 62 enhanced features combining HW and traditional indicators
+2025-08-22 17:56:15,684 - helformer_model - ERROR - predict_helformer:629 - Helformer prediction failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2440, in predict_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2425, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2413, in run_step  **
+        outputs = model.predict_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2381, in predict_step
+        return self(x, training=False)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 0 of layer "Helformer_Transformer" is incompatible with the layer: expected shape=(None, 64, 64), found shape=(None, 64, 62)
+
+2025-08-22 17:56:36,497 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:56:46,641 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:56:47,614 - helformer_model - INFO - load_model:690 - Helformer model loaded from ml_models_bnb_enhanced/helformer_1
+2025-08-22 17:56:47,615 - bnb_enhanced_ml - INFO - predict_helformer:864 - ✅ Loaded Helformer model from disk
+2025-08-22 17:56:48,750 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.897, β=0.007
+2025-08-22 17:56:48,835 - helformer_model - INFO - create_enhanced_features:320 - Created 62 enhanced features combining HW and traditional indicators
+2025-08-22 17:56:49,414 - helformer_model - ERROR - predict_helformer:629 - Helformer prediction failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2440, in predict_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2425, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2413, in run_step  **
+        outputs = model.predict_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2381, in predict_step
+        return self(x, training=False)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 0 of layer "Helformer_Transformer" is incompatible with the layer: expected shape=(None, 64, 64), found shape=(None, 64, 62)
+
+2025-08-22 17:58:27,116 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:58:27,117 - bnb_enhanced_ml - INFO - train_helformer_model:771 - 🚀 Training revolutionary Helformer model for breakthrough performance...
+2025-08-22 17:58:27,117 - bnb_enhanced_ml - INFO - train_helformer_model:774 - Step 1: Fetching high-resolution data for Helformer...
+2025-08-22 17:58:27,117 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 17:58:30,669 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 17:58:30,672 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:58:30,672 - bnb_enhanced_ml - INFO - train_helformer_model:798 - Step 2: Training Helformer with Holt-Winters + Transformer architecture...
+2025-08-22 17:58:30,672 - helformer_model - INFO - train_helformer:441 - Starting Helformer training with HW decomposition + Transformer architecture
+2025-08-22 17:58:30,672 - helformer_model - INFO - train_helformer:444 - Step 1: Extracting Holt-Winters components...
+2025-08-22 17:58:30,866 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.897, β=0.007
+2025-08-22 17:58:30,866 - helformer_model - INFO - train_helformer:448 - Step 2: Creating enhanced features...
+2025-08-22 17:58:30,880 - helformer_model - INFO - create_enhanced_features:334 - Created 64 enhanced features combining HW and traditional indicators
+2025-08-22 17:58:30,880 - helformer_model - INFO - train_helformer:452 - Step 3: Preparing sequences for Transformer...
+2025-08-22 17:58:30,887 - helformer_model - INFO - train_helformer:458 - Prepared 436 sequences with 64 timesteps and 64 features
+2025-08-22 17:58:30,887 - helformer_model - INFO - train_helformer:461 - Step 4: Building Transformer architecture...
+2025-08-22 17:58:31,125 - helformer_model - INFO - train_helformer:501 - Step 5: Training Transformer...
+2025-08-22 17:58:41,688 - helformer_model - INFO - train_helformer:555 - ✅ Helformer training completed!
+2025-08-22 17:58:41,693 - helformer_model - INFO - train_helformer:556 - 📊 Performance: RMSE≈32.130, Direction Acc: 0.932
+2025-08-22 17:58:41,801 - helformer_model - INFO - save_model:674 - Helformer model saved to ml_models_bnb_enhanced/helformer_1
+2025-08-22 17:58:41,802 - bnb_enhanced_ml - INFO - train_helformer_model:817 - ✅ Helformer model saved: ml_models_bnb_enhanced/helformer_1
+2025-08-22 17:58:41,802 - bnb_enhanced_ml - INFO - train_helformer_model:826 - 🎯 Helformer Performance:
+2025-08-22 17:58:41,802 - bnb_enhanced_ml - INFO - train_helformer_model:827 -    📊 RMSE: 32.130
+2025-08-22 17:58:41,802 - bnb_enhanced_ml - INFO - train_helformer_model:828 -    🎯 Direction Accuracy: 0.932
+2025-08-22 17:58:41,802 - bnb_enhanced_ml - INFO - train_helformer_model:829 -    🤖 Total Parameters: 603,525
+2025-08-22 18:04:38,601 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 18:04:45,517 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 18:04:45,853 - helformer_model - INFO - load_model:704 - Helformer model loaded from ml_models_bnb_enhanced/helformer_1
+2025-08-22 18:04:45,853 - bnb_enhanced_ml - INFO - predict_helformer:864 - ✅ Loaded Helformer model from disk
+2025-08-22 18:04:46,331 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.917, β=0.011
+2025-08-22 18:04:46,343 - helformer_model - WARNING - create_enhanced_features:323 - Feature count mismatch: got 62, expected 64
+2025-08-22 18:04:46,343 - helformer_model - INFO - create_enhanced_features:334 - Created 64 enhanced features combining HW and traditional indicators
