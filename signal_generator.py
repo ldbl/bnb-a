@@ -120,7 +120,7 @@ class TradingSignalGenerator:
         
         # Correlation analysis (lightweight version for scoring)
         try:
-            correlation_data = self.correlation.run_correlation_analysis("1h", 50)
+            correlation_data = self.correlation.run_correlation_analysis("1d", 30)
             if correlation_data and "signals" in correlation_data:
                 corr_signals = correlation_data["signals"]
                 correlation_score = corr_signals.get("correlation_score", 0)
@@ -238,6 +238,7 @@ class TradingSignalGenerator:
         signal = {
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "price": current_price,
+            "signal": action,  # Add signal key for main.py
             "action": action,
             "confidence": confidence,
             "bull_score": bull_score,
@@ -314,7 +315,7 @@ class TradingSignalGenerator:
         }
         
         # Get detailed levels
-        levels = fibonacci.get("levels", {})
+        levels = fibonacci.get("fibonacci_levels", {})  # Use fibonacci_levels key
         if levels:
             # Find support and resistance levels
             fib_info["support_levels"] = []
@@ -329,6 +330,9 @@ class TradingSignalGenerator:
             # Limit to 3 closest levels each
             fib_info["support_levels"] = fib_info["support_levels"][:3]
             fib_info["resistance_levels"] = fib_info["resistance_levels"][:3]
+        
+        # Add levels to fib_info for main.py compatibility
+        fib_info["levels"] = levels
         
         # Golden Pocket analysis
         if fib_info["golden_pocket"]:

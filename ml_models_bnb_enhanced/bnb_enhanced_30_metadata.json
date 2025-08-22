@@ -1,5 +1,5 @@
 {
-  "created_at": "2025-08-21T23:56:34.376611",
+  "created_at": "2025-08-22T15:06:30.941771",
   "periods_ahead": 30,
   "models_trained": 3,
   "training_samples": 720,
@@ -8,15 +8,15 @@
   "results": {
     "enhanced_rf": {
       "train_accuracy": 1.0,
-      "test_accuracy": 0.95
+      "test_accuracy": 0.9388888888888889
     },
     "enhanced_gb": {
       "train_accuracy": 1.0,
       "test_accuracy": 0.9555555555555556
     },
     "enhanced_lr": {
-      "train_accuracy": 0.8833333333333333,
-      "test_accuracy": 0.9
+      "train_accuracy": 0.8916666666666667,
+      "test_accuracy": 0.9055555555555556
     }
   }
 }

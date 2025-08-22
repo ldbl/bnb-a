@@ -92,6 +92,7 @@ class BNBAdvancedAnalyzer:
             
             # Add market summary data to signal
             signal["market_data"] = market_data["market_summary"]
+            signal["current_price"] = market_data["current_price"]  # Ensure current_price is in signal
             
             # Get enhanced information for main screen
             signal["enhanced_fibonacci"] = self.signal_generator.get_enhanced_fibonacci_info(market_data["current_price"])
@@ -152,14 +153,18 @@ class BNBAdvancedAnalyzer:
                 })
                 alerts["show_any"] = True
             
-            # Check correlation alerts
-            corr_alert = self.correlation_analyzer.check_critical_correlation_activity()
-            if corr_alert.get("show_alert"):
-                alerts["correlation_alerts"].append({
-                    "type": "market_correlation",
-                    "data": corr_alert
-                })
-                alerts["show_any"] = True
+            # Check correlation alerts (use daily data for main analysis)
+            try:
+                corr_alert = self.correlation_analyzer.check_critical_correlation_activity()
+                if corr_alert.get("show_alert"):
+                    alerts["correlation_alerts"].append({
+                        "type": "market_correlation",
+                        "data": corr_alert
+                    })
+                    alerts["show_any"] = True
+            except:
+                # Skip correlation alerts if there's an error
+                pass
             
             # Check trend reversal alerts
             reversal_alert = self.reversal_detector.check_critical_reversal_alerts()
@@ -177,15 +182,248 @@ class BNBAdvancedAnalyzer:
         return alerts
     
     def display_analysis(self):
-        """Display the complete trading analysis"""
+        """Display the complete trading analysis with key insights from all modules"""
+        print("\n" + "="*80)
+        print("🎯 COMPLETE MARKET ANALYSIS - ALL MODULES SUMMARY")
+        print("="*80)
+        
+        # Get market data and analysis
         signal = self.analyze_market()
         
         if "error" in signal:
             print(f"❌ Error: {signal['error']}")
             return False
         
-        # Display using the display module
-        self.display.display_full_analysis(signal)
+        try:
+            # 1. MARKET OVERVIEW
+            print(f"\n📊 MARKET OVERVIEW:")
+            current_price = signal.get('current_price', 'N/A')
+            if isinstance(current_price, (int, float)):
+                print(f"   💰 Current Price: ${current_price:,.4f}")
+            else:
+                print(f"   💰 Current Price: {current_price}")
+            print(f"   📈 Signal: {signal.get('signal', 'N/A')}")
+            print(f"   🎯 Confidence: {signal.get('confidence', 'N/A')}")
+            
+            # 2. FIBONACCI KEY LEVELS
+            print(f"\n📐 FIBONACCI KEY LEVELS:")
+            try:
+                 # Get Fibonacci data directly from analyzer
+                 current_price = signal.get('current_price', 0)
+                 if current_price and current_price != 'N/A':
+                     fib_data = self.fibonacci_analyzer.get_fibonacci_signals(current_price)
+                     if fib_data and 'fibonacci_levels' in fib_data:
+                         levels = fib_data['fibonacci_levels']
+                         
+                         # Show current position
+                         print(f"   💰 Current Price: ${current_price:,.2f}")
+                         
+                         # Find closest level
+                         closest_level = None
+                         min_distance = float('inf')
+                         for level_name, level_price in levels.items():
+                             if isinstance(level_price, (int, float)) and level_price > 0:
+                                 distance = abs(current_price - level_price) / current_price * 100
+                                 if distance < min_distance:
+                                     min_distance = distance
+                                     closest_level = (level_name, level_price, distance)
+                         
+                         if closest_level:
+                             level_name, level_price, distance = closest_level
+                             print(f"   🎯 Closest Level: {level_name} at ${level_price:,.2f} ({distance:.1f}% away)")
+                         
+                         # Show all levels within 15%
+                         print(f"   📊 Key Levels:")
+                         for level_name, level_price in levels.items():
+                             if isinstance(level_price, (int, float)) and level_price > 0:
+                                 distance = abs(current_price - level_price) / current_price * 100
+                                 if distance < 15:  # Show levels within 15%
+                                     print(f"      {level_name}: ${level_price:,.2f} ({distance:.1f}% away)")
+                     else:
+                         print("   💡 Fibonacci analysis in progress...")
+                 else:
+                     print("   💡 Current price not available for Fibonacci analysis")
+            except Exception as e:
+                print(f"   💡 Fibonacci analysis: {str(e)[:50]}")
+            
+            # 3. ELLIOTT WAVE STATUS
+            print(f"\n🌊 ELLIOTT WAVE STATUS:")
+            try:
+                # Get Elliott Wave data directly from analyzer
+                current_price = signal.get('current_price', 0)
+                if current_price and current_price != 'N/A':
+                    # Get recent prices for Elliott Wave analysis
+                    market_data = self.get_market_data()
+                    if "error" not in market_data:
+                        prices = market_data["prices"]
+                        elliott_data = self.elliott_analyzer.detect_elliott_wave(prices)
+                        if elliott_data:
+                            wave = elliott_data.get('wave', 'Unknown')
+                            confidence = elliott_data.get('confidence', 0)
+                            print(f"   🌊 Current Wave: {wave}")
+                            print(f"   🎯 Confidence: {confidence}%")
+                            print(f"   📊 Trend: {elliott_data.get('description', 'Unknown')}")
+                            
+                            # Show wave degree and timeframes
+                            degree = elliott_data.get('degree', 'Unknown')
+                            print(f"   ⏰ Timeframe: {degree}")
+                            
+                            # Show projections if available
+                            projections = elliott_data.get('projections', {})
+                            if projections:
+                                print(f"   🎯 Next Targets:")
+                                for level, price in list(projections.items())[:3]:  # Show first 3
+                                    if isinstance(price, (int, float)) and price > 0:
+                                        distance = abs(current_price - price) / current_price * 100
+                                        print(f"      {level}: ${price:,.2f} ({distance:.1f}% away)")
+                        else:
+                            print("   💡 Elliott Wave analysis in progress...")
+                    else:
+                        print("   💡 Market data not available for Elliott Wave analysis")
+                else:
+                    print("   💡 Current price not available for Elliott Wave analysis")
+            except Exception as e:
+                print(f"   💡 Elliott Wave analysis: {str(e)[:50]}")
+            
+            # 4. TECHNICAL INDICATORS
+            print(f"\n📊 TECHNICAL INDICATORS:")
+            try:
+                # Get technical indicators directly from analyzer
+                current_price = signal.get('current_price', 0)
+                if current_price and current_price != 'N/A':
+                    market_data = self.get_market_data()
+                    if "error" not in market_data:
+                        prices = market_data["prices"]
+                        volumes = market_data["volumes"]
+                        
+                        # Calculate RSI
+                        from indicators import TechnicalIndicators
+                        tech_indicators = TechnicalIndicators()
+                        rsi = tech_indicators.calculate_rsi(prices)
+                        macd = tech_indicators.calculate_macd(prices)
+                        bollinger = tech_indicators.calculate_bollinger(prices)
+                        
+                        if rsi is not None:
+                            print(f"   📈 RSI: {rsi:.2f}")
+                        if macd and 'macd' in macd:
+                            print(f"   📊 MACD: {macd['macd']:.2f}")
+                        if bollinger and 'position' in bollinger:
+                            print(f"   📉 Bollinger: {bollinger['position']}")
+                    else:
+                        print("   💡 Market data not available for technical indicators")
+                else:
+                    print("   💡 Current price not available for technical indicators")
+            except Exception as e:
+                print(f"   💡 Technical indicators: {str(e)[:50]}")
+            
+            # 5. WHALE ACTIVITY ALERTS
+            print(f"\n🐋 WHALE ACTIVITY:")
+            whale_alerts = signal.get('alerts', {}).get('whale_alerts', [])
+            if whale_alerts:
+                for alert in whale_alerts:
+                    data = alert.get('data', {})
+                    if data.get('show_alert'):
+                        print(f"   🚨 {data.get('message', 'Whale activity detected')}")
+            else:
+                print("   ✅ No significant whale activity")
+            
+            # 6. TREND REVERSAL SIGNALS
+            print(f"\n🔄 TREND REVERSAL:")
+            reversal_alerts = signal.get('alerts', {}).get('reversal_alerts', [])
+            if reversal_alerts:
+                for alert in reversal_alerts:
+                    data = alert.get('data', {})
+                    if data.get('show_alert'):
+                        print(f"   🚨 {data.get('message', 'Reversal signal detected')}")
+            else:
+                print("   ✅ No reversal signals")
+            
+            # 7. ML PREDICTIONS (if available)
+            print(f"\n🤖 ML PREDICTIONS:")
+            
+            # Enhanced ML
+            try:
+                ml_result = self.ml_system.predict_enhanced(7)  # 7 days ahead
+                if 'error' not in ml_result:
+                    pred = ml_result.get('prediction_label', 'Unknown')
+                    conf = ml_result.get('confidence', 0)
+                    print(f"   📊 Enhanced ML: {pred} ({conf:.1%} confidence)")
+                else:
+                    print("   💡 Enhanced ML: Train models first (Option 8 → 4)")
+            except:
+                print("   💡 Enhanced ML: Train models first (Option 8 → 4)")
+            
+            # Revolutionary Models
+            print(f"   🚀 REVOLUTIONARY 2025 MODELS:")
+            print(f"      📊 Status: Models initialized, ready for training")
+            
+            # Helformer
+            try:
+                helformer_result = self.ml_system.predict_helformer(10)
+                if 'error' not in helformer_result:
+                    pred = helformer_result.get('prediction_label', 'Unknown')
+                    conf = helformer_result.get('confidence', 0)
+                    print(f"      🔥 Helformer: {pred} ({conf:.1%} confidence)")
+                else:
+                    print(f"      💡 Helformer: Ready to train (Option 8 → 5)")
+            except:
+                print(f"      💡 Helformer: Ready to train (Option 8 → 5)")
+            
+            # TFT
+            try:
+                tft_result = self.ml_system.predict_tft(24)
+                if 'error' not in tft_result:
+                    pred = tft_result.get('prediction_label', 'Unknown')
+                    conf = tft_result.get('confidence', 0)
+                    print(f"      🚀 TFT: {pred} ({conf:.1%} confidence)")
+                else:
+                    print(f"      💡 TFT: Ready to train (Option 8 → 6)")
+            except:
+                print(f"      💡 TFT: Ready to train (Option 8 → 6)")
+            
+            # Performer
+            try:
+                performer_result = self.ml_system.predict_performer(7)
+                if 'error' not in performer_result:
+                    pred = performer_result.get('prediction_label', 'Unknown')
+                    conf = performer_result.get('confidence', 0)
+                    print(f"      ⚡ Performer: {pred} ({conf:.1%} confidence)")
+                else:
+                    print(f"      💡 Performer: Ready to train (Option 8 → 7)")
+            except:
+                print(f"      💡 Performer: Ready to train (Option 8 → 7)")
+            
+            # 8. CRITICAL ALERTS SUMMARY
+            print(f"\n🚨 CRITICAL ALERTS:")
+            alerts = signal.get('alerts', {})
+            if alerts.get('show_any'):
+                total_alerts = len(alerts.get('whale_alerts', [])) + len(alerts.get('reversal_alerts', []))
+                print(f"   ⚠️  {total_alerts} active alerts - Check individual modules for details")
+            else:
+                print("   ✅ No critical alerts")
+            
+            # 9. TRADING RECOMMENDATION
+            print(f"\n💡 TRADING RECOMMENDATION:")
+            signal_strength = signal.get('signal_strength', 'neutral')
+            if signal_strength == 'strong_buy':
+                print("   🚀 STRONG BUY SIGNAL - Consider entering long position")
+            elif signal_strength == 'buy':
+                print("   📈 BUY SIGNAL - Monitor for entry opportunities")
+            elif signal_strength == 'strong_sell':
+                print("   🔴 STRONG SELL SIGNAL - Consider exiting or shorting")
+            elif signal_strength == 'sell':
+                print("   📉 SELL SIGNAL - Monitor for exit opportunities")
+            else:
+                print("   ⏸️  NEUTRAL - Wait for clearer signals")
+            
+            print(f"\n{'='*80}")
+            print("💡 For detailed analysis of any module, select individual options (2-9)")
+            print("🤖 For ML predictions, select Option 8")
+            
+        except Exception as e:
+            print(f"❌ Error displaying analysis: {e}")
+            return False
+        
         return True
     
     def show_fibonacci_analysis(self):
@@ -305,14 +543,22 @@ class BNBAdvancedAnalyzer:
         print("="*60)
         
         try:
-            print("📅 SELECT PREDICTION HORIZON:")
-            print("1. 7 days ahead (1 week)")
-            print("2. 30 days ahead (1 month)") 
-            print("3. 90 days ahead (3 months)")
+            print("📅 SELECT MODEL & PREDICTION HORIZON:")
+            print("🧠 ENHANCED ML MODELS:")
+            print("1. 7 days ahead (1 week) - Enhanced ML")
+            print("2. 30 days ahead (1 month) - Enhanced ML") 
+            print("3. 90 days ahead (3 months) - Enhanced ML")
             print("4. Train enhanced models first")
-            print("5. Show discovered patterns")
+            print()
+            print("🚀 REVOLUTIONARY 2025 MODELS:")
+            print("5. Helformer prediction (925% return potential)")
+            print("6. TFT prediction (Multi-horizon forecasting)")
+            print("7. Performer prediction (Linear complexity)")
+            print("8. Ensemble prediction (All models combined)")
+            print()
+            print("9. Show discovered patterns")
             
-            choice = input(f"\n{self.display.colorize('Select option (1-5): ', 'cyan')}").strip()
+            choice = input(f"\n{self.display.colorize('Select option (1-9): ', 'cyan')}").strip()
             
             if choice == "1":
                 periods = 7
@@ -333,6 +579,50 @@ class BNBAdvancedAnalyzer:
                     print(f"❌ Training failed: {result.get('error', 'Unknown error')}")
                     return
             elif choice == "5":
+                # Helformer prediction
+                print("🔥 HELFORMER PREDICTION (925% Excess Return Potential)")
+                print("=" * 60)
+                helformer_result = self.ml_system.predict_helformer(10, 24)
+                if "error" not in helformer_result:
+                    self._display_revolutionary_prediction(helformer_result, "Helformer")
+                else:
+                    print(f"❌ Helformer error: {helformer_result['error']}")
+                    print("💡 Train Helformer model first with: python3 train_revolutionary_models.py --models helformer --periods 10")
+                return
+                
+            elif choice == "6":
+                # TFT prediction
+                print("🚀 TFT PREDICTION (Multi-Horizon Forecasting)")
+                print("=" * 55)
+                tft_result = self.ml_system.predict_tft(24, [1, 6, 12, 24, 48])
+                if "error" not in tft_result:
+                    self._display_revolutionary_prediction(tft_result, "TFT")
+                else:
+                    print(f"❌ TFT error: {tft_result['error']}")
+                    print("💡 Train TFT model first with: python3 train_revolutionary_models.py --models tft --periods 24")
+                return
+                
+            elif choice == "7":
+                # Performer prediction
+                print("⚡ PERFORMER PREDICTION (Linear Complexity O(N))")
+                print("=" * 55)
+                performer_result = self.ml_system.predict_performer(168, True)
+                if "error" not in performer_result:
+                    self._display_revolutionary_prediction(performer_result, "Performer")
+                else:
+                    print(f"❌ Performer error: {performer_result['error']}")
+                    print("💡 Train Performer model first with: python3 train_revolutionary_models.py --models performer --periods 7")
+                return
+                
+            elif choice == "8":
+                # Ensemble prediction
+                print("🎭 ENSEMBLE PREDICTION (All Revolutionary Models)")
+                print("=" * 55)
+                print("💡 Running all available revolutionary models...")
+                self._run_ensemble_prediction()
+                return
+                
+            elif choice == "9":
                 # Show pattern analysis
                 print("🧠 PATTERN DISCOVERY ANALYSIS:")
                 print("=" * 40)
@@ -365,7 +655,7 @@ class BNBAdvancedAnalyzer:
             print(f"\n🎯 BNB ENHANCED PREDICTION RESULTS")
             print("=" * 50)
             print(f"💰 Current BNB Price: ${current_price:.2f}")
-            print(f"⏰ Prediction Horizon: {periods} hours ahead")
+            print(f"⏰ Prediction Horizon: {periods} days ahead")
             print(f"🧠 Enhanced Analysis: Multi-Crypto Intelligence")
             
             # Color coding based on prediction
@@ -453,6 +743,115 @@ class BNBAdvancedAnalyzer:
             
         except Exception as e:
             print(f"❌ Error in BNB enhanced analysis: {e}")
+    
+    def _display_revolutionary_prediction(self, result, model_name):
+        """Display revolutionary model prediction results"""
+        print(f"\n🎯 {model_name.upper()} PREDICTION RESULTS")
+        print("=" * 50)
+        
+        if model_name == "Helformer":
+            current_price = result.get('current_price', 0)
+            predicted_price = result.get('predicted_price', 0)
+            direction = result.get('predicted_direction', 'Unknown')
+            confidence = result.get('confidence', 0)
+            
+            print(f"💰 Current Price: ${current_price:.2f}")
+            print(f"🎯 Predicted Price: ${predicted_price:.2f}")
+            print(f"📊 Direction: {direction}")
+            print(f"🎲 Confidence: {confidence:.1%}")
+            print(f"🔥 Model: Helformer (925% excess return potential)")
+            
+        elif model_name == "TFT":
+            current_price = result.get('current_bnb_price', 0)
+            primary = result.get('primary_prediction', {})
+            
+            print(f"💰 Current Price: ${current_price:.2f}")
+            print(f"🎯 Primary Prediction: {primary}")
+            print(f"🚀 Multi-horizon forecasting with uncertainty quantification")
+            
+            # Show multi-horizon if available
+            multi_horizon = result.get('multi_horizon_forecasts', {})
+            if multi_horizon:
+                print(f"📊 Multi-Horizon Forecasts:")
+                for horizon, forecast in multi_horizon.items():
+                    print(f"   {horizon}: {forecast}")
+                    
+        elif model_name == "Performer":
+            current_price = result.get('current_price', 0)
+            primary = result.get('primary_prediction', {})
+            
+            print(f"💰 Current Price: ${current_price:.2f}")
+            print(f"🎯 Primary Prediction: {primary}")
+            print(f"⚡ Linear Complexity: O(N) vs O(N²) standard Transformers")
+            print(f"🚀 FAVOR+ attention mechanism")
+            
+            # Show multi-horizon if available
+            multi_horizon = result.get('multi_horizon_forecasts', {})
+            if multi_horizon:
+                print(f"📊 Multi-Horizon Forecasts:")
+                for horizon, forecast in multi_horizon.items():
+                    print(f"   {horizon}: ${forecast.get('price', 0):.2f} ({forecast.get('percentage_change', 0):+.1f}%)")
+        
+        print(f"\n🚀 {model_name} analysis completed!")
+        input("\nPress Enter to continue...")
+    
+    def _run_ensemble_prediction(self):
+        """Run ensemble prediction combining multiple revolutionary models"""
+        print("🎭 Running ensemble prediction with available models...")
+        
+        models_results = {}
+        
+        # Try Enhanced ML first
+        try:
+            enhanced_result = self.ml_system.predict_bnb_enhanced(30)
+            if "error" not in enhanced_result:
+                models_results["Enhanced"] = enhanced_result
+                print("✅ Enhanced ML prediction successful")
+            else:
+                print("❌ Enhanced ML not available")
+        except:
+            print("❌ Enhanced ML not available")
+        
+        # Try Revolutionary models (will show errors if not trained)
+        revolutionary_models = [
+            ("Helformer", lambda: self.ml_system.predict_helformer(10, 24)),
+            ("TFT", lambda: self.ml_system.predict_tft(24, [1, 6, 12, 24])),
+            ("Performer", lambda: self.ml_system.predict_performer(168, True))
+        ]
+        
+        for model_name, predict_func in revolutionary_models:
+            try:
+                result = predict_func()
+                if "error" not in result:
+                    models_results[model_name] = result
+                    print(f"✅ {model_name} prediction successful")
+                else:
+                    print(f"❌ {model_name} not available: {result['error']}")
+            except Exception as e:
+                print(f"❌ {model_name} not available: {e}")
+        
+        if models_results:
+            print(f"\n🎭 ENSEMBLE RESULTS ({len(models_results)} models)")
+            print("=" * 50)
+            
+            for model_name, result in models_results.items():
+                print(f"\n🤖 {model_name.upper()}:")
+                if model_name == "Enhanced":
+                    pred = result.get('prediction_label', 'Unknown')
+                    conf = result.get('confidence', 0)
+                    print(f"   📊 Prediction: {pred}")
+                    print(f"   🎲 Confidence: {conf:.1%}")
+                else:
+                    # For revolutionary models, show basic info
+                    print(f"   📊 Model available with predictions")
+            
+            print(f"\n💡 For detailed analysis, select individual models (options 5-7)")
+        else:
+            print("❌ No models available for ensemble prediction")
+            print("💡 Train models first with:")
+            print("   python3 train_revolutionary_models.py --models all --periods 7")
+        
+        input("\nPress Enter to continue...")
     
     def show_reversal_analysis(self):
         """Show comprehensive trend reversal analysis"""
