@@ -1,0 +1,15 @@
+{
+  "last_check": "2025-08-22T00:14:28.934431",
+  "last_retrain": "2025-08-22T00:14:17.003452",
+  "model_performance": {},
+  "retrain_history": [
+    {
+      "date": "2025-08-22T00:14:17.003393",
+      "period": 7,
+      "reasons": [
+        "Performance degraded"
+      ],
+      "success": true
+    }
+  ]
+}

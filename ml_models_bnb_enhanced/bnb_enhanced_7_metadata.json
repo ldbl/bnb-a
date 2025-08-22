@@ -1,0 +1,22 @@
+{
+  "created_at": "2025-08-22T15:05:59.473226",
+  "periods_ahead": 7,
+  "models_trained": 3,
+  "training_samples": 720,
+  "learning_cryptos": 10,
+  "enhanced_features": 64,
+  "results": {
+    "enhanced_rf": {
+      "train_accuracy": 1.0,
+      "test_accuracy": 1.0
+    },
+    "enhanced_gb": {
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9944444444444445
+    },
+    "enhanced_lr": {
+      "train_accuracy": 0.9930555555555556,
+      "test_accuracy": 1.0
+    }
+  }
+}
