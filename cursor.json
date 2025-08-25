@@ -1,0 +1,89 @@
+{
+  "workspace": {
+    "name": "BNB Cryptocurrency Prediction System",
+    "description": "State-of-the-art ML system for BNB price prediction with Helformer, TFT, and Performer models"
+  },
+  "editor": {
+    "formatOnSave": true,
+    "tabSize": 4,
+    "insertSpaces": true,
+    "rulers": [88, 120],
+    "wordWrap": "bounded"
+  },
+  "python": {
+    "defaultInterpreterPath": "/usr/bin/python3",
+    "pythonPath": "/usr/bin/python3",
+    "linting": {
+      "enabled": true,
+      "pylintEnabled": true,
+      "flake8Enabled": true
+    },
+    "formatting": {
+      "provider": "black",
+      "args": ["--line-length", "88"]
+    }
+  },
+  "files": {
+    "associations": {
+      "*.py": "python",
+      "*.md": "markdown",
+      "*.json": "json",
+      "*.yml": "yaml",
+      "*.yaml": "yaml"
+    },
+    "exclude": {
+      "**/__pycache__": true,
+      "**/*.pyc": true,
+      "**/logs": true,
+      "**/ml_models": true,
+      "**/venv": true,
+      "**/.env": true
+    }
+  },
+  "search": {
+    "exclude": {
+      "**/node_modules": true,
+      "**/bower_components": true,
+      "**/*.code-search": true,
+      "**/logs": true,
+      "**/ml_models": true
+    }
+  },
+  "terminal": {
+    "integrated": {
+      "shell": {
+        "osx": "/bin/zsh"
+      }
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.black-formatter",
+      "ms-python.flake8",
+      "ms-python.pylint",
+      "ms-python.isort",
+      "ms-vscode.python",
+      "ms-toolsai.jupyter",
+      "ms-python.vscode-pylance",
+      "redhat.vscode-yaml",
+      "ms-vscode.vscode-json"
+    ]
+  },
+  "ai": {
+    "assistant": {
+      "model": "claude-3.5-sonnet",
+      "context": "BNB cryptocurrency prediction system with ML models",
+      "rules": ".cursorrules"
+    }
+  },
+  "ml": {
+    "models": {
+      "helformer": "working",
+      "tft": "debugging",
+      "performer": "debugging",
+      "enhanced_ml": "working"
+    },
+    "priority": "swing_trading_enhancement"
+  }
+}
