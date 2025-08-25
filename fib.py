@@ -98,6 +98,408 @@ class FibonacciAnalyzer:
             if distance < min_distance:
                 min_distance = distance
                 closest = {"name": name, "level": level, "distance": round(distance, 2)}
+    
+    def calculate_dynamic_fibonacci_levels(self, prices: List[float], window: int = 3) -> Dict:
+        """Calculate dynamic Fibonacci levels based on rolling average lows"""
+        import numpy as np
+        
+        # Convert to numpy array and handle NaN
+        prices_array = np.array(prices)
+        prices_array = np.nan_to_num(prices_array, nan=0.0)
+        
+        # Calculate rolling average of lows (using close prices as proxy)
+        if len(prices_array) >= window:
+            rolling_lows = []
+            for i in range(window, len(prices_array)):
+                window_prices = prices_array[i-window:i]
+                rolling_lows.append(np.mean(window_prices))
+            
+            # Use recent rolling lows for dynamic levels
+            recent_low = np.mean(rolling_lows[-5:]) if len(rolling_lows) >= 5 else np.mean(rolling_lows)
+            recent_high = np.max(prices_array[-20:])  # Last 20 periods
+            
+            # Calculate dynamic Fibonacci levels
+            range_size = recent_high - recent_low
+            
+            dynamic_levels = {
+                "dynamic_low": round(recent_low, 2),
+                "dynamic_high": round(recent_high, 2),
+                "buy_zone_50": round(recent_low + (range_size * 0.5), 2),
+                "buy_zone_618": round(recent_low + (range_size * 0.618), 2),
+                "sell_zone_1382": round(recent_high + (range_size * 0.382), 2),
+                "sell_zone_1618": round(recent_high + (range_size * 0.618), 2),
+                "risk_reward_ratio": round((recent_high - recent_low) / (recent_high * 0.1), 2)  # 10% risk
+            }
+            
+            return dynamic_levels
+        else:
+            return {"error": "Insufficient data for dynamic calculation"}
+    
+    def get_dynamic_swing_signals(self, current_price: float, prices: List[float]) -> Dict:
+        """Get dynamic swing trading signals based on Fibonacci levels"""
+        try:
+            # Get dynamic Fibonacci levels
+            dynamic_levels = self.calculate_dynamic_fibonacci_levels(prices)
+            
+            if "error" in dynamic_levels:
+                return {"error": dynamic_levels["error"]}
+            
+            # Calculate current position relative to dynamic levels
+            buy_zone_50 = dynamic_levels["buy_zone_50"]
+            buy_zone_618 = dynamic_levels["buy_zone_618"]
+            sell_zone_1382 = dynamic_levels["sell_zone_1382"]
+            sell_zone_1618 = dynamic_levels["sell_zone_1618"]
+            
+            # Generate swing trading signals
+            signals = {
+                "current_price": current_price,
+                "dynamic_levels": dynamic_levels,
+                "buy_signals": [],
+                "sell_signals": [],
+                "risk_management": {}
+            }
+            
+            # Buy signals (50-61.8% Fibonacci retracement)
+            if current_price <= buy_zone_618:
+                signals["buy_signals"].append({
+                    "type": "STRONG_BUY",
+                    "level": "61.8% retracement",
+                    "price": buy_zone_618,
+                    "confidence": "HIGH"
+                })
+            elif current_price <= buy_zone_50:
+                signals["buy_signals"].append({
+                    "type": "BUY",
+                    "level": "50% retracement",
+                    "price": buy_zone_50,
+                    "confidence": "MEDIUM"
+                })
+            
+            # Sell signals (138.2-161.8% Fibonacci extension)
+            if current_price >= sell_zone_1382:
+                signals["sell_signals"].append({
+                    "type": "STRONG_SELL",
+                    "level": "138.2% extension",
+                    "price": sell_zone_1382,
+                    "confidence": "HIGH"
+                })
+            elif current_price >= sell_zone_1618:
+                signals["buy_signals"].append({
+                    "type": "SELL",
+                    "level": "161.8% extension",
+                    "price": sell_zone_1618,
+                    "confidence": "MEDIUM"
+                })
+            
+            # Risk management (Rule #7: отстъпление под $550)
+            stop_loss = max(550, dynamic_levels["dynamic_low"] * 0.95)  # 5% below dynamic low
+            signals["risk_management"] = {
+                "stop_loss": round(stop_loss, 2),
+                "risk_reward_ratio": dynamic_levels["risk_reward_ratio"],
+                "position_sizing": "1/3 capital (Rule #3)",
+                "max_leverage": 2
+            }
+            
+            return signals
+            
+        except Exception as e:
+            return {"error": f"Error calculating dynamic signals: {str(e)}"}
+    
+    def calculate_historical_support_resistance(self, prices: List[float], volumes: List[float] = None, 
+                                             lookback_periods: int = 100) -> Dict:
+        """Calculate historical support and resistance levels from price data"""
+        import numpy as np
+        
+        try:
+            # Convert to numpy array and handle NaN
+            prices_array = np.array(prices[-lookback_periods:])
+            prices_array = np.nan_to_num(prices_array, nan=0.0)
+            
+            # Find local minima (support) and maxima (resistance)
+            support_levels = []
+            resistance_levels = []
+            
+            # Use peak detection for support/resistance
+            for i in range(2, len(prices_array) - 2):
+                # Support: local minimum
+                if (prices_array[i] < prices_array[i-1] and 
+                    prices_array[i] < prices_array[i-2] and
+                    prices_array[i] < prices_array[i+1] and 
+                    prices_array[i] < prices_array[i+2]):
+                    support_levels.append({
+                        'price': round(prices_array[i], 2),
+                        'index': i,
+                        'strength': self._calculate_level_strength(prices_array, i, 'support')
+                    })
+                
+                # Resistance: local maximum
+                if (prices_array[i] > prices_array[i-1] and 
+                    prices_array[i] > prices_array[i-2] and
+                    prices_array[i] > prices_array[i+1] and 
+                    prices_array[i] > prices_array[i+2]):
+                    resistance_levels.append({
+                        'price': round(prices_array[i], 2),
+                        'index': i,
+                        'strength': self._calculate_level_strength(prices_array, i, 'resistance')
+                    })
+            
+            # Sort by strength and get top 3
+            support_levels.sort(key=lambda x: x['strength'], reverse=True)
+            resistance_levels.sort(key=lambda x: x['strength'], reverse=True)
+            
+            # Group nearby levels (within 2% of each other)
+            support_levels = self._group_nearby_levels(support_levels[:10], 0.02)
+            resistance_levels = self._group_nearby_levels(resistance_levels[:10], 0.02)
+            
+            return {
+                'support_levels': support_levels[:3],
+                'resistance_levels': resistance_levels[:3],
+                'analysis_periods': lookback_periods
+            }
+            
+        except Exception as e:
+            return {"error": f"Error calculating support/resistance: {str(e)}"}
+    
+    def _calculate_level_strength(self, prices, level_index: int, level_type: str) -> float:
+        """Calculate the strength of a support/resistance level"""
+        try:
+            level_price = prices[level_index]
+            strength = 0.0
+            
+            # Count touches (how many times price approached this level)
+            touch_count = 0
+            for i in range(len(prices)):
+                if abs(prices[i] - level_price) / level_price < 0.01:  # Within 1%
+                    touch_count += 1
+            
+            # Volume confirmation (if available)
+            volume_factor = 1.0  # Default if no volume data
+            
+            # Distance from current price
+            current_price = prices[-1]
+            distance_factor = 1.0 / (1.0 + abs(current_price - level_price) / current_price)
+            
+            # Calculate final strength
+            strength = (touch_count * 0.4 + volume_factor * 0.3 + distance_factor * 0.3)
+            
+            return round(strength, 2)
+            
+        except Exception as e:
+            return 1.0  # Default strength
+    
+    def _group_nearby_levels(self, levels: List[Dict], threshold: float) -> List[Dict]:
+        """Group nearby support/resistance levels"""
+        if not levels:
+            return []
+        
+        grouped = []
+        used_indices = set()
+        
+        for i, level in enumerate(levels):
+            if i in used_indices:
+                continue
+                
+            group = [level]
+            used_indices.add(i)
+            
+            # Find nearby levels
+            for j, other_level in enumerate(levels[i+1:], i+1):
+                if j in used_indices:
+                    continue
+                    
+                price_diff = abs(level['price'] - other_level['price']) / level['price']
+                if price_diff <= threshold:
+                    group.append(other_level)
+                    used_indices.add(j)
+            
+            # Average the grouped levels
+            avg_price = sum(l['price'] for l in group) / len(group)
+            avg_strength = sum(l['strength'] for l in group) / len(group)
+            
+            grouped.append({
+                'price': round(avg_price, 2),
+                'strength': round(avg_strength, 2),
+                'touches': len(group),
+                'original_levels': group
+            })
+        
+        return grouped
+    
+    def get_fibonacci_position_analysis(self, current_price: float, prices: List[float]) -> Dict:
+        """Get comprehensive analysis of current price position relative to Fibonacci levels"""
+        try:
+            # Get dynamic Fibonacci levels
+            dynamic_levels = self.calculate_dynamic_fibonacci_levels(prices)
+            
+            if "error" in dynamic_levels:
+                return {"error": dynamic_levels["error"]}
+            
+            # Get historical support/resistance
+            support_resistance = self.calculate_historical_support_resistance(prices)
+            
+            if "error" in support_resistance:
+                return {"error": support_resistance["error"]}
+            
+            # Calculate current position relative to all levels
+            analysis = {
+                'current_price': current_price,
+                'fibonacci_levels': dynamic_levels,
+                'support_levels': [],
+                'resistance_levels': [],
+                'current_position': {},
+                'recommendations': []
+            }
+            
+            # Analyze support levels
+            for level in support_resistance['support_levels']:
+                level_price = level['price']
+                distance = ((current_price - level_price) / current_price) * 100
+                
+                # Find closest Fibonacci level
+                fib_level = self._find_closest_fibonacci_level(level_price, dynamic_levels)
+                
+                level_analysis = {
+                    'price': level_price,
+                    'strength': level['strength'],
+                    'touches': level['touches'],
+                    'distance_from_current': round(distance, 2),
+                    'fibonacci_position': fib_level,
+                    'is_above_current': level_price > current_price
+                }
+                
+                analysis['support_levels'].append(level_analysis)
+            
+            # Analyze resistance levels
+            for level in support_resistance['resistance_levels']:
+                level_price = level['price']
+                distance = ((level_price - current_price) / current_price) * 100
+                
+                # Find closest Fibonacci level
+                fib_level = self._find_closest_fibonacci_level(level_price, dynamic_levels)
+                
+                level_analysis = {
+                    'price': level_price,
+                    'strength': level['strength'],
+                    'touches': level['touches'],
+                    'distance_from_current': round(distance, 2),
+                    'fibonacci_position': fib_level,
+                    'is_above_current': level_price > current_price
+                }
+                
+                analysis['resistance_levels'].append(level_analysis)
+            
+            # Current position analysis
+            analysis['current_position'] = self._analyze_current_position(current_price, dynamic_levels)
+            
+            # Generate recommendations
+            analysis['recommendations'] = self._generate_position_recommendations(analysis)
+            
+            return analysis
+            
+        except Exception as e:
+            return {"error": f"Error in Fibonacci position analysis: {str(e)}"}
+    
+    def _find_closest_fibonacci_level(self, price: float, fib_levels: Dict) -> Dict:
+        """Find the closest Fibonacci level to a given price"""
+        try:
+            closest_level = None
+            min_distance = float('inf')
+            
+            # Check all Fibonacci levels
+            for level_name, level_price in fib_levels.items():
+                if isinstance(level_price, (int, float)) and level_price > 0:
+                    distance = abs(price - level_price)
+                    if distance < min_distance:
+                        min_distance = distance
+                        closest_level = {
+                            'name': level_name,
+                            'price': level_price,
+                            'distance': round(distance, 2),
+                            'percentage': round((distance / price) * 100, 2)
+                        }
+            
+            return closest_level or {'name': 'None', 'price': 0, 'distance': 0, 'percentage': 0}
+            
+        except Exception as e:
+            return {'name': 'Error', 'price': 0, 'distance': 0, 'percentage': 0}
+    
+    def _analyze_current_position(self, current_price: float, fib_levels: Dict) -> Dict:
+        """Analyze current price position relative to Fibonacci levels"""
+        try:
+            # Find closest Fibonacci level
+            closest_fib = self._find_closest_fibonacci_level(current_price, fib_levels)
+            
+            # Determine position type
+            if closest_fib['name'] == 'buy_zone_618':
+                position_type = "STRONG_BUY_ZONE"
+                confidence = "HIGH"
+            elif closest_fib['name'] == 'buy_zone_50':
+                position_type = "BUY_ZONE"
+                confidence = "MEDIUM"
+            elif closest_fib['name'] == 'sell_zone_1382':
+                position_type = "STRONG_SELL_ZONE"
+                confidence = "HIGH"
+            elif closest_fib['name'] == 'sell_zone_1618':
+                position_type = "SELL_ZONE"
+                confidence = "MEDIUM"
+            else:
+                position_type = "NEUTRAL"
+                confidence = "LOW"
+            
+            return {
+                'position_type': position_type,
+                'confidence': confidence,
+                'closest_fibonacci': closest_fib,
+                'recommendation': self._get_position_recommendation(position_type, confidence)
+            }
+            
+        except Exception as e:
+            return {
+                'position_type': 'ERROR',
+                'confidence': 'LOW',
+                'closest_fibonacci': {'name': 'Error', 'price': 0, 'distance': 0, 'percentage': 0},
+                'recommendation': 'Error in analysis'
+            }
+    
+    def _get_position_recommendation(self, position_type: str, confidence: str) -> str:
+        """Get trading recommendation based on position type and confidence"""
+        recommendations = {
+            'STRONG_BUY_ZONE': 'Strong buy signal - Enter long position',
+            'BUY_ZONE': 'Buy signal - Consider long entry',
+            'STRONG_SELL_ZONE': 'Strong sell signal - Exit long or enter short',
+            'SELL_ZONE': 'Sell signal - Consider taking profits',
+            'NEUTRAL': 'Wait for clearer signals'
+        }
+        
+        return recommendations.get(position_type, 'No recommendation available')
+    
+    def _generate_position_recommendations(self, analysis: Dict) -> List[str]:
+        """Generate comprehensive trading recommendations"""
+        recommendations = []
+        
+        try:
+            # Support level recommendations
+            for level in analysis['support_levels']:
+                if level['distance_from_current'] < 5:  # Within 5%
+                    recommendations.append(f"Support at ${level['price']} nearby (Fibonacci: {level['fibonacci_position']['name']})")
+            
+            # Resistance level recommendations
+            for level in analysis['resistance_levels']:
+                if level['distance_from_current'] < 5:  # Within 5%
+                    recommendations.append(f"Resistance at ${level['price']} nearby (Fibonacci: {level['fibonacci_position']['name']})")
+            
+            # Current position recommendations
+            current_pos = analysis['current_position']
+            if current_pos['position_type'] != 'NEUTRAL':
+                recommendations.append(f"Current position: {current_pos['recommendation']}")
+            
+            # Risk management
+            recommendations.append("Risk management: Use 1/3 position sizing, max 2x leverage")
+            
+            return recommendations
+            
+        except Exception as e:
+            return [f"Error generating recommendations: {str(e)}"]
         
         # Determine if price is at a key level
         key_levels = ["38.2%", "50%", "61.8%"]

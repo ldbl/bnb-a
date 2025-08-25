@@ -316,7 +316,70 @@ class BNBAdvancedAnalyzer:
             except Exception as e:
                 print(f"   💡 Technical indicators: {str(e)[:50]}")
             
-            # 5. WHALE ACTIVITY ALERTS
+            # 5. ДИНАМИЧНА КОТВА (ХАЙДУШКИ КОДЕКС)
+            print(f"\n🥋 ДИНАМИЧНА КОТВА (ХАЙДУШКИ КОДЕКС):")
+            try:
+                # Get current price and historical data
+                current_price = signal.get('current_price', 0)
+                if current_price and current_price != 'N/A':
+                    # Get market data for analysis
+                    market_data = self.get_market_data()
+                    if "error" not in market_data:
+                        prices = market_data["prices"]
+                        
+                        # Get comprehensive Fibonacci position analysis
+                        fib_analysis = self.fibonacci_analyzer.get_fibonacci_position_analysis(current_price, prices)
+                        
+                        if "error" not in fib_analysis:
+                            # Display dynamic kotva information
+                            fib_levels = fib_analysis['fibonacci_levels']
+                            current_pos = fib_analysis['current_position']
+                            
+                            print(f"   🎯 Динамична Котва: ${fib_levels.get('buy_zone_618', 0):.0f} (61.8% retracement)")
+                            print(f"   📊 Текуща позиция: {current_pos['position_type']} ({current_pos['confidence']})")
+                            print(f"   🚀 Take Profit: ${fib_levels.get('sell_zone_1382', 0):.0f} (138.2% extension)")
+                            
+                            # Display top 3 support levels with Fibonacci positions
+                            print(f"\n   🟢 TOP 3 SUPPORT LEVELS:")
+                            for i, level in enumerate(fib_analysis['support_levels'][:3], 1):
+                                fib_pos = level['fibonacci_position']
+                                print(f"      {i}. ${level['price']:.0f} (Strength: {level['strength']}, Touches: {level['touches']})")
+                                print(f"         📐 Fibonacci: {fib_pos['name']} at ${fib_pos['price']:.0f} ({fib_pos['percentage']:.1f}% away)")
+                                print(f"         📏 Distance: {level['distance_from_current']:.1f}% from current")
+                            
+                            # Display top 3 resistance levels with Fibonacci positions
+                            print(f"\n   🔴 TOP 3 RESISTANCE LEVELS:")
+                            for i, level in enumerate(fib_analysis['resistance_levels'][:3], 1):
+                                fib_pos = level['fibonacci_position']
+                                print(f"      {i}. ${level['price']:.0f} (Strength: {level['strength']}, Touches: {level['touches']})")
+                                print(f"         📐 Fibonacci: {fib_pos['name']} at ${fib_pos['price']:.0f} ({fib_pos['percentage']:.1f}% away)")
+                                print(f"         📏 Distance: {level['distance_from_current']:.1f}% from current")
+                            
+                            # Display recommendations
+                            if fib_analysis['recommendations']:
+                                print(f"\n   💡 RECOMMENDATIONS:")
+                                for rec in fib_analysis['recommendations'][:3]:  # Show top 3
+                                    print(f"      • {rec}")
+                            
+                            # Haiduk Code compliance
+                            if current_pos['position_type'] in ['STRONG_BUY_ZONE', 'BUY_ZONE']:
+                                print(f"   ✅ ХАЙДУШКИ КОДЕКС: В зоната за вход")
+                            elif current_pos['position_type'] in ['STRONG_SELL_ZONE', 'SELL_ZONE']:
+                                print(f"   🚨 ХАЙДУШКИ КОДЕКС: В зоната за изход")
+                            else:
+                                print(f"   ⏸️ ХАЙДУШКИ КОДЕКС: Изчакване за по-добри сигнали")
+                                
+                        else:
+                            print(f"   💡 Динамична котва: {fib_analysis['error']}")
+                    else:
+                        print("   💡 Динамична котва: Няма данни за анализ")
+                else:
+                    print("   💡 Динамична котва: Текущата цена не е налична")
+                    
+            except Exception as e:
+                print(f"   💡 Динамична котва: {str(e)[:50]}")
+            
+            # 6. WHALE ACTIVITY ALERTS
             print(f"\n🐋 WHALE ACTIVITY:")
             whale_alerts = signal.get('alerts', {}).get('whale_alerts', [])
             if whale_alerts:
@@ -327,7 +390,7 @@ class BNBAdvancedAnalyzer:
             else:
                 print("   ✅ No significant whale activity")
             
-            # 6. TREND REVERSAL SIGNALS
+            # 7. TREND REVERSAL SIGNALS
             print(f"\n🔄 TREND REVERSAL:")
             reversal_alerts = signal.get('alerts', {}).get('reversal_alerts', [])
             if reversal_alerts:
@@ -338,7 +401,7 @@ class BNBAdvancedAnalyzer:
             else:
                 print("   ✅ No reversal signals")
             
-            # 7. ML PREDICTIONS (if available)
+            # 8. ML PREDICTIONS (if available)
             print(f"\n🤖 ML PREDICTIONS:")
             
             # Enhanced ML

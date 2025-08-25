@@ -6,6 +6,7 @@ Contains trading signal logic and scoring system
 
 from datetime import datetime
 from typing import Dict, List
+import pandas as pd
 from indicators import TechnicalIndicators
 from elliott_wave import ElliottWaveAnalyzer
 from fib import FibonacciAnalyzer

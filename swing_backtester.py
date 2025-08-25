@@ -79,11 +79,11 @@ class SwingStrategy(bt.Strategy):
     BNB Swing Trading Strategy following ХАЙДУШКИ КОДЕКС principles
     
     ХАЙДУШКИ КОДЕКС Rules:
-    - Rule #1: Entry only at котва levels ($600-650)
+    - Rule #1: Entry only at dynamic котва levels (50-61.8% Fibonacci)
     - Rule #2: Patience for clear setup (3-7 days for bottom)
     - Rule #3: Position sizing 1/3 capital, gradual scaling
     - Rule #4: Maximum 2x leverage
-    - Rule #5: Take profit at $750-780 targets
+    - Rule #5: Take profit at 138.2-161.8% Fibonacci extension
     - Rule #6: Focus on one trade at a time
     - Rule #7: Emergency exit below $550
     - Rule #8: System integration (all modules work together)
@@ -91,8 +91,12 @@ class SwingStrategy(bt.Strategy):
     
     params = (
         # ХАЙДУШКИ КОДЕКС Parameters
-        ('kotva_min', 550),          # Rule #1: Котва entry levels (relaxed)
-        ('kotva_max', 700),
+        ('dynamic_kotva', True),     # Rule #1: Dynamic котва levels
+        ('fib_buy_min', 0.5),        # 50% Fibonacci retracement
+        ('fib_buy_max', 0.618),      # 61.8% Fibonacci retracement
+        ('fib_sell_min', 1.382),     # 138.2% Fibonacci extension
+        ('fib_sell_max', 1.618),     # 161.8% Fibonacci extension
+        ('rolling_window', 3),       # Rolling average window
         ('take_profit_min', 750),    # Rule #5: Take profit targets
         ('take_profit_max', 780),
         ('stop_loss_level', 500),    # Rule #7: Emergency exit (relaxed)
@@ -176,10 +180,16 @@ class SwingStrategy(bt.Strategy):
         current_price = self.data.close[0]
         current_date = self.data.datetime.date(0)
         
-        # Rule #1: Entry only at котва levels ($600-650)
-        if not (self.params.kotva_min <= current_price <= self.params.kotva_max):
-            self.patience_counter = 0
-            return
+        # Rule #1: Entry only at dynamic котва levels (50-61.8% Fibonacci)
+        if self.params.dynamic_kotva:
+            if not self._is_at_dynamic_kotva_level(current_price):
+                self.patience_counter = 0
+                return
+        else:
+            # Fallback to static levels
+            if not (self.params.kotva_min <= current_price <= self.params.kotva_max):
+                self.patience_counter = 0
+                return
         
         # Rule #2: Patience for clear setup
         if self.patience_counter < self.params.patience_days:
@@ -193,6 +203,68 @@ class SwingStrategy(bt.Strategy):
         # Weekly wick analysis validation
         if not self._validate_weekly_patterns():
             return
+    
+    def _is_at_dynamic_kotva_level(self, current_price: float) -> bool:
+        """Check if current price is at dynamic котва level (50-61.8% Fibonacci)"""
+        try:
+            # Get recent price data for dynamic calculation
+            recent_prices = [self.data.close[i] for i in range(-20, 0)]
+            
+            # Calculate dynamic Fibonacci levels
+            dynamic_levels = self._calculate_dynamic_fibonacci_levels(recent_prices)
+            
+            if "error" in dynamic_levels:
+                return False
+            
+            # Check if current price is in buy zone (50-61.8% retracement)
+            buy_zone_50 = dynamic_levels["buy_zone_50"]
+            buy_zone_618 = dynamic_levels["buy_zone_618"]
+            
+            # Entry condition: price at or below 61.8% retracement
+            return current_price <= buy_zone_618
+            
+        except Exception as e:
+            logger.error(f"Error in dynamic kotva calculation: {e}")
+            return False
+    
+    def _calculate_dynamic_fibonacci_levels(self, prices: List[float]) -> Dict:
+        """Calculate dynamic Fibonacci levels based on rolling average lows"""
+        try:
+            # Convert to numpy array and handle NaN
+            prices_array = np.array(prices)
+            prices_array = np.nan_to_num(prices_array, nan=0.0)
+            
+            # Calculate rolling average of lows
+            window = self.params.rolling_window
+            if len(prices_array) >= window:
+                rolling_lows = []
+                for i in range(window, len(prices_array)):
+                    window_prices = prices_array[i-window:i]
+                    rolling_lows.append(np.mean(window_prices))
+                
+                # Use recent rolling lows for dynamic levels
+                recent_low = np.mean(rolling_lows[-5:]) if len(rolling_lows) >= 5 else np.mean(rolling_lows)
+                recent_high = np.max(prices_array[-20:])  # Last 20 periods
+                
+                # Calculate dynamic Fibonacci levels
+                range_size = recent_high - recent_low
+                
+                dynamic_levels = {
+                    "dynamic_low": round(recent_low, 2),
+                    "dynamic_high": round(recent_high, 2),
+                    "buy_zone_50": round(recent_low + (range_size * self.params.fib_buy_min), 2),
+                    "buy_zone_618": round(recent_low + (range_size * self.params.fib_buy_max), 2),
+                    "sell_zone_1382": round(recent_high + (range_size * (self.params.fib_sell_min - 1)), 2),
+                    "sell_zone_1618": round(recent_high + (range_size * (self.params.fib_sell_max - 1)), 2)
+                }
+                
+                return dynamic_levels
+            else:
+                return {"error": "Insufficient data for dynamic calculation"}
+                
+        except Exception as e:
+            logger.error(f"Error calculating dynamic Fibonacci levels: {e}")
+            return {"error": str(e)}
         
         # Execute entry
         self._execute_entry(current_price, current_date)
@@ -257,6 +329,37 @@ class SwingStrategy(bt.Strategy):
             logger.warning(f"Weekly pattern validation error: {e}")
             return False
     
+    def _calculate_dynamic_take_profit(self, entry_price: float) -> float:
+        """Calculate dynamic take profit based on Fibonacci extensions"""
+        try:
+            # Get recent price data for dynamic calculation
+            recent_prices = [self.data.close[i] for i in range(-20, 0)]
+            
+            # Calculate dynamic Fibonacci levels
+            dynamic_levels = self._calculate_dynamic_fibonacci_levels(recent_prices)
+            
+            if "error" in dynamic_levels:
+                # Fallback to static take profit
+                return self.params.take_profit_min
+            
+            # Use 138.2% extension as primary take profit
+            take_profit_1382 = dynamic_levels["sell_zone_1382"]
+            take_profit_1618 = dynamic_levels["sell_zone_1618"]
+            
+            # Ensure take profit is above entry price
+            if take_profit_1382 > entry_price:
+                return take_profit_1382
+            elif take_profit_1618 > entry_price:
+                return take_profit_1618
+            else:
+                # Fallback to static take profit
+                return self.params.take_profit_min
+                
+        except Exception as e:
+            logger.error(f"Error calculating dynamic take profit: {e}")
+            # Fallback to static take profit
+            return self.params.take_profit_min
+    
     def _execute_entry(self, price: float, date):
         """Execute entry order following ХАЙДУШКИ КОДЕКС Rule #3"""
         try:
@@ -266,6 +369,9 @@ class SwingStrategy(bt.Strategy):
             
             # Ensure stop loss respects Rule #7 (not below $550)
             stop_loss = max(stop_loss, self.params.stop_loss_level)
+            
+            # Calculate dynamic take profit levels (138.2-161.8% Fibonacci extension)
+            take_profit = self._calculate_dynamic_take_profit(price)
             
             # Calculate position size (Rule #3: 1/3 capital)
             risk_amount = self.broker.getvalue() * self.params.risk_per_trade
@@ -288,21 +394,21 @@ class SwingStrategy(bt.Strategy):
             self.entry_price = price
             self.entry_date = date
             self.stop_loss = stop_loss
-            self.take_profit = price * 1.25  # 25% target (realistic vs 925%)
+            self.take_profit = take_profit  # Use dynamic take profit
             self.position_size = position_size
             self.holding_days = 0
             self.patience_counter = 0
             
             # Log entry
             self.log(f"🟢 ENTRY: Price=${price:.2f}, Stop=${stop_loss:.2f}, "
-                    f"Target=${self.take_profit:.2f}, Size={position_size:.2f}")
+                    f"Target=${take_profit:.2f}, Size={position_size:.2f}")
             
             # Store signal
             self.entry_signals.append({
                 'date': date,
                 'price': price,
                 'stop_loss': stop_loss,
-                'take_profit': self.take_profit,
+                'take_profit': take_profit,
                 'size': position_size
             })
             
