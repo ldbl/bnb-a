@@ -1,1 +1,117 @@
+# Python cache files
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# BNB Project Specific
+# Logs directory
+logs/
+*.log
+
+# ML Models (large files)
+ml_models/
+ml_models_bnb_enhanced/
+ml_models_deep/
+ml_models_multi/
+
+# Model files
+*.pkl
+*.h5
+*.hdf5
+*.joblib
+*.pth
+*.pt
+*.ckpt
+
+# Metadata files
+*_metadata.json
+
+# Backup files
+backups/
+
+# Data files
+*.csv
+*.xlsx
+*.json
+data/
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+*.temp
+
+# Configuration files with sensitive data
+config_local.py
+.env.local
+secrets.json
