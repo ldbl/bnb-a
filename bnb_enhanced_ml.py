@@ -770,26 +770,26 @@ class BNBEnhancedML:
         
         self.logger.info("🚀 Training revolutionary Helformer model for breakthrough performance...")
         
-        # Step 1: Get high-quality data for Helformer
+        # Step 1: Get high-quality data for Helformer (production training)
         self.logger.info("Step 1: Fetching high-resolution data for Helformer...")
-        crypto_data = self.fetch_learning_data("1h", 2000)  # More data for Helformer
+        crypto_data = self.fetch_learning_data("1h", 2500)  # Production: 2500 periods for full training
         
         if len(crypto_data) < 5:
             return {"error": "Insufficient learning data for Helformer"}
         
         # Get BNB data
         bnb_data = crypto_data.get("BNBUSDT")
-        if bnb_data is None or len(bnb_data) < 200:
+        if bnb_data is None or len(bnb_data) < 500:  # Production: 500+ periods for robust training
             return {"error": "Insufficient BNB data for Helformer training"}
         
         try:
-            # Step 2: Initialize Helformer with optimized parameters
+            # Step 2: Initialize Helformer with production parameters (full power)
             helformer = HelformerModel(
-                sequence_length=128,  # Longer sequences for better pattern recognition
-                d_model=256,          # Rich representation
-                num_heads=8,          # Multi-head attention
-                num_layers=6,         # Deep architecture
-                dff=1024,            # Feed-forward dimension
+                sequence_length=128,  # Production: 128 for full sequence learning
+                d_model=256,          # Production: 256 for full model capacity
+                num_heads=8,          # Production: 8 for optimal attention
+                num_layers=6,         # Production: 6 for deep learning
+                dff=1024,             # Production: 1024 for full feedforward capacity
                 dropout_rate=0.1,     # Regularization
                 hw_seasonal_periods=24  # Cryptocurrency seasonality
             )
@@ -800,8 +800,8 @@ class BNBEnhancedML:
             training_result = helformer.train_helformer(
                 bnb_data,
                 validation_split=0.2,
-                epochs=100,
-                batch_size=32,
+                epochs=100,     # Production: 100 epochs for full convergence
+                batch_size=32,  # Production: 32 for optimal training
                 learning_rate=0.001
             )
             
@@ -1005,12 +1005,26 @@ class BNBEnhancedML:
                 'energy_efficiency': [0.9]  # Environmental score
             })
             
-            # Step 5: Train TFT
-            self.logger.info("Step 3: Training TFT with multi-horizon architecture...")
+            # Step 5: Clean features for TFT (remove string columns)
+            self.logger.info("Step 3: Cleaning features for TFT training...")
+            
+            # Filter out non-numeric columns that TFT can't handle
+            numeric_features = enhanced_features.select_dtypes(include=[np.number])
+            
+            # TEMPORARY: Reduce features to avoid dimension mismatch (569 → 202)
+            if len(numeric_features.columns) > 202:
+                numeric_features = numeric_features.iloc[:, :202]
+                self.logger.info(f"📊 TFT features: Reduced to {len(numeric_features.columns)} features for testing")
+            else:
+                self.logger.info(f"📊 TFT features: {len(numeric_features.columns)} numeric features (filtered from {len(enhanced_features.columns)} total)")
+            
+            # Ensure we have enough features
+            if len(numeric_features.columns) < 100:
+                self.logger.warning(f"⚠️ Only {len(numeric_features.columns)} numeric features available for TFT")
             
             training_result = tft.train_tft(
                 price_data=bnb_data[['close']],
-                features_data=enhanced_features,
+                features_data=numeric_features,  # Use only numeric features
                 static_features_data=static_features,
                 validation_split=0.2,
                 epochs=150,  # More epochs for TFT

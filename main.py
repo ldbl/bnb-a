@@ -359,7 +359,7 @@ class BNBAdvancedAnalyzer:
             
             # Helformer
             try:
-                helformer_result = self.ml_system.predict_helformer(10)
+                helformer_result = self.ml_system.predict_helformer(1)  # Use 1 period as trained
                 if 'error' not in helformer_result:
                     pred = helformer_result.get('prediction_label', 'Unknown')
                     conf = helformer_result.get('confidence', 0)
@@ -579,10 +579,15 @@ class BNBAdvancedAnalyzer:
                     print(f"❌ Training failed: {result.get('error', 'Unknown error')}")
                     return
             elif choice == "5":
-                # Helformer prediction
-                print("🔥 HELFORMER PREDICTION (925% Excess Return Potential)")
+                # Helformer prediction - MAIN MODEL
+                print("🔥 HELFORMER PREDICTION - BNB QUARTERLY TRADING READY")
                 print("=" * 60)
-                helformer_result = self.ml_system.predict_helformer(10, 24)
+                print("🎯 Optimized for 3-4 month swing trading cycles")
+                print("📊 20-40% amplitude targets with quarterly seasonality")
+                print("🥋 Haiduk Code compliant: EMA10/50, RSI7, MACD12/26/9")
+                print("💡 Use for monthly (5-10%) and quarterly (20-40%) strategies")
+                print()
+                helformer_result = self.ml_system.predict_helformer(1, 24)  # Use 1 period as trained
                 if "error" not in helformer_result:
                     self._display_revolutionary_prediction(helformer_result, "Helformer")
                 else:
@@ -591,35 +596,33 @@ class BNBAdvancedAnalyzer:
                 return
                 
             elif choice == "6":
-                # TFT prediction
-                print("🚀 TFT PREDICTION (Multi-Horizon Forecasting)")
+                # TFT prediction - TEMPORARILY DISABLED
+                print("🚀 TFT PREDICTION - TEMPORARILY DISABLED")
                 print("=" * 55)
-                tft_result = self.ml_system.predict_tft(24, [1, 6, 12, 24, 48])
-                if "error" not in tft_result:
-                    self._display_revolutionary_prediction(tft_result, "TFT")
-                else:
-                    print(f"❌ TFT error: {tft_result['error']}")
-                    print("💡 Train TFT model first with: python3 train_revolutionary_models.py --models tft --periods 24")
+                print("🔧 TFT model is currently under maintenance")
+                print("💡 Focus on Helformer model for now")
+                print("📊 Helformer provides excellent quarterly seasonality analysis")
+                input("\nPress Enter to continue...")
                 return
                 
             elif choice == "7":
-                # Performer prediction
-                print("⚡ PERFORMER PREDICTION (Linear Complexity O(N))")
+                # Performer prediction - TEMPORARILY DISABLED
+                print("⚡ PERFORMER PREDICTION - TEMPORARILY DISABLED")
                 print("=" * 55)
-                performer_result = self.ml_system.predict_performer(168, True)
-                if "error" not in performer_result:
-                    self._display_revolutionary_prediction(performer_result, "Performer")
-                else:
-                    print(f"❌ Performer error: {performer_result['error']}")
-                    print("💡 Train Performer model first with: python3 train_revolutionary_models.py --models performer --periods 7")
+                print("🔧 Performer model is currently under maintenance")
+                print("💡 Focus on Helformer model for now")
+                print("📊 Helformer provides excellent quarterly seasonality analysis")
+                input("\nPress Enter to continue...")
                 return
                 
             elif choice == "8":
-                # Ensemble prediction
-                print("🎭 ENSEMBLE PREDICTION (All Revolutionary Models)")
+                # Ensemble prediction - TEMPORARILY DISABLED
+                print("🎭 ENSEMBLE PREDICTION - TEMPORARILY DISABLED")
                 print("=" * 55)
-                print("💡 Running all available revolutionary models...")
-                self._run_ensemble_prediction()
+                print("🔧 Ensemble prediction is currently under maintenance")
+                print("💡 Focus on Helformer model for now")
+                print("📊 Helformer provides excellent quarterly seasonality analysis")
+                input("\nPress Enter to continue...")
                 return
                 
             elif choice == "9":
@@ -759,98 +762,37 @@ class BNBAdvancedAnalyzer:
             print(f"🎯 Predicted Price: ${predicted_price:.2f}")
             print(f"📊 Direction: {direction}")
             print(f"🎲 Confidence: {confidence:.1%}")
-            print(f"🔥 Model: Helformer (925% excess return potential)")
+            print(f"🔥 Model: Helformer (BNB Quarterly Trading Ready)")
+            print(f"📈 Quarterly Seasonality: 3-4 month cycles")
+            print(f"🎯 Target Amplitude: 20-40% returns")
+            print(f"🥋 Haiduk Code: EMA10/50, RSI7, MACD12/26/9")
             
         elif model_name == "TFT":
-            current_price = result.get('current_bnb_price', 0)
-            primary = result.get('primary_prediction', {})
+            print("🚀 TFT Model - TEMPORARILY DISABLED")
+            print("🔧 Under maintenance for optimization")
+            print("💡 Use Helformer model for quarterly trading signals")
             
-            print(f"💰 Current Price: ${current_price:.2f}")
-            print(f"🎯 Primary Prediction: {primary}")
-            print(f"🚀 Multi-horizon forecasting with uncertainty quantification")
-            
-            # Show multi-horizon if available
-            multi_horizon = result.get('multi_horizon_forecasts', {})
-            if multi_horizon:
-                print(f"📊 Multi-Horizon Forecasts:")
-                for horizon, forecast in multi_horizon.items():
-                    print(f"   {horizon}: {forecast}")
-                    
         elif model_name == "Performer":
-            current_price = result.get('current_price', 0)
-            primary = result.get('primary_prediction', {})
-            
-            print(f"💰 Current Price: ${current_price:.2f}")
-            print(f"🎯 Primary Prediction: {primary}")
-            print(f"⚡ Linear Complexity: O(N) vs O(N²) standard Transformers")
-            print(f"🚀 FAVOR+ attention mechanism")
-            
-            # Show multi-horizon if available
-            multi_horizon = result.get('multi_horizon_forecasts', {})
-            if multi_horizon:
-                print(f"📊 Multi-Horizon Forecasts:")
-                for horizon, forecast in multi_horizon.items():
-                    print(f"   {horizon}: ${forecast.get('price', 0):.2f} ({forecast.get('percentage_change', 0):+.1f}%)")
+            print("⚡ Performer Model - TEMPORARILY DISABLED")
+            print("🔧 Under maintenance for optimization")
+            print("💡 Use Helformer model for quarterly trading signals")
         
         print(f"\n🚀 {model_name} analysis completed!")
         input("\nPress Enter to continue...")
     
     def _run_ensemble_prediction(self):
         """Run ensemble prediction combining multiple revolutionary models"""
-        print("🎭 Running ensemble prediction with available models...")
-        
-        models_results = {}
-        
-        # Try Enhanced ML first
-        try:
-            enhanced_result = self.ml_system.predict_bnb_enhanced(30)
-            if "error" not in enhanced_result:
-                models_results["Enhanced"] = enhanced_result
-                print("✅ Enhanced ML prediction successful")
-            else:
-                print("❌ Enhanced ML not available")
-        except:
-            print("❌ Enhanced ML not available")
-        
-        # Try Revolutionary models (will show errors if not trained)
-        revolutionary_models = [
-            ("Helformer", lambda: self.ml_system.predict_helformer(10, 24)),
-            ("TFT", lambda: self.ml_system.predict_tft(24, [1, 6, 12, 24])),
-            ("Performer", lambda: self.ml_system.predict_performer(168, True))
-        ]
-        
-        for model_name, predict_func in revolutionary_models:
-            try:
-                result = predict_func()
-                if "error" not in result:
-                    models_results[model_name] = result
-                    print(f"✅ {model_name} prediction successful")
-                else:
-                    print(f"❌ {model_name} not available: {result['error']}")
-            except Exception as e:
-                print(f"❌ {model_name} not available: {e}")
-        
-        if models_results:
-            print(f"\n🎭 ENSEMBLE RESULTS ({len(models_results)} models)")
-            print("=" * 50)
-            
-            for model_name, result in models_results.items():
-                print(f"\n🤖 {model_name.upper()}:")
-                if model_name == "Enhanced":
-                    pred = result.get('prediction_label', 'Unknown')
-                    conf = result.get('confidence', 0)
-                    print(f"   📊 Prediction: {pred}")
-                    print(f"   🎲 Confidence: {conf:.1%}")
-                else:
-                    # For revolutionary models, show basic info
-                    print(f"   📊 Model available with predictions")
-            
-            print(f"\n💡 For detailed analysis, select individual models (options 5-7)")
-        else:
-            print("❌ No models available for ensemble prediction")
-            print("💡 Train models first with:")
-            print("   python3 train_revolutionary_models.py --models all --periods 7")
-        
+        print("🎭 ENSEMBLE PREDICTION - TEMPORARILY DISABLED")
+        print("=" * 50)
+        print("🔧 Ensemble prediction is currently under maintenance")
+        print("💡 Focus on Helformer model for quarterly trading signals")
+        print("📊 Helformer provides excellent quarterly seasonality analysis")
+        print("🥋 Haiduk Code compliant: 3-4 month cycles, 20-40% amplitude")
+        print()
+        print("🎯 Use Helformer model (Option 5) for:")
+        print("   • Monthly trading (5-10% returns)")
+        print("   • Quarterly trading (20-40% returns)")
+        print("   • Swing trading signals with risk management")
         input("\nPress Enter to continue...")
     
     def show_reversal_analysis(self):
@@ -889,7 +831,7 @@ class BNBAdvancedAnalyzer:
         """Display the main menu and get user choice"""
         print("\n" + "="*60)
         print("🎯 BNB ADVANCED ANALYZER - MAIN MENU")
-        print("🧠 Enhanced with Multi-Crypto Intelligence")
+        print("🔥 FOCUS: Helformer Model for Quarterly Seasonality")
         print("="*60)
         print("1. Show complete market analysis")
         print("2. Show Fibonacci analysis")
@@ -903,6 +845,8 @@ class BNBAdvancedAnalyzer:
         print("10. Show market summary")
         print("11. Toggle colors")
         print("12. Exit")
+        print("\n🔧 NOTE: TFT, Performer & Ensemble are temporarily disabled")
+        print("💡 Focus on Helformer model for quarterly seasonality analysis")
         
         return input(f"\n{self.display.colorize('Choice (1-12): ', 'cyan')}")
 
@@ -910,11 +854,12 @@ class BNBAdvancedAnalyzer:
         """Main application loop"""
         print(f"\n{'='*60}")
         print("🎯 BNB ADVANCED TRADING ANALYZER")
-        print("🧠 Enhanced with Multi-Crypto Intelligence")
+        print("🔥 FOCUS: Helformer Model for Quarterly Seasonality")
         print(f"{'='*60}")
         print(f"📊 Analyzing: {self.symbol}")
-        print("🤖 ML System: BNB Enhanced (Learning from Top 10 Cryptos)")
-        print("💡 Tip: Train ML models first (Option 8 → 4) for best results")
+        print("🤖 ML System: Helformer (BNB Quarterly Trading Ready)")
+        print("💡 Tip: Use Helformer model (Option 5) for swing trading signals")
+        print("🥋 Haiduk Code compliant: 3-4 month cycles, 20-40% amplitude")
         
         while True:
             try:

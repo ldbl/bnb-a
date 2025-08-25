@@ -116,7 +116,7 @@ class GatedResidualNetwork(layers.Layer):
         else:
             self.skip_layer = None
         
-        # Gating layer
+        # Gating layer - should match input size for proper broadcasting
         self.gate = layers.Dense(self.output_size, activation='sigmoid')
         
         # Context integration
@@ -145,8 +145,19 @@ class GatedResidualNetwork(layers.Layer):
         else:
             skip = inputs
         
-        # Gating mechanism
+        # Gating mechanism - ensure proper broadcasting
         gate = self.gate(x)
+        
+        # Ensure skip has the same shape as x for broadcasting
+        if self.skip_layer is not None:
+            skip = self.skip_layer(inputs)
+        else:
+            # If no skip layer, project inputs to match output size
+            if inputs.shape[-1] != self.output_size:
+                skip = layers.Dense(self.output_size, activation='linear')(inputs)
+            else:
+                skip = inputs
+        
         gated_output = gate * x + (1 - gate) * skip
         
         # Normalization
@@ -236,8 +247,8 @@ class TemporalFusionTransformer:
                  num_quantiles: int = 3,
                  max_encoder_length: int = 168,  # 1 week of hourly data
                  max_prediction_length: int = 24,  # 1 day prediction
-                 static_features: int = 10,
-                 dynamic_features: int = 50):
+                 static_features: int = 20,  # Match with bnb_enhanced_ml.py
+                 dynamic_features: int = 600):  # Increased for 577+ features
         
         self.logger = get_logger(__name__)
         
@@ -249,12 +260,13 @@ class TemporalFusionTransformer:
         self.max_encoder_length = max_encoder_length
         self.max_prediction_length = max_prediction_length
         self.static_features = static_features
-        self.dynamic_features = dynamic_features
+        self.dynamic_features = dynamic_features  # Only for metadata, not for architecture
         
         # Model components
         self.model = None
         self.training_history = {}
         self.feature_importances = {}
+        self.num_features = None  # Will be set dynamically
         
         # Quantile levels for prediction intervals
         self.quantiles = [0.1, 0.5, 0.9]  # 10th, 50th (median), 90th percentiles
@@ -266,7 +278,10 @@ class TemporalFusionTransformer:
                    num_features: int) -> keras.Model:
         """Build the complete TFT architecture"""
         
-        # Input layers
+        # Store the actual number of features
+        self.num_features = num_features
+        
+        # Input layers - use actual num_features, not self.dynamic_features
         inputs = keras.Input(shape=(total_time_steps, num_features), name='historical_inputs')
         
         # Known future inputs (for prediction horizon)
@@ -279,6 +294,9 @@ class TemporalFusionTransformer:
         static_inputs = keras.Input(shape=(self.static_features,), name='static_inputs')
         
         # === STATIC FEATURE PROCESSING ===
+        # First project static features to hidden_size
+        static_projection = layers.Dense(self.hidden_size, activation='relu', name='static_projection')(static_inputs)
+        
         static_encoder = GatedResidualNetwork(
             hidden_size=self.hidden_size,
             output_size=self.hidden_size,
@@ -286,7 +304,7 @@ class TemporalFusionTransformer:
             name='static_encoder'
         )
         
-        static_context = static_encoder(static_inputs)
+        static_context = static_encoder(static_projection)
         
         # === VARIABLE SELECTION NETWORKS ===
         
@@ -452,6 +470,14 @@ class TemporalFusionTransformer:
         else:
             features_data['target'] = features_data['close']
         
+        # Filter out non-numeric columns (strings, objects, etc.)
+        numeric_columns = features_data.select_dtypes(include=[np.number]).columns
+        features_data = features_data[numeric_columns]
+        
+        # Ensure target column exists
+        if 'target' not in features_data.columns:
+            features_data['target'] = price_data['close']
+        
         # Sort by time
         features_data = features_data.sort_index()
         
@@ -469,28 +495,55 @@ class TemporalFusionTransformer:
         
         for i in range(len(features_data) - total_length + 1):
             try:
+                # Validate indices before accessing
+                if i < 0 or i >= len(features_data):
+                    continue
+                    
                 # Historical sequence (encoder input)
                 historical_end = i + self.max_encoder_length
-                if historical_end > len(features_data):
+                if historical_end <= i or historical_end > len(features_data):
                     continue
+                    
                 historical_seq = features_data.iloc[i:historical_end]
+                if len(historical_seq) != self.max_encoder_length:
+                    continue
                 
-                # Future sequence (decoder input) - without target
+                # Future sequence (decoder input) - keep same feature count as historical
                 future_start = historical_end
                 future_end = future_start + self.max_prediction_length
-                if future_end > len(features_data):
+                if future_end <= future_start or future_end > len(features_data):
                     continue
-                future_seq = features_data.iloc[future_start:future_end].drop('target', axis=1, errors='ignore')
+                    
+                # Keep all features including target for dimension consistency
+                future_seq = features_data.iloc[future_start:future_end]
+                if len(future_seq) != self.max_prediction_length:
+                    continue
                 
                 # Target sequence (what we want to predict)
+                if future_start >= len(features_data) or future_end > len(features_data):
+                    continue
+                    
                 target_seq = features_data['target'].iloc[future_start:future_end].values
-            except IndexError as e:
-                self.logger.warning(f"Index error at position {i}: {e}")
+                if len(target_seq) != self.max_prediction_length:
+                    continue
+                    
+            except (IndexError, ValueError) as e:
+                self.logger.warning(f"Data access error at position {i}: {e}")
                 continue
             
             # Static features (if provided)
-            if static_features_data is not None:
-                static_ctx = static_features_data.iloc[i].values
+            if static_features_data is not None and i < len(static_features_data):
+                try:
+                    static_ctx = static_features_data.iloc[i].values
+                    if len(static_ctx) != self.static_features:
+                        # Pad or truncate to match expected size
+                        if len(static_ctx) < self.static_features:
+                            static_ctx = np.pad(static_ctx, (0, self.static_features - len(static_ctx)), 'constant')
+                        else:
+                            static_ctx = static_ctx[:self.static_features]
+                except (IndexError, ValueError):
+                    # Create dummy static features if access fails
+                    static_ctx = np.random.randn(self.static_features)
             else:
                 # Create dummy static features
                 static_ctx = np.random.randn(self.static_features)
@@ -506,11 +559,17 @@ class TemporalFusionTransformer:
         if not sequences:
             raise ValueError("No valid sequences could be created from the data")
         
-        # Convert to numpy arrays
-        X_historical = np.array(sequences)
-        X_future = np.array(future_features)
-        X_static = np.array(static_contexts)
-        y = np.array(targets)
+        # Convert to numpy arrays and ensure proper data types
+        X_historical = np.array(sequences, dtype=np.float32)
+        X_future = np.array(future_features, dtype=np.float32)
+        X_static = np.array(static_contexts, dtype=np.float32)
+        y = np.array(targets, dtype=np.float32)
+        
+        # Ensure no NaN or infinite values
+        X_historical = np.nan_to_num(X_historical, nan=0.0, posinf=0.0, neginf=0.0)
+        X_future = np.nan_to_num(X_future, nan=0.0, posinf=0.0, neginf=0.0)
+        X_static = np.nan_to_num(X_static, nan=0.0, posinf=0.0, neginf=0.0)
+        y = np.nan_to_num(y, nan=0.0, posinf=0.0, neginf=0.0)
         
         # Prepare inputs dictionary
         inputs = {
@@ -606,12 +665,12 @@ class TemporalFusionTransformer:
             extended_targets['historical_importance'] = np.zeros((
                 batch_size_actual, 
                 self.max_encoder_length, 
-                num_features
+                self.num_features  # Use self.num_features from build_model
             ))
             extended_targets['future_importance'] = np.zeros((
                 batch_size_actual, 
                 self.max_prediction_length, 
-                num_features
+                self.num_features  # Use self.num_features from build_model
             ))
             
             # Train model

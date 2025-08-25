@@ -2,6 +2,8 @@
 """
 Trend Reversal Detection Module
 Analyzes classic reversal patterns and signals across multiple timeframes
+
+Enhanced with BNB-specific weekly wick analysis for swing trading
 """
 
 import requests
@@ -12,7 +14,7 @@ import time
 
 
 class TrendReversalDetector:
-    """Detects trend reversal patterns and signals"""
+    """Detects trend reversal patterns and signals with BNB weekly wick specialization"""
     
     def __init__(self):
         self.base_url = "https://api.binance.com/api/v3"
@@ -22,6 +24,16 @@ class TrendReversalDetector:
         self.divergence_lookback = 14  # Periods to look back for divergences
         self.pattern_confirmation_periods = 3  # Periods for pattern confirmation
         
+        # BNB-specific weekly wick parameters
+        self.bnb_wick_config = {
+            'upper_wick_ratio': 2.8,      # Upper wick > body_size * 2.8 for shooting star
+            'lower_wick_ratio': 2.8,      # Lower wick > body_size * 2.8 for hammer
+            'volume_confirmation': 1.2,   # >120% average weekly volume
+            'round_number_levels': [800, 850, 900, 950],  # BNB resistance levels
+            'weekly_pattern_score': 15,   # Higher score for weekly patterns
+            'daily_pattern_score': 5      # Standard score for daily patterns
+        }
+        
         # Alert thresholds for reversal signals
         self.alert_thresholds = {
             "strong_reversal": 15,      # Score threshold for strong reversal
@@ -29,7 +41,7 @@ class TrendReversalDetector:
             "multiple_timeframes": 3,   # Number of timeframes showing reversal
             "high_conviction": 20       # Score for very high conviction reversal
         }
-        
+    
     def fetch_klines_data(self, interval: str = "1d", limit: int = 100) -> List:
         """Fetch historical klines data"""
         try:
@@ -652,6 +664,334 @@ class TrendReversalDetector:
             alert_text += f"   {signal}\n"
         
         return alert_text
+
+    def weekly_wick_analysis(self, limit: int = 26) -> Dict:
+        """
+        Analyze BNB-specific weekly wick patterns for swing trading
+        
+        Args:
+            limit: Number of weekly candles (26 = 6 months)
+            
+        Returns:
+            Dict with weekly wick analysis results
+        """
+        try:
+            print(f"\n🔍 BNB Weekly Wick Analysis (Last {limit} weeks)")
+            print("=" * 50)
+            
+            # Fetch weekly data
+            weekly_klines = self.fetch_klines_data("1w", limit)
+            if not weekly_klines:
+                return {"error": "Failed to fetch weekly data"}
+            
+            # Process weekly data
+            weekly_data = self.process_klines_data(weekly_klines)
+            if not weekly_data:
+                return {"error": "Failed to process weekly data"}
+            
+            # Analyze weekly wick patterns
+            wick_patterns = self._detect_weekly_wick_patterns(weekly_data)
+            
+            # Detect round number resistance
+            round_number_analysis = self._analyze_round_number_resistance(weekly_data)
+            
+            # Calculate weekly volume analysis
+            volume_analysis = self._analyze_weekly_volume(weekly_data)
+            
+            # Generate weekly wick signals
+            wick_signals = self._generate_weekly_wick_signals(wick_patterns, volume_analysis)
+            
+            # Calculate overall weekly score
+            weekly_score = self._calculate_weekly_score(wick_patterns, volume_analysis, round_number_analysis)
+            
+            return {
+                "timeframe": "1w",
+                "period": f"Last {limit} weeks",
+                "wick_patterns": wick_patterns,
+                "round_number_analysis": round_number_analysis,
+                "volume_analysis": volume_analysis,
+                "wick_signals": wick_signals,
+                "weekly_score": weekly_score,
+                "current_price": weekly_data["closes"][-1] if weekly_data["closes"] else 0,
+                "analysis_time": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            }
+            
+        except Exception as e:
+            print(f"Error in weekly wick analysis: {e}")
+            return {"error": str(e)}
+    
+    def _detect_weekly_wick_patterns(self, data: Dict) -> List[Dict]:
+        """Detect BNB-specific weekly wick patterns"""
+        patterns = []
+        
+        if len(data.get("opens", [])) < 3:
+            return patterns
+        
+        opens = data["opens"]
+        highs = data["highs"]
+        lows = data["lows"]
+        closes = data["closes"]
+        
+        # Analyze last 8 weeks for patterns
+        for i in range(2, min(len(closes), 10)):
+            curr_idx = -(i + 1)
+            
+            o, h, l, c = opens[curr_idx], highs[curr_idx], lows[curr_idx], closes[curr_idx]
+            body_size = abs(c - o)
+            upper_shadow = h - max(o, c)
+            lower_shadow = min(o, c) - l
+            
+            # Avoid division by zero
+            if body_size == 0:
+                continue
+            
+            # BNB-optimized wick ratios
+            upper_wick_ratio = upper_shadow / body_size
+            lower_wick_ratio = lower_shadow / body_size
+            
+            # Weekly Shooting Star (bearish reversal)
+            if (upper_wick_ratio > self.bnb_wick_config['upper_wick_ratio'] and
+                lower_shadow < body_size * 0.3 and
+                c < o):  # Red candle
+                
+                patterns.append({
+                    "pattern": "WEEKLY_SHOOTING_STAR",
+                    "type": "BEARISH_REVERSAL",
+                    "strength": "VERY_STRONG",
+                    "position": i,
+                    "week_number": i,
+                    "upper_wick_ratio": round(upper_wick_ratio, 2),
+                    "body_size": round(body_size, 2),
+                    "description": f"Weekly Shooting Star - upper wick {upper_wick_ratio:.1f}x body size",
+                    "score": self.bnb_wick_config['weekly_pattern_score']
+                })
+            
+            # Weekly Hammer (bullish reversal)
+            elif (lower_wick_ratio > self.bnb_wick_config['lower_wick_ratio'] and
+                  upper_shadow < body_size * 0.3 and
+                  c > o):  # Green candle
+                
+                patterns.append({
+                    "pattern": "WEEKLY_HAMMER",
+                    "type": "BULLISH_REVERSAL",
+                    "strength": "VERY_STRONG",
+                    "position": i,
+                    "week_number": i,
+                    "lower_wick_ratio": round(lower_wick_ratio, 2),
+                    "body_size": round(body_size, 2),
+                    "description": f"Weekly Hammer - lower wick {lower_wick_ratio:.1f}x body size",
+                    "score": self.bnb_wick_config['weekly_pattern_score']
+                })
+            
+            # Weekly Doji (indecision)
+            elif body_size < (h - l) * 0.1:  # Body < 10% of range
+                patterns.append({
+                    "pattern": "WEEKLY_DOJI",
+                    "type": "INDECISION",
+                    "strength": "MODERATE",
+                    "position": i,
+                    "week_number": i,
+                    "description": "Weekly Doji - market indecision, potential reversal",
+                    "score": self.bnb_wick_config['weekly_pattern_score'] // 2
+                })
+        
+        return patterns
+    
+    def _analyze_round_number_resistance(self, data: Dict) -> Dict:
+        """Analyze BNB round number resistance levels"""
+        try:
+            highs = data["highs"]
+            closes = data["closes"]
+            
+            if not highs or not closes:
+                return {"error": "No data for round number analysis"}
+            
+            current_price = closes[-1]
+            resistance_levels = self.bnb_wick_config['round_number_levels']
+            
+            # Find nearest resistance levels
+            nearest_resistance = None
+            nearest_distance = float('inf')
+            
+            for level in resistance_levels:
+                distance = abs(level - current_price)
+                if distance < nearest_distance:
+                    nearest_distance = distance
+                    nearest_resistance = level
+            
+            # Check if price is near resistance
+            near_resistance = nearest_distance < 20  # Within $20
+            
+            # Analyze recent touches of resistance levels
+            resistance_touches = {}
+            for level in resistance_levels:
+                touches = 0
+                for high in highs[-8:]:  # Last 8 weeks
+                    if abs(high - level) < 10:  # Within $10
+                        touches += 1
+                resistance_touches[level] = touches
+            
+            return {
+                "current_price": current_price,
+                "nearest_resistance": nearest_resistance,
+                "distance_to_resistance": round(nearest_distance, 2),
+                "near_resistance": near_resistance,
+                "resistance_touches": resistance_touches,
+                "interpretation": self._interpret_resistance_levels(current_price, resistance_touches)
+            }
+            
+        except Exception as e:
+            return {"error": f"Round number analysis failed: {str(e)}"}
+    
+    def _analyze_weekly_volume(self, data: Dict) -> Dict:
+        """Analyze weekly volume patterns for BNB"""
+        try:
+            volumes = data["volumes"]
+            closes = data["closes"]
+            
+            if len(volumes) < 4:
+                return {"error": "Insufficient volume data"}
+            
+            # Calculate average weekly volume
+            avg_volume = np.mean(volumes[-4:])  # Last 4 weeks
+            current_volume = volumes[-1]
+            volume_ratio = current_volume / avg_volume if avg_volume > 0 else 1.0
+            
+            # Volume confirmation for wick patterns
+            volume_confirmed = volume_ratio > self.bnb_wick_config['volume_confirmation']
+            
+            # Volume trend analysis
+            volume_trend = "increasing" if volumes[-1] > volumes[-2] else "decreasing"
+            
+            return {
+                "current_volume": current_volume,
+                "average_volume": avg_volume,
+                "volume_ratio": round(volume_ratio, 2),
+                "volume_confirmed": volume_confirmed,
+                "volume_trend": volume_trend,
+                "interpretation": f"Weekly volume is {volume_trend} ({volume_ratio:.1f}x average)"
+            }
+            
+        except Exception as e:
+            return {"error": f"Volume analysis failed: {str(e)}"}
+    
+    def _generate_weekly_wick_signals(self, patterns: List[Dict], volume_analysis: Dict) -> List[Dict]:
+        """Generate weekly wick trading signals"""
+        signals = []
+        
+        for pattern in patterns:
+            if "error" in volume_analysis:
+                continue
+            
+            # Check volume confirmation
+            volume_confirmed = volume_analysis.get('volume_confirmed', False)
+            
+            if pattern["pattern"] == "WEEKLY_SHOOTING_STAR":
+                signal = {
+                    "type": "SELL",
+                    "pattern": pattern["pattern"],
+                    "strength": "VERY_STRONG" if volume_confirmed else "STRONG",
+                    "score": pattern["score"],
+                    "volume_confirmed": volume_confirmed,
+                    "description": f"Weekly Shooting Star detected - {pattern['description']}",
+                    "action": "Consider selling or shorting BNB",
+                    "target": "Support levels below current price"
+                }
+                signals.append(signal)
+            
+            elif pattern["pattern"] == "WEEKLY_HAMMER":
+                signal = {
+                    "type": "BUY",
+                    "pattern": pattern["pattern"],
+                    "strength": "VERY_STRONG" if volume_confirmed else "STRONG",
+                    "score": pattern["score"],
+                    "volume_confirmed": volume_confirmed,
+                    "description": f"Weekly Hammer detected - {pattern['description']}",
+                    "action": "Consider buying BNB",
+                    "target": "Resistance levels above current price"
+                }
+                signals.append(signal)
+        
+        return signals
+    
+    def _calculate_weekly_score(self, patterns: List[Dict], volume_analysis: Dict, 
+                               round_number_analysis: Dict) -> Dict:
+        """Calculate overall weekly wick score"""
+        try:
+            total_score = 0
+            bullish_score = 0
+            bearish_score = 0
+            
+            # Add pattern scores
+            for pattern in patterns:
+                score = pattern.get('score', 0)
+                total_score += score
+                
+                if "BULLISH" in pattern["type"]:
+                    bullish_score += score
+                elif "BEARISH" in pattern["type"]:
+                    bearish_score += score
+            
+            # Add volume confirmation bonus
+            if volume_analysis.get('volume_confirmed', False):
+                total_score += 5
+                volume_bonus = 5
+            else:
+                volume_bonus = 0
+            
+            # Add resistance level bonus
+            resistance_bonus = 0
+            if round_number_analysis.get('near_resistance', False):
+                resistance_bonus = 3
+                total_score += 3
+            
+            # Determine overall direction
+            if bullish_score > bearish_score + 5:
+                direction = "BULLISH_REVERSAL"
+                conviction = "HIGH" if total_score >= 20 else "MODERATE" if total_score >= 15 else "LOW"
+            elif bearish_score > bullish_score + 5:
+                direction = "BEARISH_REVERSAL"
+                conviction = "HIGH" if total_score >= 20 else "MODERATE" if total_score >= 15 else "LOW"
+            else:
+                direction = "MIXED_SIGNALS"
+                conviction = "LOW"
+            
+            return {
+                "total_score": total_score,
+                "bullish_score": bullish_score,
+                "bearish_score": bearish_score,
+                "volume_bonus": volume_bonus,
+                "resistance_bonus": resistance_bonus,
+                "direction": direction,
+                "conviction": conviction,
+                "show_alert": total_score >= self.alert_thresholds["strong_reversal"]
+            }
+            
+        except Exception as e:
+            return {"error": f"Weekly score calculation failed: {str(e)}"}
+    
+    def _interpret_resistance_levels(self, current_price: float, resistance_touches: Dict) -> str:
+        """Interpret resistance level analysis for BNB"""
+        try:
+            # Find most touched resistance level
+            most_touched_level = max(resistance_touches.items(), key=lambda x: x[1])
+            level, touches = most_touched_level
+            
+            if touches >= 2:
+                if current_price < level:
+                    return f"BNB approaching strong resistance at ${level} (touched {touches} times)"
+                else:
+                    return f"BNB above resistance at ${level}, may find support here"
+            elif touches == 1:
+                if current_price < level:
+                    return f"BNB approaching resistance at ${level} (touched once)"
+                else:
+                    return f"BNB above resistance at ${level}"
+            else:
+                return f"BNB not near major resistance levels"
+                
+        except Exception as e:
+            return f"Resistance interpretation error: {str(e)}"
 
 
 if __name__ == "__main__":

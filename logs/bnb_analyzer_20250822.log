@@ -808,3 +808,1062 @@ Call arguments received by layer 'favor_plus_attention_1' (type FAVORPlusAttenti
 2025-08-22 17:44:16,422 - helformer_model - ERROR - load_model:673 - Failed to load Helformer model: No file or directory found at ml_models_bnb_enhanced/helformer_10_transformer.h5
 2025-08-22 17:44:16,422 - temporal_fusion_transformer - INFO - __init__:262 - ADE-TFT initialized: hidden_size=128, horizons=24
 2025-08-22 17:44:16,423 - temporal_fusion_transformer - ERROR - load_model:879 - Failed to load TFT model: No file or directory found at ml_models_bnb_enhanced/tft_24_tft.h5
+2025-08-22 17:48:30,275 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:48:47,781 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 128, d_model: 256
+2025-08-22 17:48:47,784 - helformer_model - ERROR - load_model:673 - Failed to load Helformer model: No file or directory found at ml_models_bnb_enhanced/helformer_10_transformer.h5
+2025-08-22 17:51:06,524 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:51:06,524 - bnb_enhanced_ml - INFO - train_helformer_model:771 - 🚀 Training revolutionary Helformer model for breakthrough performance...
+2025-08-22 17:51:06,524 - bnb_enhanced_ml - INFO - train_helformer_model:774 - Step 1: Fetching high-resolution data for Helformer...
+2025-08-22 17:51:06,524 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 17:51:09,958 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 17:51:09,960 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:51:09,960 - bnb_enhanced_ml - INFO - train_helformer_model:798 - Step 2: Training Helformer with Holt-Winters + Transformer architecture...
+2025-08-22 17:51:09,960 - helformer_model - INFO - train_helformer:427 - Starting Helformer training with HW decomposition + Transformer architecture
+2025-08-22 17:51:09,960 - helformer_model - INFO - train_helformer:430 - Step 1: Extracting Holt-Winters components...
+2025-08-22 17:51:10,237 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.897, β=0.008
+2025-08-22 17:51:10,237 - helformer_model - INFO - train_helformer:434 - Step 2: Creating enhanced features...
+2025-08-22 17:51:10,261 - helformer_model - INFO - create_enhanced_features:320 - Created 64 enhanced features combining HW and traditional indicators
+2025-08-22 17:51:10,261 - helformer_model - INFO - train_helformer:438 - Step 3: Preparing sequences for Transformer...
+2025-08-22 17:51:10,272 - helformer_model - INFO - train_helformer:444 - Prepared 436 sequences with 64 timesteps and 64 features
+2025-08-22 17:51:10,272 - helformer_model - INFO - train_helformer:447 - Step 4: Building Transformer architecture...
+2025-08-22 17:51:10,687 - helformer_model - INFO - train_helformer:487 - Step 5: Training Transformer...
+2025-08-22 17:51:29,861 - bnb_enhanced_ml - ERROR - train_helformer_model:848 - Helformer training exception: 'val_price_mae'
+2025-08-22 17:52:32,214 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:52:32,215 - bnb_enhanced_ml - INFO - train_helformer_model:771 - 🚀 Training revolutionary Helformer model for breakthrough performance...
+2025-08-22 17:52:32,215 - bnb_enhanced_ml - INFO - train_helformer_model:774 - Step 1: Fetching high-resolution data for Helformer...
+2025-08-22 17:52:32,215 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 17:52:35,505 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 17:52:35,507 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:52:35,507 - bnb_enhanced_ml - INFO - train_helformer_model:798 - Step 2: Training Helformer with Holt-Winters + Transformer architecture...
+2025-08-22 17:52:35,507 - helformer_model - INFO - train_helformer:427 - Starting Helformer training with HW decomposition + Transformer architecture
+2025-08-22 17:52:35,507 - helformer_model - INFO - train_helformer:430 - Step 1: Extracting Holt-Winters components...
+2025-08-22 17:52:35,758 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.898, β=0.008
+2025-08-22 17:52:35,758 - helformer_model - INFO - train_helformer:434 - Step 2: Creating enhanced features...
+2025-08-22 17:52:35,782 - helformer_model - INFO - create_enhanced_features:320 - Created 64 enhanced features combining HW and traditional indicators
+2025-08-22 17:52:35,782 - helformer_model - INFO - train_helformer:438 - Step 3: Preparing sequences for Transformer...
+2025-08-22 17:52:35,793 - helformer_model - INFO - train_helformer:444 - Prepared 436 sequences with 64 timesteps and 64 features
+2025-08-22 17:52:35,793 - helformer_model - INFO - train_helformer:447 - Step 4: Building Transformer architecture...
+2025-08-22 17:52:36,100 - helformer_model - INFO - train_helformer:487 - Step 5: Training Transformer...
+2025-08-22 17:52:53,884 - bnb_enhanced_ml - ERROR - train_helformer_model:848 - Helformer training exception: 'val_price_mae'
+2025-08-22 17:53:30,113 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:53:30,113 - bnb_enhanced_ml - INFO - train_helformer_model:771 - 🚀 Training revolutionary Helformer model for breakthrough performance...
+2025-08-22 17:53:30,113 - bnb_enhanced_ml - INFO - train_helformer_model:774 - Step 1: Fetching high-resolution data for Helformer...
+2025-08-22 17:53:30,113 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 17:53:33,162 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 17:53:33,164 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:53:33,164 - bnb_enhanced_ml - INFO - train_helformer_model:798 - Step 2: Training Helformer with Holt-Winters + Transformer architecture...
+2025-08-22 17:53:33,164 - helformer_model - INFO - train_helformer:427 - Starting Helformer training with HW decomposition + Transformer architecture
+2025-08-22 17:53:33,164 - helformer_model - INFO - train_helformer:430 - Step 1: Extracting Holt-Winters components...
+2025-08-22 17:53:33,338 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.898, β=0.008
+2025-08-22 17:53:33,338 - helformer_model - INFO - train_helformer:434 - Step 2: Creating enhanced features...
+2025-08-22 17:53:33,354 - helformer_model - INFO - create_enhanced_features:320 - Created 64 enhanced features combining HW and traditional indicators
+2025-08-22 17:53:33,355 - helformer_model - INFO - train_helformer:438 - Step 3: Preparing sequences for Transformer...
+2025-08-22 17:53:33,364 - helformer_model - INFO - train_helformer:444 - Prepared 436 sequences with 64 timesteps and 64 features
+2025-08-22 17:53:33,365 - helformer_model - INFO - train_helformer:447 - Step 4: Building Transformer architecture...
+2025-08-22 17:53:33,634 - helformer_model - INFO - train_helformer:487 - Step 5: Training Transformer...
+2025-08-22 17:53:58,061 - helformer_model - INFO - train_helformer:541 - ✅ Helformer training completed!
+2025-08-22 17:53:58,062 - helformer_model - INFO - train_helformer:542 - 📊 Performance: RMSE≈25.604, Direction Acc: 0.932
+2025-08-22 17:53:58,225 - helformer_model - INFO - save_model:660 - Helformer model saved to ml_models_bnb_enhanced/helformer_1
+2025-08-22 17:53:58,225 - bnb_enhanced_ml - INFO - train_helformer_model:817 - ✅ Helformer model saved: ml_models_bnb_enhanced/helformer_1
+2025-08-22 17:53:58,225 - bnb_enhanced_ml - INFO - train_helformer_model:826 - 🎯 Helformer Performance:
+2025-08-22 17:53:58,225 - bnb_enhanced_ml - INFO - train_helformer_model:827 -    📊 RMSE: 25.604
+2025-08-22 17:53:58,225 - bnb_enhanced_ml - INFO - train_helformer_model:828 -    🎯 Direction Accuracy: 0.932
+2025-08-22 17:53:58,226 - bnb_enhanced_ml - INFO - train_helformer_model:829 -    🤖 Total Parameters: 603,525
+2025-08-22 17:54:16,392 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:54:23,627 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:54:23,631 - helformer_model - ERROR - load_model:694 - Failed to load Helformer model: No file or directory found at ml_models_bnb_enhanced/helformer_10_transformer.h5
+2025-08-22 17:55:37,533 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:56:14,051 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:56:14,052 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:56:14,875 - helformer_model - INFO - load_model:690 - Helformer model loaded from ml_models_bnb_enhanced/helformer_1
+2025-08-22 17:56:14,876 - bnb_enhanced_ml - INFO - predict_helformer:864 - ✅ Loaded Helformer model from disk
+2025-08-22 17:56:15,514 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.897, β=0.007
+2025-08-22 17:56:15,546 - helformer_model - INFO - create_enhanced_features:320 - Created 62 enhanced features combining HW and traditional indicators
+2025-08-22 17:56:15,684 - helformer_model - ERROR - predict_helformer:629 - Helformer prediction failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2440, in predict_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2425, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2413, in run_step  **
+        outputs = model.predict_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2381, in predict_step
+        return self(x, training=False)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 0 of layer "Helformer_Transformer" is incompatible with the layer: expected shape=(None, 64, 64), found shape=(None, 64, 62)
+
+2025-08-22 17:56:36,497 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:56:46,641 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:56:47,614 - helformer_model - INFO - load_model:690 - Helformer model loaded from ml_models_bnb_enhanced/helformer_1
+2025-08-22 17:56:47,615 - bnb_enhanced_ml - INFO - predict_helformer:864 - ✅ Loaded Helformer model from disk
+2025-08-22 17:56:48,750 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.897, β=0.007
+2025-08-22 17:56:48,835 - helformer_model - INFO - create_enhanced_features:320 - Created 62 enhanced features combining HW and traditional indicators
+2025-08-22 17:56:49,414 - helformer_model - ERROR - predict_helformer:629 - Helformer prediction failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2440, in predict_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2425, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2413, in run_step  **
+        outputs = model.predict_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2381, in predict_step
+        return self(x, training=False)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 0 of layer "Helformer_Transformer" is incompatible with the layer: expected shape=(None, 64, 64), found shape=(None, 64, 62)
+
+2025-08-22 17:58:27,116 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 17:58:27,117 - bnb_enhanced_ml - INFO - train_helformer_model:771 - 🚀 Training revolutionary Helformer model for breakthrough performance...
+2025-08-22 17:58:27,117 - bnb_enhanced_ml - INFO - train_helformer_model:774 - Step 1: Fetching high-resolution data for Helformer...
+2025-08-22 17:58:27,117 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 17:58:30,669 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 17:58:30,672 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 17:58:30,672 - bnb_enhanced_ml - INFO - train_helformer_model:798 - Step 2: Training Helformer with Holt-Winters + Transformer architecture...
+2025-08-22 17:58:30,672 - helformer_model - INFO - train_helformer:441 - Starting Helformer training with HW decomposition + Transformer architecture
+2025-08-22 17:58:30,672 - helformer_model - INFO - train_helformer:444 - Step 1: Extracting Holt-Winters components...
+2025-08-22 17:58:30,866 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.897, β=0.007
+2025-08-22 17:58:30,866 - helformer_model - INFO - train_helformer:448 - Step 2: Creating enhanced features...
+2025-08-22 17:58:30,880 - helformer_model - INFO - create_enhanced_features:334 - Created 64 enhanced features combining HW and traditional indicators
+2025-08-22 17:58:30,880 - helformer_model - INFO - train_helformer:452 - Step 3: Preparing sequences for Transformer...
+2025-08-22 17:58:30,887 - helformer_model - INFO - train_helformer:458 - Prepared 436 sequences with 64 timesteps and 64 features
+2025-08-22 17:58:30,887 - helformer_model - INFO - train_helformer:461 - Step 4: Building Transformer architecture...
+2025-08-22 17:58:31,125 - helformer_model - INFO - train_helformer:501 - Step 5: Training Transformer...
+2025-08-22 17:58:41,688 - helformer_model - INFO - train_helformer:555 - ✅ Helformer training completed!
+2025-08-22 17:58:41,693 - helformer_model - INFO - train_helformer:556 - 📊 Performance: RMSE≈32.130, Direction Acc: 0.932
+2025-08-22 17:58:41,801 - helformer_model - INFO - save_model:674 - Helformer model saved to ml_models_bnb_enhanced/helformer_1
+2025-08-22 17:58:41,802 - bnb_enhanced_ml - INFO - train_helformer_model:817 - ✅ Helformer model saved: ml_models_bnb_enhanced/helformer_1
+2025-08-22 17:58:41,802 - bnb_enhanced_ml - INFO - train_helformer_model:826 - 🎯 Helformer Performance:
+2025-08-22 17:58:41,802 - bnb_enhanced_ml - INFO - train_helformer_model:827 -    📊 RMSE: 32.130
+2025-08-22 17:58:41,802 - bnb_enhanced_ml - INFO - train_helformer_model:828 -    🎯 Direction Accuracy: 0.932
+2025-08-22 17:58:41,802 - bnb_enhanced_ml - INFO - train_helformer_model:829 -    🤖 Total Parameters: 603,525
+2025-08-22 18:04:38,601 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 18:04:45,517 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 64, d_model: 128
+2025-08-22 18:04:45,853 - helformer_model - INFO - load_model:704 - Helformer model loaded from ml_models_bnb_enhanced/helformer_1
+2025-08-22 18:04:45,853 - bnb_enhanced_ml - INFO - predict_helformer:864 - ✅ Loaded Helformer model from disk
+2025-08-22 18:04:46,331 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.917, β=0.011
+2025-08-22 18:04:46,343 - helformer_model - WARNING - create_enhanced_features:323 - Feature count mismatch: got 62, expected 64
+2025-08-22 18:04:46,343 - helformer_model - INFO - create_enhanced_features:334 - Created 64 enhanced features combining HW and traditional indicators
+2025-08-22 18:10:30,142 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 18:10:30,142 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 18:10:30,143 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 18:10:30,143 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 18:10:33,542 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 18:10:33,544 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 18:10:34,359 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 18:10:34,360 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 18:10:34,360 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 18:10:34,360 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 18:10:34,360 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 18:10:34,361 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 18:10:34,361 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 18:10:34,362 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 18:10:34,370 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 18:10:34,371 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 18:12:15,085 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 18:12:15,230 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 18:12:15,329 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 18:12:15,335 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 18:12:15,336 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 18:12:15,355 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 18:12:15,499 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 18:12:15,518 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 18:12:15,518 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 18:12:15,578 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 18:12:15,579 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 18:12:15,579 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 18:12:15,579 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 18:12:15,579 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 18:12:15,580 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 18:12:15,581 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 18:12:15,581 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 18:12:15,582 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 18:12:15,584 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 18:12:15,586 - temporal_fusion_transformer - INFO - __init__:262 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 18:12:15,588 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Training TFT with multi-horizon architecture...
+2025-08-22 18:12:15,590 - temporal_fusion_transformer - INFO - train_tft:544 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 18:12:15,590 - temporal_fusion_transformer - INFO - prepare_tft_data:447 - Preparing TFT data with multi-horizon structure...
+2025-08-22 18:12:15,612 - temporal_fusion_transformer - ERROR - train_tft:663 - TFT training failed: single positional indexer is out-of-bounds
+2025-08-22 18:15:40,862 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 18:15:40,863 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 18:15:40,863 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 18:15:40,863 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 18:15:44,083 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 18:15:44,085 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 18:15:44,655 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 18:15:44,655 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 18:15:44,655 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 18:15:44,655 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 18:15:44,655 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 18:15:44,656 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 18:15:44,656 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 18:15:44,657 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 18:15:44,665 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 18:15:44,670 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 18:16:23,030 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 18:16:23,087 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 18:16:23,129 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 18:16:23,132 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 18:16:23,132 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 18:16:23,143 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 18:16:23,207 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 18:16:23,217 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 18:16:23,217 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 18:16:23,243 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 18:16:23,243 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 18:16:23,243 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 18:16:23,243 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 18:16:23,243 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 18:16:23,244 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 18:16:23,244 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 18:16:23,244 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 18:16:23,244 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 18:16:23,245 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 18:16:23,247 - temporal_fusion_transformer - INFO - __init__:262 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 18:16:23,248 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Training TFT with multi-horizon architecture...
+2025-08-22 18:16:23,249 - temporal_fusion_transformer - INFO - train_tft:570 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 18:16:23,249 - temporal_fusion_transformer - INFO - prepare_tft_data:447 - Preparing TFT data with multi-horizon structure...
+2025-08-22 18:16:30,931 - temporal_fusion_transformer - INFO - prepare_tft_data:554 - TFT data prepared: 809 sequences, 168 historical steps, 24 prediction steps
+2025-08-22 18:16:33,790 - temporal_fusion_transformer - ERROR - train_tft:689 - TFT training failed: Exception encountered when calling layer "static_encoder" (type GatedResidualNetwork).
+
+in user code:
+
+    File "/Users/stan/bnb-a/temporal_fusion_transformer.py", line 150, in call  *
+        gated_output = gate * x + (1 - gate) * skip
+
+    ValueError: Dimensions must be equal, but are 128 and 20 for '{{node static_encoder/mul_1}} = Mul[T=DT_FLOAT](static_encoder/sub, Placeholder)' with input shapes: [?,128], [?,20].
+
+
+Call arguments received by layer "static_encoder" (type GatedResidualNetwork):
+  • inputs=tf.Tensor(shape=(None, 20), dtype=float32)
+  • context=None
+  • training=None
+2025-08-22 18:17:40,912 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 18:17:40,912 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 18:17:40,912 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 18:17:40,912 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 18:17:44,898 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 18:17:44,903 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 18:17:46,122 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 18:17:46,122 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 18:17:46,122 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 18:17:46,122 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 18:17:46,122 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 18:17:46,126 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 18:17:46,127 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 18:17:46,129 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 18:17:46,154 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 18:17:46,156 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 18:19:54,736 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 18:19:54,905 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 18:19:55,009 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 18:19:55,023 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 18:19:55,024 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 18:19:55,033 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 18:19:55,192 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 18:19:55,209 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 18:19:55,209 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 18:19:55,253 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 18:19:55,254 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 18:19:55,255 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 18:19:55,255 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 18:19:55,255 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 18:19:55,257 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 18:19:55,257 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 18:19:55,257 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 18:19:55,260 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 18:19:55,262 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 18:19:55,264 - temporal_fusion_transformer - INFO - __init__:262 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 18:19:55,265 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Training TFT with multi-horizon architecture...
+2025-08-22 18:19:55,267 - temporal_fusion_transformer - INFO - train_tft:570 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 18:19:55,268 - temporal_fusion_transformer - INFO - prepare_tft_data:447 - Preparing TFT data with multi-horizon structure...
+2025-08-22 18:20:07,696 - temporal_fusion_transformer - INFO - prepare_tft_data:554 - TFT data prepared: 809 sequences, 168 historical steps, 24 prediction steps
+2025-08-22 18:20:11,496 - temporal_fusion_transformer - ERROR - train_tft:689 - TFT training failed: Exception encountered when calling layer "static_encoder" (type GatedResidualNetwork).
+
+in user code:
+
+    File "/Users/stan/bnb-a/temporal_fusion_transformer.py", line 150, in call  *
+        gated_output = gate * x + (1 - gate) * skip
+
+    ValueError: Dimensions must be equal, but are 128 and 20 for '{{node static_encoder/mul_1}} = Mul[T=DT_FLOAT](static_encoder/sub, Placeholder)' with input shapes: [?,128], [?,20].
+
+
+Call arguments received by layer "static_encoder" (type GatedResidualNetwork):
+  • inputs=tf.Tensor(shape=(None, 20), dtype=float32)
+  • context=None
+  • training=None
+2025-08-22 18:22:14,091 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 18:22:14,091 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 18:22:14,091 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 18:22:14,092 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 18:22:17,856 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 18:22:17,860 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 18:22:19,151 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 18:22:19,151 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 18:22:19,152 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 18:22:19,153 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 18:22:19,153 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 18:22:19,156 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 18:22:19,156 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 18:22:19,158 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 18:22:19,178 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 18:22:19,179 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 18:24:18,470 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 18:24:18,593 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 18:24:18,680 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 18:24:18,686 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 18:24:18,686 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 18:24:18,696 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 18:24:18,822 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 18:24:18,837 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 18:24:18,837 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 18:24:18,879 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 18:24:18,879 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 18:24:18,880 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 18:24:18,880 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 18:24:18,880 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 18:24:18,882 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 18:24:18,882 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 18:24:18,882 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 18:24:18,884 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 18:24:18,887 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 18:24:18,889 - temporal_fusion_transformer - INFO - __init__:273 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 18:24:18,891 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Training TFT with multi-horizon architecture...
+2025-08-22 18:24:18,892 - temporal_fusion_transformer - INFO - train_tft:584 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 18:24:18,892 - temporal_fusion_transformer - INFO - prepare_tft_data:461 - Preparing TFT data with multi-horizon structure...
+2025-08-22 18:24:30,868 - temporal_fusion_transformer - INFO - prepare_tft_data:568 - TFT data prepared: 809 sequences, 168 historical steps, 24 prediction steps
+2025-08-22 18:28:18,817 - temporal_fusion_transformer - ERROR - train_tft:703 - TFT training failed: Failed to convert a NumPy array to a Tensor (Unsupported object type float).
+2025-08-22 18:29:17,736 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 18:29:17,737 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 18:29:17,737 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 18:29:17,737 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 18:29:21,978 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 18:29:21,983 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 18:29:23,257 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 18:29:23,258 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 18:29:23,258 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 18:29:23,258 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 18:29:23,258 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 18:29:23,260 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 18:29:23,260 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 18:29:23,262 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 18:29:23,283 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 18:29:23,285 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 18:31:18,907 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 18:31:19,028 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 18:31:19,116 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 18:31:19,122 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 18:31:19,122 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 18:31:19,133 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 18:31:19,276 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 18:31:19,291 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 18:31:19,291 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 18:31:19,345 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 18:31:19,345 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 18:31:19,345 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 18:31:19,345 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 18:31:19,345 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 18:31:19,347 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 18:31:19,347 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 18:31:19,347 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 18:31:19,350 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 18:31:19,352 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 18:31:19,353 - temporal_fusion_transformer - INFO - __init__:273 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 18:31:19,354 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Training TFT with multi-horizon architecture...
+2025-08-22 18:31:19,355 - temporal_fusion_transformer - INFO - train_tft:590 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 18:31:19,355 - temporal_fusion_transformer - INFO - prepare_tft_data:461 - Preparing TFT data with multi-horizon structure...
+2025-08-22 18:31:26,644 - temporal_fusion_transformer - ERROR - train_tft:709 - TFT training failed: could not convert string to float: 'BNBUSDT'
+2025-08-22 18:53:40,026 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 18:53:40,026 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 18:53:40,026 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 18:53:40,026 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 18:53:43,632 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 18:53:43,634 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 18:53:44,091 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 18:53:44,091 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 18:53:44,091 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 18:53:44,091 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 18:53:44,091 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 18:53:44,092 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 18:53:44,092 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 18:53:44,093 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 18:53:44,099 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 18:53:44,100 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 18:54:07,876 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 18:54:07,902 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 18:54:07,923 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 18:54:07,926 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 18:54:07,927 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 18:54:07,930 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 18:54:07,962 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 18:54:07,970 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 18:54:07,970 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 18:54:07,987 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 18:54:07,987 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 18:54:07,987 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 18:54:07,987 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 18:54:07,987 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 18:54:07,987 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 18:54:07,988 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 18:54:07,988 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 18:54:07,988 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 18:54:07,989 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 18:54:07,989 - temporal_fusion_transformer - INFO - __init__:273 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 18:54:07,989 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Cleaning features for TFT training...
+2025-08-22 18:54:07,990 - bnb_enhanced_ml - INFO - train_tft_model:1013 - 📊 TFT features: 569 numeric features (filtered from 577 total)
+2025-08-22 18:54:07,991 - temporal_fusion_transformer - INFO - train_tft:598 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 18:54:07,991 - temporal_fusion_transformer - INFO - prepare_tft_data:461 - Preparing TFT data with multi-horizon structure...
+2025-08-22 18:54:09,335 - temporal_fusion_transformer - INFO - prepare_tft_data:582 - TFT data prepared: 809 sequences, 168 historical steps, 24 prediction steps
+2025-08-22 18:54:49,170 - temporal_fusion_transformer - ERROR - train_tft:717 - TFT training failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1401, in train_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1384, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1373, in run_step  **
+        outputs = model.train_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1150, in train_step
+        y_pred = self(x, training=True)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 1 of layer "ADE_TFT" is incompatible with the layer: expected shape=(None, 24, 570), found shape=(None, 24, 569)
+
+2025-08-22 18:55:26,815 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 18:55:26,816 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 18:55:26,816 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 18:55:26,816 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 18:55:29,998 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 18:55:30,000 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 18:55:30,547 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 18:55:30,547 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 18:55:30,547 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 18:55:30,547 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 18:55:30,547 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 18:55:30,548 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 18:55:30,548 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 18:55:30,549 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 18:55:30,557 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 18:55:30,558 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 18:56:07,545 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 18:56:07,591 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 18:56:07,621 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 18:56:07,624 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 18:56:07,624 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 18:56:07,626 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 18:56:07,676 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 18:56:07,688 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 18:56:07,688 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 18:56:07,719 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 18:56:07,719 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 18:56:07,719 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 18:56:07,719 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 18:56:07,719 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 18:56:07,719 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 18:56:07,719 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 18:56:07,720 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 18:56:07,720 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 18:56:07,722 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 18:56:07,723 - temporal_fusion_transformer - INFO - __init__:273 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 18:56:07,723 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Cleaning features for TFT training...
+2025-08-22 18:56:07,725 - bnb_enhanced_ml - INFO - train_tft_model:1013 - 📊 TFT features: 569 numeric features (filtered from 577 total)
+2025-08-22 18:56:07,726 - temporal_fusion_transformer - INFO - train_tft:598 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 18:56:07,726 - temporal_fusion_transformer - INFO - prepare_tft_data:461 - Preparing TFT data with multi-horizon structure...
+2025-08-22 18:56:10,007 - temporal_fusion_transformer - INFO - prepare_tft_data:582 - TFT data prepared: 809 sequences, 168 historical steps, 24 prediction steps
+2025-08-22 18:57:01,755 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 18:58:13,562 - temporal_fusion_transformer - ERROR - train_tft:717 - TFT training failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1401, in train_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1384, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1373, in run_step  **
+        outputs = model.train_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1150, in train_step
+        y_pred = self(x, training=True)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 1 of layer "ADE_TFT" is incompatible with the layer: expected shape=(None, 24, 570), found shape=(None, 24, 569)
+
+2025-08-22 18:59:09,060 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 18:59:09,061 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 18:59:09,061 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 18:59:09,061 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 18:59:13,098 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 18:59:13,101 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 18:59:14,381 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 18:59:14,381 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 18:59:14,381 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 18:59:14,382 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 18:59:14,382 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 18:59:14,385 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 18:59:14,386 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 18:59:14,388 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 18:59:14,403 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 18:59:14,405 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 19:00:42,175 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 19:00:42,277 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 19:00:42,343 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 19:00:42,349 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 19:00:42,350 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 19:00:42,360 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 19:00:42,469 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 19:00:42,482 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 19:00:42,482 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 19:00:42,518 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 19:00:42,519 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 19:00:42,519 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 19:00:42,519 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 19:00:42,519 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 19:00:42,520 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 19:00:42,521 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 19:00:42,521 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 19:00:42,523 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 19:00:42,525 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 19:00:42,527 - temporal_fusion_transformer - INFO - __init__:274 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 19:00:42,529 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Cleaning features for TFT training...
+2025-08-22 19:00:42,531 - bnb_enhanced_ml - INFO - train_tft_model:1013 - 📊 TFT features: 569 numeric features (filtered from 577 total)
+2025-08-22 19:00:42,532 - temporal_fusion_transformer - INFO - train_tft:602 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 19:00:42,533 - temporal_fusion_transformer - INFO - prepare_tft_data:465 - Preparing TFT data with multi-horizon structure...
+2025-08-22 19:00:45,692 - temporal_fusion_transformer - INFO - prepare_tft_data:586 - TFT data prepared: 809 sequences, 168 historical steps, 24 prediction steps
+2025-08-22 19:01:44,777 - helformer_model - INFO - __init__:75 - Helformer model initialized - sequence_length: 128, d_model: 256
+2025-08-22 19:01:47,021 - helformer_model - INFO - load_model:704 - Helformer model loaded from ml_models_bnb_enhanced/helformer_1
+2025-08-22 19:01:47,021 - bnb_enhanced_ml - INFO - predict_helformer:864 - ✅ Loaded Helformer model from disk
+2025-08-22 19:01:48,149 - helformer_model - INFO - extract_holt_winters_components:210 - Holt-Winters decomposition successful: α=0.907, β=0.018
+2025-08-22 19:01:48,242 - helformer_model - WARNING - create_enhanced_features:323 - Feature count mismatch: got 62, expected 128
+2025-08-22 19:01:48,269 - helformer_model - INFO - create_enhanced_features:334 - Created 128 enhanced features combining HW and traditional indicators
+2025-08-22 19:01:48,669 - helformer_model - ERROR - predict_helformer:643 - Helformer prediction failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2440, in predict_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2425, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2413, in run_step  **
+        outputs = model.predict_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 2381, in predict_step
+        return self(x, training=False)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 0 of layer "Helformer_Transformer" is incompatible with the layer: expected shape=(None, 64, 64), found shape=(None, 64, 128)
+
+2025-08-22 19:01:48,678 - temporal_fusion_transformer - INFO - __init__:273 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 19:01:48,679 - temporal_fusion_transformer - ERROR - load_model:933 - Failed to load TFT model: No file or directory found at ml_models_bnb_enhanced/tft_24_tft.h5
+2025-08-22 19:03:53,194 - temporal_fusion_transformer - ERROR - train_tft:721 - TFT training failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1401, in train_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1384, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1373, in run_step  **
+        outputs = model.train_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1150, in train_step
+        y_pred = self(x, training=True)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 1 of layer "ADE_TFT" is incompatible with the layer: expected shape=(None, 24, 570), found shape=(None, 24, 569)
+
+2025-08-22 19:04:41,230 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 19:04:41,230 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 19:04:41,230 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 19:04:41,231 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 19:04:44,642 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 19:04:44,644 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 19:04:45,338 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 19:04:45,338 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 19:04:45,339 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 19:04:45,339 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 19:04:45,339 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 19:04:45,340 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 19:04:45,341 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 19:04:45,341 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 19:04:45,353 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 19:04:45,354 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 19:06:06,342 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 19:06:06,439 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 19:06:06,501 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 19:06:06,506 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 19:06:06,507 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 19:06:06,513 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 19:06:06,615 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 19:06:06,628 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 19:06:06,628 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 19:06:06,666 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 19:06:06,666 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 19:06:06,667 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 19:06:06,667 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 19:06:06,667 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 19:06:06,669 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 19:06:06,669 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 19:06:06,669 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 19:06:06,671 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 19:06:06,673 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 19:06:06,674 - temporal_fusion_transformer - INFO - __init__:274 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 19:06:06,676 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Cleaning features for TFT training...
+2025-08-22 19:06:06,678 - bnb_enhanced_ml - INFO - train_tft_model:1013 - 📊 TFT features: 569 numeric features (filtered from 577 total)
+2025-08-22 19:06:06,680 - temporal_fusion_transformer - INFO - train_tft:602 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 19:06:06,680 - temporal_fusion_transformer - INFO - prepare_tft_data:465 - Preparing TFT data with multi-horizon structure...
+2025-08-22 19:06:09,839 - temporal_fusion_transformer - INFO - prepare_tft_data:586 - TFT data prepared: 809 sequences, 168 historical steps, 24 prediction steps
+2025-08-22 19:08:09,439 - temporal_fusion_transformer - ERROR - train_tft:721 - TFT training failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1401, in train_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1384, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1373, in run_step  **
+        outputs = model.train_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1150, in train_step
+        y_pred = self(x, training=True)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 1 of layer "ADE_TFT" is incompatible with the layer: expected shape=(None, 24, 570), found shape=(None, 24, 569)
+
+2025-08-22 19:09:06,494 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 19:09:06,494 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 19:09:06,494 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 19:09:06,495 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 19:09:10,085 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 19:09:10,087 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 19:09:10,857 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 19:09:10,857 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 19:09:10,857 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 19:09:10,858 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 19:09:10,858 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 19:09:10,861 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 19:09:10,861 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 19:09:10,863 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 19:09:10,878 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 19:09:10,880 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 19:10:39,199 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 19:10:39,307 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 19:10:39,376 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 19:10:39,381 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 19:10:39,382 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 19:10:39,390 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 19:10:39,495 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 19:10:39,507 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 19:10:39,507 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 19:10:39,545 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 19:10:39,546 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 19:10:39,546 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 19:10:39,546 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 19:10:39,546 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 19:10:39,547 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 19:10:39,547 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 19:10:39,548 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 19:10:39,549 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 19:10:39,552 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 19:10:39,553 - temporal_fusion_transformer - INFO - __init__:274 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 19:10:39,554 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Cleaning features for TFT training...
+2025-08-22 19:10:39,555 - bnb_enhanced_ml - INFO - train_tft_model:1013 - 📊 TFT features: 569 numeric features (filtered from 577 total)
+2025-08-22 19:10:39,557 - temporal_fusion_transformer - INFO - train_tft:602 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 19:10:39,557 - temporal_fusion_transformer - INFO - prepare_tft_data:465 - Preparing TFT data with multi-horizon structure...
+2025-08-22 19:10:42,671 - temporal_fusion_transformer - INFO - prepare_tft_data:586 - TFT data prepared: 809 sequences, 168 historical steps, 24 prediction steps
+2025-08-22 19:13:19,940 - temporal_fusion_transformer - ERROR - train_tft:721 - TFT training failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1401, in train_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1384, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1373, in run_step  **
+        outputs = model.train_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1150, in train_step
+        y_pred = self(x, training=True)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 1 of layer "ADE_TFT" is incompatible with the layer: expected shape=(None, 24, 570), found shape=(None, 24, 569)
+
+2025-08-22 19:14:16,524 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 19:14:16,524 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 19:14:16,525 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 19:14:16,525 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 19:14:20,893 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 19:14:20,897 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 19:14:22,298 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 19:14:22,299 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 19:14:22,299 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 19:14:22,299 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 19:14:22,299 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 19:14:22,305 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 19:14:22,305 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 19:14:22,309 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 19:14:22,326 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 19:14:22,328 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 19:16:44,453 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 19:16:44,602 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 19:16:44,688 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 19:16:44,697 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 19:16:44,698 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 19:16:44,715 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 19:16:44,879 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 19:16:44,893 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 19:16:44,893 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 19:16:44,939 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 19:16:44,940 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 19:16:44,940 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 19:16:44,940 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 19:16:44,940 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 19:16:44,942 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 19:16:44,942 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 19:16:44,942 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 19:16:44,943 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 19:16:44,947 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 19:16:44,949 - temporal_fusion_transformer - INFO - __init__:274 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 19:16:44,951 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Cleaning features for TFT training...
+2025-08-22 19:16:44,953 - bnb_enhanced_ml - INFO - train_tft_model:1013 - 📊 TFT features: 569 numeric features (filtered from 577 total)
+2025-08-22 19:16:44,955 - temporal_fusion_transformer - INFO - train_tft:602 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 19:16:44,955 - temporal_fusion_transformer - INFO - prepare_tft_data:465 - Preparing TFT data with multi-horizon structure...
+2025-08-22 19:16:49,380 - temporal_fusion_transformer - INFO - prepare_tft_data:586 - TFT data prepared: 809 sequences, 168 historical steps, 24 prediction steps
+2025-08-22 19:19:35,789 - temporal_fusion_transformer - ERROR - train_tft:721 - TFT training failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1401, in train_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1384, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1373, in run_step  **
+        outputs = model.train_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1150, in train_step
+        y_pred = self(x, training=True)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 1 of layer "ADE_TFT" is incompatible with the layer: expected shape=(None, 24, 570), found shape=(None, 24, 569)
+
+2025-08-22 19:24:53,223 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 19:24:53,224 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 19:24:53,224 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 19:24:53,224 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 19:24:57,524 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 19:24:57,528 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 19:24:58,750 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 19:24:58,750 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 19:24:58,750 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 19:24:58,750 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 19:24:58,750 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 19:24:58,756 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 19:24:58,756 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 19:24:58,758 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 19:24:58,782 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 19:24:58,790 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 19:26:37,351 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 19:26:37,466 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 19:26:37,557 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 19:26:37,563 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 19:26:37,563 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 19:26:37,581 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 19:26:37,693 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 19:26:37,709 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 19:26:37,709 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 19:26:37,756 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 19:26:37,756 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 19:26:37,756 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 19:26:37,756 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 19:26:37,756 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 19:26:37,757 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 19:26:37,758 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 19:26:37,758 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 19:26:37,759 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 19:26:37,764 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 19:26:37,769 - temporal_fusion_transformer - INFO - __init__:274 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 19:26:37,773 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Cleaning features for TFT training...
+2025-08-22 19:26:37,777 - bnb_enhanced_ml - INFO - train_tft_model:1017 - 📊 TFT features: Reduced to 200 features for testing
+2025-08-22 19:26:37,778 - temporal_fusion_transformer - INFO - train_tft:602 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 19:26:37,778 - temporal_fusion_transformer - INFO - prepare_tft_data:465 - Preparing TFT data with multi-horizon structure...
+2025-08-22 19:26:39,134 - temporal_fusion_transformer - INFO - prepare_tft_data:586 - TFT data prepared: 809 sequences, 168 historical steps, 24 prediction steps
+2025-08-22 19:27:30,375 - temporal_fusion_transformer - ERROR - train_tft:721 - TFT training failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1401, in train_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1384, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1373, in run_step  **
+        outputs = model.train_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1150, in train_step
+        y_pred = self(x, training=True)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 1 of layer "ADE_TFT" is incompatible with the layer: expected shape=(None, 24, 201), found shape=(None, 24, 200)
+
+2025-08-22 19:28:14,340 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 19:28:14,341 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 19:28:14,341 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 19:28:14,341 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 19:28:18,390 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 19:28:18,391 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 19:28:18,970 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 19:28:18,970 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 19:28:18,970 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 19:28:18,970 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 19:28:18,970 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 19:28:18,971 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 19:28:18,971 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 19:28:18,972 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 19:28:18,980 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 19:28:18,981 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 19:29:51,909 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 19:29:52,021 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 19:29:52,103 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 19:29:52,111 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 19:29:52,112 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 19:29:52,122 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 19:29:52,231 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 19:29:52,248 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 19:29:52,248 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 19:29:52,290 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 19:29:52,290 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 19:29:52,290 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 19:29:52,290 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 19:29:52,291 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 19:29:52,292 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 19:29:52,293 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 19:29:52,293 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 19:29:52,294 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 19:29:52,297 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 19:29:52,299 - temporal_fusion_transformer - INFO - __init__:274 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 19:29:52,301 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Cleaning features for TFT training...
+2025-08-22 19:29:52,307 - bnb_enhanced_ml - INFO - train_tft_model:1017 - 📊 TFT features: Reduced to 201 features for testing
+2025-08-22 19:29:52,310 - temporal_fusion_transformer - INFO - train_tft:602 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 19:29:52,310 - temporal_fusion_transformer - INFO - prepare_tft_data:465 - Preparing TFT data with multi-horizon structure...
+2025-08-22 19:29:53,655 - temporal_fusion_transformer - INFO - prepare_tft_data:586 - TFT data prepared: 809 sequences, 168 historical steps, 24 prediction steps
+2025-08-22 19:30:55,920 - temporal_fusion_transformer - ERROR - train_tft:721 - TFT training failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1401, in train_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1384, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1373, in run_step  **
+        outputs = model.train_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1150, in train_step
+        y_pred = self(x, training=True)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 1 of layer "ADE_TFT" is incompatible with the layer: expected shape=(None, 24, 202), found shape=(None, 24, 201)
+
+2025-08-22 19:31:36,331 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 19:31:36,332 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 19:31:36,332 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 19:31:36,332 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 19:31:40,143 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 19:31:40,145 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 19:31:40,702 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 19:31:40,703 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 19:31:40,703 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 19:31:40,703 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 19:31:40,703 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 19:31:40,704 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 19:31:40,704 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 19:31:40,704 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 19:31:40,712 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 19:31:40,713 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 19:33:15,979 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 19:33:16,098 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 19:33:16,183 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 19:33:16,189 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 19:33:16,190 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 19:33:16,202 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 19:33:16,323 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 19:33:16,340 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 19:33:16,341 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 19:33:16,383 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 19:33:16,383 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 19:33:16,383 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 19:33:16,384 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 19:33:16,384 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 19:33:16,385 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 19:33:16,385 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 19:33:16,386 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 19:33:16,387 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 19:33:16,390 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 19:33:16,392 - temporal_fusion_transformer - INFO - __init__:274 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 19:33:16,393 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Cleaning features for TFT training...
+2025-08-22 19:33:16,399 - bnb_enhanced_ml - INFO - train_tft_model:1017 - 📊 TFT features: Reduced to 202 features for testing
+2025-08-22 19:33:16,401 - temporal_fusion_transformer - INFO - train_tft:602 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 19:33:16,401 - temporal_fusion_transformer - INFO - prepare_tft_data:465 - Preparing TFT data with multi-horizon structure...
+2025-08-22 19:33:17,868 - temporal_fusion_transformer - INFO - prepare_tft_data:586 - TFT data prepared: 809 sequences, 168 historical steps, 24 prediction steps
+2025-08-22 19:34:11,616 - temporal_fusion_transformer - ERROR - train_tft:721 - TFT training failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1401, in train_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1384, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1373, in run_step  **
+        outputs = model.train_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1150, in train_step
+        y_pred = self(x, training=True)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/input_spec.py", line 298, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 1 of layer "ADE_TFT" is incompatible with the layer: expected shape=(None, 24, 203), found shape=(None, 24, 202)
+
+2025-08-22 19:36:51,480 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 19:36:51,481 - bnb_enhanced_ml - INFO - train_performer_model:1198 - Step 1: Fetching BNB hourly data for Performer training...
+2025-08-22 19:36:51,960 - bnb_enhanced_ml - INFO - train_performer_model:1205 - Step 2: Creating enhanced features for Performer...
+2025-08-22 19:36:53,329 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 19:36:53,329 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 19:36:53,330 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 19:36:53,330 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 19:36:53,330 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 19:36:53,334 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 19:36:53,335 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 19:36:53,336 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 19:36:53,362 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 19:36:53,363 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 19:39:15,049 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 19:39:15,270 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 19:39:15,394 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 19:39:15,403 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 19:39:15,403 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 19:39:15,409 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 19:39:15,562 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 19:39:15,578 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 19:39:15,578 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 19:39:15,622 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 19:39:15,622 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 573
+2025-08-22 19:39:15,622 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 19:39:15,622 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 19:39:15,623 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 19:39:15,624 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 19:39:15,625 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 19:39:15,626 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 19:39:15,628 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 251
+2025-08-22 19:39:15,631 - bnb_enhanced_ml - INFO - train_performer_model:1211 - Enhanced features created: 573 features with on-chain metrics
+2025-08-22 19:39:15,631 - bnb_enhanced_ml - INFO - train_performer_model:1217 - Step 3: Initializing Performer + BiLSTM model...
+2025-08-22 19:39:17,465 - bnb_enhanced_ml - ERROR - train_performer_model:1383 - Performer model training failed: Exception encountered when calling layer 'favor_plus_attention_1' (type FAVORPlusAttention).
+
+{{function_node __wrapped__Einsum_N_2_device_/job:localhost/replica:0/task:0/device:CPU:0}} Expected dimension 24 at axis 1 of the input shaped [1,1,8,256] but got dimension 1 [Op:Einsum] name: 
+
+Call arguments received by layer 'favor_plus_attention_1' (type FAVORPlusAttention):
+  • inputs=tf.Tensor(shape=(1, 24, 512), dtype=float32)
+  • mask=None
+  • training=None
+2025-08-22 19:43:16,931 - bnb_enhanced_ml - INFO - __init__:88 - BNBEnhancedML initialized - will learn from 10 cryptos
+2025-08-22 19:43:16,932 - bnb_enhanced_ml - INFO - train_tft_model:942 - 🚀 Training Advanced Deep Learning-Enhanced TFT for multi-horizon forecasting...
+2025-08-22 19:43:16,932 - bnb_enhanced_ml - INFO - train_tft_model:945 - Step 1: Fetching comprehensive data for TFT...
+2025-08-22 19:43:16,933 - bnb_enhanced_ml - INFO - fetch_learning_data:93 - Fetching learning data from 10 cryptocurrencies...
+2025-08-22 19:43:20,605 - bnb_enhanced_ml - INFO - fetch_learning_data:141 - ✅ Collected learning data from 10 cryptocurrencies
+2025-08-22 19:43:20,607 - bnb_enhanced_ml - INFO - train_tft_model:958 - Step 2: Creating enhanced features for TFT...
+2025-08-22 19:43:21,582 - onchain_metrics_provider - INFO - __init__:40 - No API keys configured, using simulation mode
+2025-08-22 19:43:21,583 - onchain_metrics_provider - INFO - __init__:578 - OnChain metrics provider initialized with 87 metrics
+2025-08-22 19:43:21,583 - enhanced_feature_engineering - INFO - __init__:55 - On-chain metrics provider initialized
+2025-08-22 19:43:21,583 - enhanced_feature_engineering - INFO - __init__:115 - Enhanced Feature Engineer initialized with 85 on-chain metrics
+2025-08-22 19:43:21,583 - enhanced_feature_engineering - INFO - _initialize_talib_patterns:149 - TA-Lib initialized with 61 candlestick patterns
+2025-08-22 19:43:21,586 - enhanced_feature_engineering - INFO - _initialize_tsfresh_settings:205 - TSfresh settings initialized for cryptocurrency time series
+2025-08-22 19:43:21,587 - enhanced_feature_engineering - INFO - create_comprehensive_features:577 - Creating comprehensive feature set with 2025 state-of-the-art techniques...
+2025-08-22 19:43:21,588 - enhanced_feature_engineering - INFO - create_comprehensive_features:583 - Step 1: Extracting TA-Lib features...
+2025-08-22 19:43:21,605 - enhanced_feature_engineering - INFO - extract_talib_features:339 - Extracted 93 TA-Lib features including 61 candlestick patterns
+2025-08-22 19:43:21,608 - enhanced_feature_engineering - INFO - create_comprehensive_features:588 - Step 2: Extracting TSfresh features...
+2025-08-22 19:45:16,970 - enhanced_feature_engineering - INFO - extract_tsfresh_features:239 - Extracted 271 TSfresh features
+2025-08-22 19:45:17,103 - enhanced_feature_engineering - INFO - create_comprehensive_features:596 - Step 3: Extracting volume profile features...
+2025-08-22 19:45:17,195 - enhanced_feature_engineering - INFO - extract_volume_profile_features:456 - Extracted 10 volume profile features
+2025-08-22 19:45:17,205 - enhanced_feature_engineering - INFO - create_comprehensive_features:603 - Step 4: Adding advanced on-chain metrics...
+2025-08-22 19:45:17,205 - onchain_metrics_provider - INFO - fetch_comprehensive_metrics:832 - Fetching comprehensive on-chain metrics for BNB...
+2025-08-22 19:45:17,217 - onchain_metrics_provider - INFO - simulate_advanced_metrics:688 - Simulating 87 distinct on-chain metrics...
+2025-08-22 19:45:17,340 - onchain_metrics_provider - INFO - simulate_advanced_metrics:808 - ✅ Simulated 174 on-chain metrics successfully
+2025-08-22 19:45:17,357 - enhanced_feature_engineering - INFO - create_comprehensive_features:617 - ✅ Added 174 on-chain metrics
+2025-08-22 19:45:17,357 - enhanced_feature_engineering - INFO - create_comprehensive_features:633 - Step 5: Creating advanced derived features...
+2025-08-22 19:45:17,404 - enhanced_feature_engineering - INFO - create_comprehensive_features:669 - ✅ Comprehensive feature engineering completed!
+2025-08-22 19:45:17,404 - enhanced_feature_engineering - INFO - create_comprehensive_features:670 - 📊 Total features: 577
+2025-08-22 19:45:17,405 - enhanced_feature_engineering - INFO - create_comprehensive_features:671 - 🎯 Feature categories:
+2025-08-22 19:45:17,405 - enhanced_feature_engineering - INFO - create_comprehensive_features:672 -    • Original OHLCV: 5
+2025-08-22 19:45:17,405 - enhanced_feature_engineering - INFO - create_comprehensive_features:673 -    • TA-Lib indicators: 93
+2025-08-22 19:45:17,406 - enhanced_feature_engineering - INFO - create_comprehensive_features:674 -    • On-chain metrics: 65
+2025-08-22 19:45:17,407 - enhanced_feature_engineering - INFO - create_comprehensive_features:675 -    • Volume profile: 10
+2025-08-22 19:45:17,408 - enhanced_feature_engineering - INFO - create_comprehensive_features:676 -    • TSfresh features: 271
+2025-08-22 19:45:17,409 - enhanced_feature_engineering - INFO - create_comprehensive_features:677 -    • Advanced derived: 255
+2025-08-22 19:45:17,411 - bnb_enhanced_ml - INFO - train_tft_model:964 - Enhanced features created: 577 features with on-chain metrics
+2025-08-22 19:45:17,413 - temporal_fusion_transformer - INFO - __init__:274 - ADE-TFT initialized: hidden_size=128, horizons=24
+2025-08-22 19:45:17,415 - bnb_enhanced_ml - INFO - train_tft_model:1009 - Step 3: Cleaning features for TFT training...
+2025-08-22 19:45:17,418 - bnb_enhanced_ml - INFO - train_tft_model:1017 - 📊 TFT features: Reduced to 202 features for testing
+2025-08-22 19:45:17,420 - temporal_fusion_transformer - INFO - train_tft:603 - Training Advanced Deep Learning-Enhanced TFT...
+2025-08-22 19:45:17,421 - temporal_fusion_transformer - INFO - prepare_tft_data:465 - Preparing TFT data with multi-horizon structure...
+2025-08-22 19:45:18,561 - temporal_fusion_transformer - INFO - prepare_tft_data:587 - TFT data prepared: 809 sequences, 168 historical steps, 24 prediction steps
+2025-08-22 19:48:38,323 - temporal_fusion_transformer - ERROR - train_tft:722 - TFT training failed: in user code:
+
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1401, in train_function  *
+        return step_function(self, iterator)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1384, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1373, in run_step  **
+        outputs = model.train_step(data)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/engine/training.py", line 1150, in train_step
+        y_pred = self(x, training=True)
+    File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/var/folders/5n/8rf8ch7x42b0kfr9slfk8xgw0000gn/T/__autograph_generated_filegebkhcnr.py", line 12, in tf__call
+        context = ag__.converted_call(ag__.ld(self).context_grn, (ag__.ld(flattened_inputs),), dict(training=ag__.ld(training)), fscope)
+    File "/var/folders/5n/8rf8ch7x42b0kfr9slfk8xgw0000gn/T/__autograph_generated_filefqk4sui3.py", line 76, in tf__call
+        ag__.if_stmt(ag__.ld(self).skip_layer is not None, if_body_3, else_body_3, get_state_3, set_state_3, ('skip',), 1)
+    File "/var/folders/5n/8rf8ch7x42b0kfr9slfk8xgw0000gn/T/__autograph_generated_filefqk4sui3.py", line 75, in else_body_3
+        ag__.if_stmt(ag__.ld(inputs).shape[-1] != ag__.ld(self).output_size, if_body_2, else_body_2, get_state_2, set_state_2, ('skip',), 1)
+    File "/var/folders/5n/8rf8ch7x42b0kfr9slfk8xgw0000gn/T/__autograph_generated_filefqk4sui3.py", line 70, in if_body_2
+        skip = ag__.converted_call(ag__.converted_call(ag__.ld(layers).Dense, (ag__.ld(self).output_size,), dict(activation='linear'), fscope), (ag__.ld(inputs),), None, fscope)
+
+    ValueError: Exception encountered when calling layer 'historical_vsn' (type VariableSelectionNetwork).
+    
+    in user code:
+    
+        File "/Users/stan/bnb-a/temporal_fusion_transformer.py", line 68, in call  *
+            context = self.context_grn(flattened_inputs, training=training)
+        File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler  **
+            raise e.with_traceback(filtered_tb) from None
+        File "/var/folders/5n/8rf8ch7x42b0kfr9slfk8xgw0000gn/T/__autograph_generated_filefqk4sui3.py", line 76, in tf__call
+            ag__.if_stmt(ag__.ld(self).skip_layer is not None, if_body_3, else_body_3, get_state_3, set_state_3, ('skip',), 1)
+        File "/var/folders/5n/8rf8ch7x42b0kfr9slfk8xgw0000gn/T/__autograph_generated_filefqk4sui3.py", line 75, in else_body_3
+            ag__.if_stmt(ag__.ld(inputs).shape[-1] != ag__.ld(self).output_size, if_body_2, else_body_2, get_state_2, set_state_2, ('skip',), 1)
+        File "/var/folders/5n/8rf8ch7x42b0kfr9slfk8xgw0000gn/T/__autograph_generated_filefqk4sui3.py", line 70, in if_body_2
+            skip = ag__.converted_call(ag__.converted_call(ag__.ld(layers).Dense, (ag__.ld(self).output_size,), dict(activation='linear'), fscope), (ag__.ld(inputs),), None, fscope)
+    
+        ValueError: Exception encountered when calling layer 'gated_residual_network' (type GatedResidualNetwork).
+        
+        in user code:
+        
+            File "/Users/stan/bnb-a/temporal_fusion_transformer.py", line 157, in call  *
+                skip = layers.Dense(self.output_size, activation='linear')(inputs)
+            File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler  **
+                raise e.with_traceback(filtered_tb) from None
+        
+            ValueError: tf.function only supports singleton tf.Variables created on the first call. Make sure the tf.Variable is only created once or created outside tf.function. See https://www.tensorflow.org/guide/function#creating_tfvariables for more information.
+        
+        
+        Call arguments received by layer 'gated_residual_network' (type GatedResidualNetwork):
+          • inputs=tf.Tensor(shape=(None, 34104), dtype=float32)
+          • context=None
+          • training=True
+    
+    
+    Call arguments received by layer 'historical_vsn' (type VariableSelectionNetwork):
+      • inputs=tf.Tensor(shape=(None, 168, 203), dtype=float32)
+      • training=True
+

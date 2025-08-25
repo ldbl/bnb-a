@@ -1,0 +1,283 @@
+# Cursor Rules for BNB Cryptocurrency Prediction System
+
+## 🎯 Project Overview
+This is a state-of-the-art cryptocurrency prediction system for BNB (Binance Coin) using advanced machine learning models including Helformer, TFT, and Performer. The system integrates 87+ on-chain metrics and provides swing trading capabilities.
+
+## 🚀 Code Style & Standards
+
+### Python Code
+- Use Python 3.8+ with type hints
+- Follow PEP 8 style guidelines
+- Use descriptive variable names (e.g., `bnb_price_data`, `helformer_model`)
+- Add comprehensive docstrings for all functions and classes
+- Use f-strings for string formatting
+
+### Machine Learning
+- **Use PyTorch 2.0+ instead of TensorFlow**
+- Always handle PyTorch/NumPy compatibility issues
+- Validate input data shapes before model operations
+- Use proper error handling for model loading/saving
+- Implement fallback mechanisms for failed predictions
+- **Optimize for performance: use torch.cuda.is_available() for GPU and avoid unnecessary loops**
+
+### File Organization
+- Keep ML models in `ml_models_bnb_enhanced/` directory
+- Use consistent naming: `{model_name}_{period}_{type}.{extension}`
+- Separate configuration in `config.py`
+- Log all operations with proper log levels
+
+## 🔧 Development Guidelines
+
+### When Adding New Features
+1. Test with small datasets first (e.g., 100-1000 rows)
+2. Implement error handling before optimization
+3. Add logging for debugging
+4. Update requirements.txt with new dependencies
+5. Document changes in appropriate README files
+
+### When Debugging Models
+1. Check data types (ensure numeric, no strings)
+2. Validate feature dimensions match model expectations
+3. Test with simplified parameters first
+4. Use try-catch blocks for PyTorch operations
+5. Log intermediate data shapes and types
+
+### Code Comments
+- Explain complex ML algorithms in detail
+- Document data preprocessing steps
+- Add TODO comments for future improvements
+- Include examples of expected input/output
+- **Add specific comments for each function (e.g., 'MACD: TA-Lib, fast=12, slow=26')**
+
+## 📊 Data Handling
+
+### Data Validation
+- Always check for NaN/inf values
+- Validate data types before ML operations
+- Handle missing data gracefully
+- Log data statistics for debugging
+- **Avoid NaN in indicators (EMA, RSI, ROC, MACD, ATR) with np.nan_to_num or fillna(0)**
+
+### Feature Engineering
+- Use `select_dtypes(include=[np.number])` for numeric features
+- Implement proper scaling/normalization
+- Handle categorical variables appropriately
+- Validate feature dimensions consistency
+
+## 🚨 Common Issues & Solutions
+
+### PyTorch Errors
+- Convert NumPy arrays to tensors: `torch.tensor()`
+- Handle M1/M2 Mac compatibility issues
+- Use `np.float32` for better compatibility
+- Check for dynamic layer creation issues
+- **Check PyTorch input/output shapes (e.g., (batch, seq_len, input_dim=5) for Close, High, Low, Volume, RSI)**
+
+### Shape Mismatches
+- Log input/output shapes before model operations
+- Validate feature counts match model expectations
+- Use dynamic model building when possible
+- Implement proper error messages for mismatches
+- **Use assert x.shape[2] == 5 for input validation**
+
+## 📝 Documentation
+
+### README Files
+- Keep README.md updated with latest features
+- Document installation steps clearly
+- Include troubleshooting sections
+- Provide usage examples
+
+### Code Documentation
+- Use Google-style docstrings
+- Include parameter descriptions
+- Document return values
+- Add usage examples in docstrings
+
+## 🔍 Testing & Validation
+
+### Model Testing
+- Test with historical data first
+- Validate prediction accuracy
+- Check for overfitting
+- Implement cross-validation where appropriate
+- **Test with BNB data for August-September 2024 (+6.4%) and Q3-Q4 2024 (+31%)**
+
+### Error Handling
+- Provide clear error messages
+- Implement fallback mechanisms
+- Log all errors with context
+- Guide users to solutions
+
+## 🎯 Project-Specific Rules
+
+### BNB Data
+- **Use daily data (~540 points, 2024-02-01 to 2025-08-31, Close: [606.91, 578.49, 532.90, 567.26, 701, 834.96])**
+- Always use BNB/USDT trading pair
+- Handle multiple timeframes (1h, 1d, 1w, 1M)
+- Implement proper data fetching from Binance API via CCXT
+- Cache data appropriately
+
+### ML Models Priority
+1. Helformer (working) - enhance for swing trading
+2. TFT (debugging) - fix architecture issues
+3. Performer (debugging) - resolve sequence problems
+4. Enhanced ML (working) - maintain compatibility
+
+### Swing Trading Focus
+- **Implement hybrid monthly (5-10% return) and quarterly (20-40% return) strategies**
+- **Monthly: EMA10/50, RSI7, ROC1, MACD12/26/9**
+- **Quarterly: EMA50/200, RSI14, ROC3, MACD50/200/9**
+- **Targets: >85% accuracy, >5% monthly return, >25% quarterly return**
+- **Risk: <10% monthly drawdown, <15% quarterly drawdown**
+- Add quarterly seasonality features
+- Focus on risk management
+- Use historical data for validation
+
+## 🥋 Haiduk Code (Хайдушки Кодекс)
+
+### Rule #0: No Over-Engineering
+- Keep it simple, avoid unnecessary complexity
+- Focus on working solutions, not perfect ones
+
+### Rule #1: Anchor (Котва)
+- Enter at $600-650 level, no FOMO
+- Wait for proper entry points
+
+### Rule #2: Patience (Търпение)
+- 3-7 days for bottom, 2-4 weeks for top
+- Don't rush decisions
+
+### Rule #3: Steps (Стъпки)
+- Use 1/3 capital, no all-in
+- Build positions gradually
+
+### Rule #4: Leverage
+- Maximum 2x leverage
+- Don't over-leverage
+
+### Rule #5: Exit (Излизане)
+- Exit at targets $750-780
+- Take profits at resistance levels
+
+### Rule #6: One Battle (Една Битка)
+- Focus on one trade at a time
+- Don't scatter attention
+
+### Rule #7: Retreat (Отстъпление)
+- Exit below $550
+- Cut losses quickly
+
+### Rule #8: Team (Дружината)
+- Each module has a role
+- Work together as a system
+
+## 🕺 'Horo' Philosophy (Хоро Философия)
+- **Two steps forward, one step back**
+- Enter/exit in rhythm with the market
+- Don't fight the trend, dance with it
+
+## 📊 Specific Technical Requirements
+
+### Data Fetching
+- Use CCXT for Binance API
+- Interval: '1d' for daily data
+- Return pandas DataFrame with Date, Open, High, Low, Close, Volume
+- Handle pagination and avoid API limits
+
+### Risk Management
+- **SwingRiskManager class: capital=10000, risk_per_trade=0.02**
+- **Calculate ATR: period=7 (monthly), 14 (quarterly)**
+- **Stop-loss: multiplier=3 (monthly), 2 (quarterly)**
+- **Position sizing: 1/3 capital, leverage up to 2x**
+
+### Fibonacci Analysis
+- **Calculate retracement levels (23.6%, 38.2%, 61.8%)**
+- **Test with Q3-Q4 2024 data (Low $407.52, High $793.35)**
+- **Target: precise levels for entry/exit ($600-650, $750-780)**
+
+### Backtesting
+- **Use Backtrader for hybrid monthly/quarterly cycles**
+- **Validate August-September 2024 (+6.4%) and Q3-Q4 2024 (+31%)**
+- **Add Sharpe ratio and max drawdown metrics**
+
+### Performance Optimization
+- **Use torch.cuda.is_available() for GPU acceleration**
+- **Avoid unnecessary loops and optimize data processing**
+- **Implement efficient data structures and algorithms**
+
+### On-chain Integration
+- **Integrate on-chain metrics (e.g., whale movements >1000 BNB from Glassnode)**
+- **Use blockchain data for signal confirmation**
+- **Implement real-time data feeds**
+
+### Email Notifications
+- **Implement automated Buy/Sell signal notifications**
+- **Use smtplib for email delivery**
+- **Integrate with email_reporter.py**
+
+### Testing & Validation
+- **Include unittest.testcase for accuracy testing**
+- **Use Backtrader for return/drawdown validation**
+- **Implement comprehensive test coverage**
+
+### Module Integration
+- **Ensure compatibility between all modules**
+- **signal_generator.py should combine predictions from helformer_model.py and levels from fib.py**
+- **Maintain clean interfaces and minimal dependencies**
+
+## 📁 File-Specific Rules
+
+### helformer_model.py
+- Use Holt-Winters from statsmodels.tsa.holtwinters with seasonal_periods=1 (monthly) or 3 (quarterly)
+- Set forecast horizon: 720h for monthly, 2880h for quarterly
+- Validate for accuracy >85% with daily BNB data (~540 points)
+- Avoid shape mismatches with assert x.shape[2] == 5
+- Integrate predictions for signal_generator.py
+- Follow Haiduk Code (Rule #2: patience, Rule #8: team) and 'Horo'
+
+### signal_generator.py
+- Implement hybrid logic with mode='monthly' (EMA10/50, RSI7, ROC1, MACD12/26/9) or 'quarterly' (EMA50/200, RSI14, ROC3, MACD50/200/9) using TA-Lib
+- Buy conditions: EMA_fast > EMA_slow, RSI < 40, ROC > 0, MACD > Signal, price at level ($600-650)
+- Sell conditions: EMA_fast < EMA_slow, RSI > 70, MACD < Signal, price at target ($750-780)
+- Test for August-September 2024 (+6.4%) and Q3-Q4 2024 (+31%)
+- Avoid NaN with np.nan_to_num
+- Integrate predictions from helformer_model.py and levels from fib.py
+- Add email notifications in email_reporter.py
+- Follow Haiduk Code (Rule #1: anchor, Rule #5: exit, Rule #6: one battle) and 'Horo'
+
+### swing_risk_manager.py
+- Class SwingRiskManager(capital=10000, risk_per_trade=0.02)
+- Methods: calculate_atr(period=7 monthly, 14 quarterly), calculate_stop_loss(multiplier=3 monthly, 2 quarterly), calculate_position_size (1/3 capital, leverage up to 2x)
+- Test for entry $532.90 (monthly) and $533 (quarterly), drawdown <10% monthly, <15% quarterly
+- Avoid division by zero with np.nan_to_num
+- Add retreat on break below $550 (Rule #7)
+- Follow Haiduk Code (Rule #3: steps, Rule #4: leverage, Rule #7: retreat)
+
+### fib.py
+- Calculate Fibonacci retracement levels (23.6%, 38.2%, 61.8%) for monthly (5-10%) and quarterly (20-40%) cycles
+- Test with daily data for Q3-Q4 2024 (Low $407.52, High $793.35) and September 2025 (~$750-800 support)
+- Target: precise levels for entry/exit ($600-650, $750-780)
+- Integrate in signal_generator.py for signal confirmation
+- Follow Haiduk Code (Rule #1: anchor, Rule #5: exit) and 'Horo'
+
+### data_fetcher.py
+- Use CCXT for Binance API, interval='1d' for ~540 points (2024-02-01 to 2025-08-31)
+- Return pandas DataFrame with Date, Open, High, Low, Close, Volume
+- Handle pagination and avoid API limits
+- Follow Haiduk Code (Rule #0: no over-engineering)
+
+### swing_backtester.py
+- Use Backtrader for hybrid monthly (5-10%) and quarterly (20-40%) cycles
+- Test with daily data (~540 points, Close: [606.91, 578.49, 532.90, 567.26, 701, 834.96])
+- Validate for August-September 2024 (+6.4%) and Q3-Q4 2024 (+31%)
+- Add Sharpe ratio and max drawdown, target: <10% monthly/<15% quarterly drawdown
+- Follow Haiduk Code (Rule #0: no over-engineering, Rule #6: one battle) and 'Horo'
+
+### email_reporter.py
+- Implement email notifications for Buy/Sell signals using smtplib
+- Test with daily BNB data for August-September 2024 (+6.4%) and Q3-Q4 2024 (+31%)
+- Follow Haiduk Code (Rule #5: exit on time, Rule #6: one battle) and 'Horo'
+
+---
+*These rules ensure consistent development and help avoid common issues in ML projects while following the Haiduk Code and 'Horo' philosophy for BNB swing trading.*
